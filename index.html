@@ -16,21 +16,18 @@
 :root{--bg:#f3f6fb;--card:#fff;--ink:#172033;--muted:#718096;--primary:#134e4a;--accent:#d97706;--nav:#062c28;--line:#e7ecf4;--good:#16a34a;--warn:#f59e0b;--bad:#dc2626}
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--ink)}
-
 /* Login Screen */
 #loginScreen{position:fixed;inset:0;background:var(--nav);display:flex;align-items:center;justify-content:center;z-index:999}
 .login-card{background:#fff;padding:30px;border-radius:18px;width:min(400px,90%);box-shadow:0 10px 25px rgba(0,0,0,0.2);text-align:center}
 .login-card h2{margin-top:10px;color:var(--nav);font-size:24px}
 .login-card input{margin-bottom:12px;padding:12px;font-size:14px}
 .login-card button{width:100%;padding:12px;font-size:15px;margin-top:5px;background:var(--primary)}
-
 /* Logo Styling */
 .brand-logo-img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid #d97706;margin:0 auto 10px;display:block;}
 .side-logo-container{display:flex;align-items:center;gap:10px;padding:5px 0}
 .side-logo-img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid #d97706}
 .logo-fallback{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:900;font-size:13px}
 .brand-logo-img.logo-fallback{font-size:22px}
-
 /* App Layout */
 .app{display:none;min-height:100vh}
 .app.active{display:flex}
@@ -41,7 +38,7 @@ body{margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(-
 .menu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:#cbd5e1;padding:10px 12px;border-radius:10px;margin:3px 0;font-size:13px;cursor:pointer}
 .menu button.active,.menu button:hover{background:#ffffff18;color:#fff}
 .main{margin-left:250px;width:calc(100% - 250px);padding:24px;max-width:1500px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}
 .title{font-size:24px;font-weight:850}
 .date{font-size:13px;color:var(--muted);margin-top:3px}
 .page{display:none}
@@ -84,47 +81,31 @@ th{background:#f8fafc;color:#607089}
 .notice{padding:12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;color:#1e40af;font-size:13px}
 .empty{text-align:center;padding:28px;color:var(--muted)}
 .calc-result{background:#f8fafc;border:1px dashed var(--primary);border-radius:10px;padding:12px;margin-top:12px;font-weight:600}
-
-/* Tax Invoice Specific Styling */
-.inv-card-box { background: #fff; border: 1px solid #94a3b8; padding: 25px; font-size: 12px; line-height: 1.4; color: #0f172a; border-radius: 8px; }
-.inv-card-box input, .inv-card-box textarea { border: 1px solid transparent; background: transparent; padding: 2px 4px; font-size: inherit; font-family: inherit; }
-.inv-card-box input:hover, .inv-card-box textarea:hover, .inv-card-box input:focus, .inv-card-box textarea:focus { border-color: #3b82f6; background: #eff6ff; outline: none; border-radius: 4px; }
-.inv-card-box table { width: 100%; border-collapse: collapse; min-width: 100%; margin: 10px 0; }
-.inv-card-box th, .inv-card-box td { border: 1px solid #94a3b8; padding: 6px 8px; text-align: left; font-size: 11.5px; }
-.inv-card-box th { background: #f1f5f9; font-weight: bold; color: #1e293b; }
-.box-section { border: 1px solid #cbd5e1; padding: 10px; margin-bottom: 12px; border-radius: 4px; }
-.box-title { font-weight: bold; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 6px; text-transform: uppercase; font-size: 11px; color: #475569; }
-.text-right { text-align: right; }
-.bold { font-weight: bold; }
-
-/* Printable Invoice Styling */
-@media print {
-  body * { visibility: hidden; }
-  #printableInvoice, #printableInvoice * { visibility: visible; }
-  #printableInvoice { position: absolute; left: 0; top: 0; width: 100%; padding: 0; border: none; }
-  .no-print { display: none !important; }
-  .inv-card-box input, .inv-card-box textarea { border: none !important; background: transparent !important; }
-}
+/* Global Search Styling */
+.global-search-container{position:relative; width:350px;}
+.global-search-input{width:100%; border:2px solid var(--primary); border-radius:20px; padding:10px 16px; font-size:13px; outline:none; background:#fff;}
+#searchResultsPanel{display:none; margin-bottom:20px; background:#fff; border:2px solid var(--accent); border-radius:16px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,0.08);}
+.search-item{padding:10px; border-bottom:1px solid var(--line); font-size:13px;}
+.search-item:last-child{border-bottom:none;}
+.search-tag{font-size:10px; font-weight:bold; padding:2px 6px; border-radius:4px; margin-right:6px; text-transform:uppercase;}
+.tag-lead{background:#e0f2fe; color:#0369a1;}
+.tag-login{background:#fef3c7; color:#b45309;}
+.tag-disb{background:#dcfce7; color:#15803d;}
+.payout-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.payout-summary .card{margin:0}.status-pending{background:#fff7ed;color:#9a3412}.status-partial{background:#fef3c7;color:#92400e}.status-clear{background:#dcfce7;color:#166534}
 </style>
 </head>
 <body>
-
 <!-- Login Screen -->
 <div id="loginScreen">
   <div class="login-card">
     <img src="logo.jpg.jpeg" class="brand-logo-img" alt="Moneylight Finance Logo" onerror="this.onerror=null;this.replaceWith(Object.assign(document.createElement('div'),{className:'brand-logo-img logo-fallback',textContent:'MF'}));">
-    <!-- If you see "MF" instead of your real logo: the file "logo.jpg.jpeg" is missing from
-         this HTML's folder. Put your actual logo image in the same folder and name it
-         EXACTLY "logo.jpg.jpeg" — or better, send Claude the image file so it can be
-         embedded directly inside this HTML and never break again regardless of hosting. -->
     <h2>Moneylight Finance</h2>
     <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Sign in to access your CRM</p>
-    <input type="text" id="loginUser" placeholder="Login ID">
-    <input type="password" id="loginPass" placeholder="Password">
+    <input type="email" id="loginUser" placeholder="Email Address" autocomplete="username">
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password">
     <button class="btn" onclick="checkLogin()">Login</button>
   </div>
 </div>
-
 <div class="app" id="appMain">
 <!-- Sidebar Navigation -->
 <aside class="side">
@@ -138,9 +119,9 @@ th{background:#f8fafc;color:#607089}
 <button onclick="go('cibil',this)">📊 CIBIL Score Check</button>
 <button onclick="go('pipeline',this)">📁 Pipeline</button>
 <button onclick="go('disb',this)">💰 Disbursement</button>
+<button onclick="go('payout',this)">💸 Payout Tracker</button>
 <button onclick="go('eligibility',this)">⚡ Eligibility Engine</button>
 <button onclick="go('analyzer',this)">📄 Statement Analyzer</button>
-<button onclick="go('invoice',this)">🧾 Tax Payout Invoice</button>
 <button onclick="go('nurture',this)">🔄 Lead Re-engagement</button>
 <button onclick="go('follow',this)">🔔 Follow-ups</button>
 <button onclick="go('calculators',this)">🧮 Calculators</button>
@@ -151,16 +132,29 @@ th{background:#f8fafc;color:#607089}
 <button onclick="logout()" style="color:#f87171;">🚪 Logout</button>
 </div>
 </aside>
-
 <!-- Main Area -->
 <main class="main">
-
-<!-- Dashboard Page -->
-<section id="home" class="page active">
+<!-- Universal Top Search Bar -->
 <div class="top">
-  <div><div class="title">Good Day 👋</div><div class="date" id="today"></div></div>
+  <div>
+    <div class="title">Good Day 👋</div>
+    <div class="date" id="today"></div>
+  </div>
+  <div class="global-search-container">
+    <input type="text" id="globalSearchInput" class="global-search-input" placeholder="🔍 Search entire CRM (Name, Mobile, Bank, etc.)..." oninput="globalSearch()">
+  </div>
   <button class="btn" onclick="openForm('lead')">+ New Lead</button>
 </div>
+<!-- Global Search Output Panel -->
+<div id="searchResultsPanel">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <h3 style="margin:0; font-size:16px; color:var(--primary);">🔍 Global Search Results</h3>
+    <button class="btn light btn-sm" onclick="clearGlobalSearch()">✕ Close Search</button>
+  </div>
+  <div id="searchResultsList"></div>
+</div>
+<!-- Dashboard Page -->
+<section id="home" class="page active">
 <div class="cards">
   <div class="card"><div class="label">Total Leads</div><div class="num" id="cLead">0</div></div>
   <div class="card"><div class="label">This Month Login</div><div class="num" id="cLogin">0</div></div>
@@ -187,11 +181,24 @@ th{background:#f8fafc;color:#607089}
   <div id="monthChart" style="padding-top:6px"></div>
 </div>
 <div class="panel">
+  <h3>💸 Connector Payout</h3>
+  <div class="cards payout-summary" style="margin:0 0 12px">
+    <div class="card"><div class="label">Expected Payout</div><div class="num" id="dashPayoutExpected">₹0</div></div>
+    <div class="card"><div class="label">Received / Clear</div><div class="num" id="dashPayoutReceived">₹0</div></div>
+    <div class="card"><div class="label">Pending Payout</div><div class="num accent" id="dashPayoutPending">₹0</div></div>
+  </div>
+  <div id="dashPayoutList"></div>
+  <button class="btn light btn-sm" onclick="openPayoutPage()">Open Payout Tracker →</button>
+</div>
+<div class="grid2">
+  <div class="panel"><h3>❌ Rejected Leads</h3><div id="dashRejected"></div></div>
+  <div class="panel"><h3>✅ Approved Leads</h3><div id="dashApproved"></div></div>
+</div>
+<div class="panel">
   <h3>🔔 Follow-ups Due</h3>
   <div id="dashFollow"></div>
 </div>
 </section>
-
 <!-- Leads Page -->
 <section id="leads" class="page">
 <div class="top">
@@ -199,7 +206,7 @@ th{background:#f8fafc;color:#607089}
   <button class="btn" onclick="openForm('lead')">+ New Lead</button>
 </div>
 <div class="toolbar">
-  <input id="search" placeholder="🔎 Search (Name / Mobile / Loan / Ref)" oninput="render()">
+  <input id="search" placeholder="🔎 Filter Leads (Name / Mobile / Loan / Ref)" oninput="render()">
   <select id="statusFilter" onchange="render()">
     <option value="">All Statuses</option>
     <option>New</option>
@@ -230,7 +237,6 @@ th{background:#f8fafc;color:#607089}
   </table>
 </div>
 </section>
-
 <!-- CIBIL Verification Page -->
 <section id="cibil" class="page">
 <div class="title">📊 CIBIL Verification Portal</div>
@@ -257,33 +263,16 @@ th{background:#f8fafc;color:#607089}
   </div>
 </div>
 </section>
-
 <!-- Pipeline Page -->
 <section id="pipeline" class="page">
 <div class="top">
-  <div class="title">Loan Pipeline (Logins)</div>
+  <div class="title">Loan Pipeline</div>
   <button class="btn light" onclick="openForm('login')">+ New Login</button>
 </div>
-<div class="table" style="margin-top:18px">
-  <table>
-    <thead>
-      <tr>
-        <th>Customer</th>
-        <th>Banker Name</th>
-        <th>Lender / Bank</th>
-        <th>Login Amount</th>
-        <th>Reference</th>
-        <th>Login Date</th>
-        <th>Stage</th>
-        <th>Login ID</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="loginTable"></tbody>
-  </table>
-</div>
+<div class="cards" id="pipelineStats"></div>
+<div id="pipelineTabs" style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0"></div>
+<div id="pipelineBoard"></div>
 </section>
-
 <!-- Disbursement Page -->
 <section id="disb" class="page">
 <div class="top">
@@ -301,7 +290,6 @@ th{background:#f8fafc;color:#607089}
         <th>Customer</th>
         <th>Loan Type</th>
         <th>Disb. Amount</th>
-        <th>Payout (%)</th>
         <th>Date</th>
         <th>Reference</th>
         <th>Actions</th>
@@ -311,7 +299,30 @@ th{background:#f8fafc;color:#607089}
   </table>
 </div>
 </section>
-
+<!-- Connector Payout Tracker -->
+<section id="payout" class="page">
+<div class="top">
+  <div class="title">💸 Connector Payout Tracker</div>
+  <button class="btn green" onclick="openForm('payout')">+ Add Payout</button>
+</div>
+<div class="payout-summary">
+  <div class="card"><div class="label">Total Expected</div><div class="num" id="pExpected">₹0</div></div>
+  <div class="card"><div class="label">Total Received / Clear</div><div class="num" id="pReceived">₹0</div></div>
+  <div class="card"><div class="label">Total Pending</div><div class="num accent" id="pPending">₹0</div></div>
+</div>
+<div class="toolbar">
+  <input id="payoutSearch" placeholder="🔎 Search Connector / Customer / Lender / Ref" oninput="render()">
+  <select id="payoutStatusFilter" onchange="render()">
+    <option value="">All Payouts</option><option value="Pending">Pending</option><option value="Partial">Partial</option><option value="Clear">Clear</option>
+  </select>
+</div>
+<div class="table">
+  <table>
+    <thead><tr><th>Connector</th><th>Customer</th><th>Lender</th><th>Disb. Amount</th><th>Payout %</th><th>Expected</th><th>Received</th><th>Pending</th><th>Status</th><th>Date</th><th>Reference</th><th>Actions</th></tr></thead>
+    <tbody id="payoutTable"></tbody>
+  </table>
+</div>
+</section>
 <!-- Eligibility Engine -->
 <section id="eligibility" class="page">
 <div class="title">⚡ Automated Eligibility Engine</div>
@@ -337,7 +348,6 @@ th{background:#f8fafc;color:#607089}
   </div>
 </div>
 </section>
-
 <!-- Statement Analyzer -->
 <section id="analyzer" class="page">
 <div class="title">📄 Bank Statement Analyzer & Quick Parser</div>
@@ -364,165 +374,6 @@ th{background:#f8fafc;color:#607089}
   </div>
 </div>
 </section>
-
-<!-- SAMPLE FORMAT-BASED TAX INVOICE GENERATOR -->
-<section id="invoice" class="page">
-<div class="top no-print">
-  <div class="title">🧾 Tax Payout Invoice (Sample Format)</div>
-  <button class="btn green" onclick="window.print()">🖨️ Print / Save PDF</button>
-</div>
-<div class="notice no-print" style="margin:12px 0">
-  Select customer from dropdown or edit any text field directly below to customize the GST Tax Invoice.
-</div>
-<div class="toolbar no-print">
-  <select id="invDisbSelect" onchange="loadInvoiceData()">
-    <option value="">-- Select Disbursed Customer --</option>
-  </select>
-</div>
-
-<div class="inv-card-box" id="printableInvoice">
-  <!-- Header Section -->
-  <div style="display:flex; justify-content:space-between; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:15px;">
-    <div>
-      <div style="font-size:20px; font-weight:800; text-transform:uppercase;">Tax Invoice</div>
-      <div>Dated: <input type="text" id="invDate" value="13-07-2026" style="width:110px; font-weight:bold;"></div>
-    </div>
-    <div class="text-right">
-      <div class="bold" style="font-size:14px;">Invoice No: <input type="text" id="invNo" value="INV_003887" style="width:130px; font-weight:bold; text-align:right;"></div>
-    </div>
-  </div>
-
-  <!-- Seller & Buyer Section -->
-  <div class="grid2">
-    <!-- Seller Info -->
-    <div class="box-section">
-      <div class="box-title">Seller Details (Service Provider)</div>
-      <input class="bold" id="sellerName" value="AGHANIYA ENTERPRISES LLP"><br>
-      <textarea id="sellerAddr" rows="2">B WING SOHRAB HALL 21 SASOON ROAD PUNE MAHARASHTRA 411001</textarea>
-      <b>GSTIN/UIN:</b> <input id="sellerGstin" value="27ACMFA3989J1ZP" style="width:160px; font-weight:bold;"><br>
-      <b>PAN:</b> <input id="sellerPan" value="ACMFA3989J" style="width:120px;">
-    </div>
-
-    <!-- Buyer Info -->
-    <div class="box-section">
-      <div class="box-title">Buyer / Bill To</div>
-      <input class="bold" id="buyerName" value="Nomisma Mobile Solutions Pvt. Ltd."><br>
-      <textarea id="buyerAddr" rows="2">1001, 10th Floor, Lodha Supremus, Sakinaka, Near Tunga Village, Sakinaka East, Mumbai</textarea>
-      <b>GSTIN/UIN:</b> <input id="buyerGstin" value="27AAECN7392RIZH" style="width:160px; font-weight:bold;"><br>
-      <b>State Name:</b> <input id="buyerState" value="Maharashtra" style="width:100px;"> <b>Code:</b> <input id="buyerStateCode" value="27" style="width:40px;"><br>
-      <b>CIN:</b> <input id="buyerCin" value="U74900WB2014PTC203082" style="width:180px;">
-    </div>
-  </div>
-
-  <!-- Main Items Table -->
-  <table>
-    <thead>
-      <tr>
-        <th style="width: 40px;">S.No.</th>
-        <th>Particulars</th>
-        <th style="width: 90px;">HSN/SAC</th>
-        <th style="width: 80px;">Rate</th>
-        <th style="width: 110px;" class="text-right">Amount (₹)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td><input value="Commission charges" id="part1"></td>
-        <td><input value="997159" id="hsn1"></td>
-        <td>-</td>
-        <td><input type="number" id="amt1" value="4800" class="text-right bold" oninput="calculateTaxInvoice()"></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Output CGST</td>
-        <td>-</td>
-        <td><input type="number" id="cgstRate" value="9" style="width:40px;" oninput="calculateTaxInvoice()">%</td>
-        <td id="cgstAmt" class="text-right">432</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Output SGST</td>
-        <td>-</td>
-        <td><input type="number" id="sgstRate" value="9" style="width:40px;" oninput="calculateTaxInvoice()">%</td>
-        <td id="sgstAmt" class="text-right">432</td>
-      </tr>
-      <tr class="bold" style="background:#f8fafc;">
-        <td colspan="4" class="text-right">Total Invoice Amount:</td>
-        <td id="totalAmt" class="text-right" style="font-size:14px; color:#0f172a;">₹5,664</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Amounts in Words -->
-  <div style="margin: 10px 0;">
-    <div><b>Amount Chargeable (in words):</b> <input id="amtWords" value="Five Thousand Six Hundred and Sixty Four" style="font-weight:bold; width:70%;"></div>
-    <div><b>Taxable Amount (in words):</b> <input id="taxWords" value="Four Thousand Eight Hundred" style="font-weight:bold; width:75%;"></div>
-  </div>
-
-  <!-- Bank Account Details Section -->
-  <div class="box-section">
-    <div class="box-title">Bank Payment Details</div>
-    <div class="grid2">
-      <div>
-        <b>Account Holder Name:</b> <input id="bankHolder" value="AGHANIYA ENTERPRISES LLP"><br>
-        <b>Bank Name:</b> <input id="bankName" value="AU SMALL FINANCE BANK">
-      </div>
-      <div>
-        <b>Account Number:</b> <input id="bankAcc" value="AUBL0002611"><br>
-        <b>IFSC Code:</b> <input id="bankIfsc" value="AUBL0002611">
-      </div>
-    </div>
-  </div>
-
-  <!-- Declaration Section -->
-  <div style="border:1px solid #cbd5e1; padding:8px; font-size:10.5px; border-radius:4px;">
-    <div class="bold">Declaration & Terms:</div>
-    <div>We declare that this invoice shows the actual price of the services described and that all particulars are true and correct.</div>
-    <ol style="margin: 3px 0; padding-left: 18px;">
-      <li>There has been no fraudulent documentation submitted to Nomisma Mobile Solutions Pvt Ltd or any payments directly received from the customer.</li>
-      <li>The commission is subject to clawback if the customer has defaulted on their payments.</li>
-      <li>Clawback of 100% of the commission if the customer has delayed payments in the first 6 months and 50% if delayed in month 6 to 12.</li>
-      <li>In case of 90+ default, valid contact details of the employee/connector sourcing the case will be shared to assist recovery.</li>
-    </ol>
-    <div class="text-right bold" style="margin-top:12px;">
-      This is a Computer-Generated Invoice
-    </div>
-  </div>
-
-  <br>
-  <!-- Annexure Section -->
-  <div style="font-size:14px; font-weight:800; border-bottom:1px solid #000; padding-bottom:3px; text-transform:uppercase;">Annexure</div>
-  <table>
-    <thead>
-      <tr>
-        <th style="width:40px;">Sr No</th>
-        <th>Application Id</th>
-        <th>Case Name</th>
-        <th class="text-right">Disbursement Amount (₹)</th>
-        <th style="width:80px;" class="text-right">Payout %</th>
-        <th class="text-right">Commission (₹)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td><input value="AP0183300" id="annAppId"></td>
-        <td><input value="Omkar Fabrication" id="annCase"></td>
-        <td><input type="number" value="320000" id="annDisb" class="text-right" oninput="calculateAnnexure()"></td>
-        <td><input type="number" step="0.1" value="1.5" id="annPct" class="text-right" oninput="calculateAnnexure()"></td>
-        <td id="annComm" class="text-right bold">4800</td>
-      </tr>
-      <tr class="bold" style="background:#f8fafc;">
-        <td colspan="5" class="text-right">Total Commission:</td>
-        <td id="annTotal" class="text-right">₹4,800</td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
-</section>
-
 <!-- Lead Re-engagement & Nurturing -->
 <section id="nurture" class="page">
 <div class="title">🔄 Lead Re-engagement & Nurturing Engine</div>
@@ -538,14 +389,12 @@ th{background:#f8fafc;color:#607089}
   <div id="nurtureList"></div>
 </div>
 </section>
-
 <!-- Follow-ups Page -->
 <section id="follow" class="page">
 <div class="title">Follow-ups & Reminders</div>
 <div class="notice" style="margin:16px 0">💡 Start your day here — Today's and overdue follow-ups will appear at the top.</div>
 <div id="followList"></div>
 </section>
-
 <!-- Calculators Page -->
 <section id="calculators" class="page">
 <div class="title">🧮 Financial Calculators</div>
@@ -563,7 +412,6 @@ th{background:#f8fafc;color:#607089}
       <div>Total Amount Payable: <span id="resTotal">₹0</span></div>
     </div>
   </div>
-
   <div class="panel">
     <h3>📈 Percentage & Commission Calculator</h3>
     <div class="form">
@@ -576,7 +424,6 @@ th{background:#f8fafc;color:#607089}
   </div>
 </div>
 </section>
-
 <!-- Reports Page -->
 <section id="reports" class="page">
 <div class="title">📊 Business Reports</div>
@@ -592,7 +439,6 @@ th{background:#f8fafc;color:#607089}
 </section>
 </main>
 </div>
-
 <!-- Modal Form Popup -->
 <div class="modal" id="modal">
   <div class="box">
@@ -601,24 +447,30 @@ th{background:#f8fafc;color:#607089}
     <div id="formArea"></div>
   </div>
 </div>
-
 <script>
 const KEY='moneylight_crm_v1';
-const AUTH_KEY='moneylight_auth_v1';
-
-let auth = JSON.parse(localStorage.getItem(AUTH_KEY) || '{"user":"Kuntiram","pass":"Kuntiram@7745"}');
-/* If this file was opened as a "Full App Backup" download, it carries a
-   <script id="embeddedBackupData"> block with the data that was live at
-   download time. On a fresh browser/device (empty localStorage) that becomes
-   the starting data; once localStorage has anything saved, that always wins
-   so normal day-to-day use is unaffected. */
+// Login is now handled by Firebase Authentication (see the module script near
+// the bottom) instead of a locally-stored plaintext password — the old
+// AUTH_KEY/DEFAULT_AUTH system used to store the password in plain text right
+// inside this file's own source code, visible to anyone via "View Source".
 let __embeddedEl = document.getElementById('embeddedBackupData');
 let __embeddedData = null;
 if(__embeddedEl){ try { __embeddedData = JSON.parse(__embeddedEl.textContent); } catch(e){} }
-let db=JSON.parse(localStorage.getItem(KEY)||JSON.stringify(__embeddedData||{"leads":[],"logins":[],"disb":[]}));
-
+const DEFAULT_DB={leads:[],logins:[],disb:[],payouts:[]};
+function normalizeDb(value){
+  const src=(value && typeof value==='object')?value:{};
+  const clean={
+    leads:Array.isArray(src.leads)?src.leads.map(x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)})):[],
+    logins:Array.isArray(src.logins)?src.logins.map(x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)})):[],
+    disb:Array.isArray(src.disb)?src.disb.map(x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)})):[],
+    payouts:Array.isArray(src.payouts)?src.payouts:[]
+  };
+  return clean;
+}
+let db=normalizeDb(DEFAULT_DB);
+try { db=normalizeDb(JSON.parse(localStorage.getItem(KEY)||JSON.stringify(__embeddedData||DEFAULT_DB))); } catch(e) { console.warn('CRM data reset because saved data was invalid.'); }
 const $=id=>document.getElementById(id), todayISO=()=>new Date().toISOString().slice(0,10);
-
+const newId=()=>Date.now()+Math.floor(Math.random()*1000);
 function formatIndianNum(val) {
   if (!val && val !== 0) return '';
   let clean = val.toString().replace(/,/g, '');
@@ -631,28 +483,28 @@ function formatIndianNum(val) {
   if (otherNumbers !== '') lastThree = ',' + lastThree;
   return otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + decimalPart;
 }
-
 function parseCurrencyNum(val) {
   if (!val) return 0;
   return parseFloat(val.toString().replace(/,/g, '')) || 0;
 }
-
 function formatCurrencyInput(el) {
-  let curPos = el.selectionStart;
-  let oldLen = el.value.length;
-  let clean = el.value.replace(/[^0-9.]/g, '');
-  let parts = clean.split('.');
-  if(parts.length > 2) clean = parts[0] + '.' + parts.slice(1).join('');
-  el.value = formatIndianNum(clean);
-  let newLen = el.value.length;
-  el.setSelectionRange(curPos + (newLen - oldLen), curPos + (newLen - oldLen));
+  if(!el) return;
+  const start=Number.isInteger(el.selectionStart)?el.selectionStart:el.value.length;
+  const before=el.value.slice(0,start);
+  const oldLen=el.value.length;
+  let clean=el.value.replace(/[^0-9.]/g,'');
+  const dot=clean.indexOf('.');
+  if(dot>=0) clean=clean.slice(0,dot+1)+clean.slice(dot+1).replace(/\./g,'');
+  el.value=formatIndianNum(clean);
+  const cleanBefore=before.replace(/[^0-9.]/g,'');
+  let cursor=el.value.length;
+  if(cleanBefore){
+    const beforeFormatted=formatIndianNum(cleanBefore);
+    cursor=Math.min(el.value.length,beforeFormatted.length);
+  } else if(oldLen===0){ cursor=0; }
+  try{el.setSelectionRange(cursor,cursor);}catch(e){}
 }
-
 const money=n=>'₹'+formatIndianNum(Number(n||0));
-// Displays a stored ISO date (YYYY-MM-DD) as DD/MM/YY for reading. The underlying
-// storage/input stays YYYY-MM-DD (required for the date picker and for date
-// comparisons like "is this follow-up overdue" elsewhere in the app) — only the
-// on-screen text changes.
 function formatDDMMYY(iso){
   if(!iso) return '-';
   let parts = iso.split('-');
@@ -660,149 +512,225 @@ function formatDDMMYY(iso){
   let [y,m,d] = parts;
   return `${d}/${m}/${y.slice(2)}`;
 }
-
-// Dependency-free grouped bar chart: for the last 6 months, shows how many
-// Leads (by createdAt), Logins (by their Login Date) and Disbursements (by
-// their Date) fall in each month — three bars side by side per month, plus
-// an "Older" group for anything before the 6-month window (or leads saved
-// before createdAt existed).
+// Every editable date FIELD in the app (as opposed to read-only table display,
+// which formatDDMMYY above already handles) uses these two, so the typed
+// format is always DD/MM/YYYY regardless of the device's own locale settings
+// — native <input type="date"> pickers don't allow forcing that, so those
+// fields use a plain masked text input instead (see the .date-ddmm handler
+// further down).
+function isoToDdmmyyyy(iso){
+  if(!iso) return '';
+  const parts=String(iso).split('-');
+  if(parts.length!==3) return '';
+  const [y,m,d]=parts;
+  return `${d}/${m}/${y}`;
+}
+function ddmmyyyyToIso(str){
+  if(!str) return '';
+  const m=String(str).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if(!m) return '';
+  const dd=m[1].padStart(2,'0'), mo=m[2].padStart(2,'0'), y=m[3];
+  if(Number(dd)<1||Number(dd)>31||Number(mo)<1||Number(mo)>12) return '';
+  return `${y}-${mo}-${dd}`;
+}
+/* Global Search Logic */
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function globalSearch(){
+  const raw=$('globalSearchInput').value.trim().toLowerCase();
+  const panel=$('searchResultsPanel'), list=$('searchResultsList');
+  if(!raw || raw.length<2){ panel.style.display='none'; list.innerHTML=''; return; }
+  const terms=raw.split(/\s+/).filter(Boolean);
+  const matches=[];
+  const searchCollection=(items,type,label,formatter,editorType)=>{
+    items.forEach(x=>{
+      const text=Object.entries(x||{})
+        .filter(([key])=>!['password','pass'].includes(String(key).toLowerCase()))
+        .map(([key,value])=>`${key} ${value??''}`)
+        .join(' ').toLowerCase();
+      if(terms.every(term=>text.includes(term))){
+        matches.push(`<div class="search-item"><span class="search-tag ${type}">${escapeHtml(label)}</span>${formatter(x)}<button class="btn light btn-sm" style="float:right" onclick="openForm('${editorType}',${Number(x.id)||0})">Edit</button></div>`);
+      }
+    });
+  };
+  searchCollection(db.leads,'tag-lead','Lead',x=>`<b>${escapeHtml(x.name||'Unnamed')}</b> (${escapeHtml(x.mobile||'No mobile')}) — Product: <b>${escapeHtml(x.product||'-')}</b> | Amount: ${money(x.amount)} | CIBIL: ${escapeHtml(x.cibil||'N/A')} | Status: ${escapeHtml(x.status||'-')}`,'lead');
+  searchCollection(db.logins,'tag-login','Pipeline',x=>`<b>${escapeHtml(x.name||'Unnamed')}</b> — Lender: <b>${escapeHtml(x.lender||'-')}</b> | Banker: ${escapeHtml(x.banker||'-')} | Amount: ${money(x.amount)} | ID: ${escapeHtml(x.lid||'-')}`,'login');
+  searchCollection(db.disb,'tag-disb','Disbursement',x=>`<b>${escapeHtml(x.name||'Unnamed')}</b> — Loan: <b>${escapeHtml(x.product||'-')}</b> | Disbursed: ${money(x.amount)} | Ref: ${escapeHtml(x.ref||'-')}`,'disb');
+  searchCollection(db.payouts,'tag-disb','Payout',x=>`<b>${escapeHtml(x.connector||'Unnamed Connector')}</b> — Customer: <b>${escapeHtml(x.customer||'-')}</b> | Expected: ${money(x.expected)} | Received: ${money(x.received)} | Status: ${escapeHtml(x.status||'-')}`,'payout');
+  panel.style.display='block';
+  list.innerHTML=matches.length?matches.join(''):'<div class="empty">No matching records found across CRM.</div>';
+}
+function openPayoutPage(){ const btn=[...document.querySelectorAll('.menu button')].find(b=>b.textContent.includes('Payout Tracker')); go('payout',btn); }
+function clearGlobalSearch(){
+  $('globalSearchInput').value = '';
+  $('searchResultsPanel').style.display = 'none';
+}
 function renderMonthChart(){
-  const el = $('monthChart');
-  if(!el) return;
+ const el=$('monthChart'); if(!el)return; const now=new Date(),months=[];
+ for(let i=2;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push({key:d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'),label:d.toLocaleDateString('en-IN',{month:'short',year:'numeric'}),leads:0,logins:0,disb:0});}
+ const add=(v,f)=>{if(!v)return;const d=new Date(v);if(isNaN(d))return;const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'),b=months.find(m=>m.key===k);if(b)b[f]++;};
+ db.leads.forEach(x=>add(x.createdAt||x.date,'leads'));db.logins.forEach(x=>add(x.date||x.createdAt,'logins'));db.disb.forEach(x=>add(x.date||x.createdAt,'disb'));
+ const max=Math.max(1,...months.map(b=>Math.max(b.leads,b.logins,b.disb)));
+ el.innerHTML='<div style="display:flex;gap:16px;font-size:11px;margin-bottom:10px;flex-wrap:wrap"><span><b style="color:var(--primary)">■</b> Leads</span><span><b style="color:var(--accent)">■</b> Logins</span><span><b style="color:var(--good)">■</b> Disbursements</span></div><div style="display:flex;align-items:flex-end;gap:14px;height:145px">'+months.map(b=>'<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end"><div style="display:flex;align-items:flex-end;gap:4px;height:105px"><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%"><b style="font-size:10px">'+b.leads+'</b><div style="width:16px;background:var(--primary);height:'+((b.leads/max*82)||1)+'px"></div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%"><b style="font-size:10px">'+b.logins+'</b><div style="width:16px;background:var(--accent);height:'+((b.logins/max*82)||1)+'px"></div></div><div style="display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%"><b style="font-size:10px">'+b.disb+'</b><div style="width:16px;background:var(--good);height:'+((b.disb/max*82)||1)+'px"></div></div></div><div style="font-size:10.5px;color:var(--muted)">'+b.label+'</div></div>').join('')+'</div>';
+}
 
-  const now = new Date();
-  const months = [];
-  for(let i=5; i>=0; i--){
-    let d = new Date(now.getFullYear(), now.getMonth()-i, 1);
-    months.push({ key: d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0'), label: d.toLocaleDateString('en-IN',{month:'short'}), leads:0, logins:0, disb:0 });
+const PIPELINE_STAGES=[
+  {key:'lead',label:'📋 Lead',color:'#64748b'},
+  {key:'Login',label:'📥 Login',color:'var(--primary)'},
+  {key:'Under Process',label:'⏳ Under Process',color:'var(--accent)'},
+  {key:'Approved',label:'✅ Approved',color:'var(--good)'},
+  {key:'Rejected',label:'❌ Rejected',color:'var(--bad)'},
+  {key:'Disbursed',label:'💰 Disbursed',color:'#2563eb'}
+];
+function quickMoveLeadToLogin(id){
+  let x=db.leads.find(l=>l.id===id);
+  if(!x) return;
+  x.status='Login';
+  autoCreateOrUpdateLoginFromLead(x);
+  save();
+}
+let pipelineTab='lead';
+function switchPipelineTab(key){ pipelineTab=key; renderPipelineBoard(); }
+function renderPipelineBoard(){
+  const boardEl=$('pipelineBoard'), tabsEl=$('pipelineTabs'), statsEl=$('pipelineStats');
+  if(!boardEl||!tabsEl||!statsEl) return;
+
+  const leadCards=db.leads.filter(x=>x.status!=='Approved'&&x.status!=='Rejected'&&x.status!=='Converted'&&x.status!=='Login');
+  const groups={lead:leadCards};
+  PIPELINE_STAGES.forEach(s=>{ if(s.key!=='lead') groups[s.key]=db.logins.filter(x=>x.status===s.key); });
+
+  tabsEl.innerHTML=PIPELINE_STAGES.map(stage=>{
+    const active=stage.key===pipelineTab;
+    return `<button class="btn ${active?'':'light'}" style="border-left:4px solid ${stage.color}" onclick="switchPipelineTab('${stage.key}')">${stage.label} <span class="badge" style="margin-left:4px">${groups[stage.key].length}</span></button>`;
+  }).join('');
+
+  const stage=PIPELINE_STAGES.find(s=>s.key===pipelineTab)||PIPELINE_STAGES[0];
+  const items=groups[stage.key];
+
+  const stageAmount=items.reduce((sum,x)=>sum+Number(x.amount||0),0);
+  statsEl.innerHTML=`
+    <div class="card"><div class="label">Files in ${stage.label}</div><div class="num">${items.length}</div></div>
+    <div class="card"><div class="label">Amount in ${stage.label}</div><div class="num">${money(stageAmount)}</div></div>
+  `;
+
+  let headHtml,bodyHtml;
+  if(stage.key==='lead'){
+    headHtml=`<th>Customer</th><th>Mobile</th><th>Amount</th><th>Actions</th>`;
+    bodyHtml=items.map(x=>`
+      <tr>
+        <td><b>${escapeHtml(x.name||'-')}</b></td>
+        <td>${escapeHtml(x.mobile||'-')}</td>
+        <td>${money(x.amount)}</td>
+        <td>
+          <button class="btn light btn-sm" onclick="openForm('lead', ${x.id})">Edit</button>
+          <button class="btn btn-sm" onclick="quickMoveLeadToLogin(${x.id})">→ Login</button>
+        </td>
+      </tr>
+    `).join('')||`<tr><td colspan="4" class="empty">No leads at this stage</td></tr>`;
+  }else{
+    headHtml=`<th>Customer</th><th>Lender / Bank</th><th>Amount</th><th>Date</th><th>Stage</th><th>Actions</th>`;
+    bodyHtml=items.map(x=>`
+      <tr>
+        <td><b>${escapeHtml(x.name||'-')}</b></td>
+        <td>${escapeHtml(x.lender||x.banker||'-')}</td>
+        <td>${money(x.amount)}</td>
+        <td>${formatDDMMYY(x.date)}</td>
+        <td>
+          <select onchange="updateLoginStatus(${x.id},this.value)" style="padding:3px;font-size:11px;">
+            <option ${x.status==='Login'?'selected':''}>Login</option>
+            <option ${x.status==='Under Process'?'selected':''}>Under Process</option>
+            <option ${x.status==='Approved'?'selected':''}>Approved</option>
+            <option ${x.status==='Rejected'?'selected':''}>Rejected</option>
+            <option ${x.status==='Disbursed'?'selected':''}>Disbursed</option>
+          </select>
+        </td>
+        <td>
+          <button class="btn light btn-sm" onclick="openForm('login', ${x.id})">Edit</button>
+          <button class="btn red btn-sm" onclick="removeLogin(${x.id})">Delete</button>
+        </td>
+      </tr>
+    `).join('')||`<tr><td colspan="6" class="empty">No logins at this stage</td></tr>`;
   }
-  const cutoff = new Date(now.getFullYear(), now.getMonth()-5, 1);
-  let older = { leads:0, logins:0, disb:0 };
 
-  function addToBucket(dateVal, field){
-    if(!dateVal) { older[field]++; return; }
-    let d = new Date(dateVal);
-    if(isNaN(d)) { older[field]++; return; }
-    let key = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-    let bucket = months.find(m=>m.key===key);
-    if(bucket) bucket[field]++;
-    else if(d < cutoff) older[field]++;
-  }
-
-  db.leads.forEach(x => addToBucket(x.createdAt, 'leads'));   // when the lead was created
-  db.logins.forEach(x => addToBucket(x.date, 'logins'));      // their actual Login Date
-  db.disb.forEach(x => addToBucket(x.date, 'disb'));          // their actual Disbursement Date
-
-  const showOlder = older.leads + older.logins + older.disb > 0;
-  const bars = showOlder ? [{label:'Older', ...older}, ...months] : months;
-  const max = Math.max(1, ...bars.map(b => Math.max(b.leads, b.logins, b.disb)));
-
-  el.innerHTML = `
-    <div style="display:flex;gap:16px;font-size:11px;margin-bottom:10px;flex-wrap:wrap">
-      <span><span style="display:inline-block;width:10px;height:10px;background:var(--primary);border-radius:2px;margin-right:5px"></span>Leads</span>
-      <span><span style="display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px;margin-right:5px"></span>Logins</span>
-      <span><span style="display:inline-block;width:10px;height:10px;background:var(--good);border-radius:2px;margin-right:5px"></span>Disbursements</span>
-    </div>
-    <div style="display:flex;align-items:flex-end;gap:14px;height:110px">
-      ${bars.map(b => `
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end">
-          <div style="display:flex;align-items:flex-end;gap:3px;height:88px">
-            <div title="Leads: ${b.leads}" style="width:10px;background:var(--primary);border-radius:3px 3px 0 0;height:${(b.leads/max*88)||1}px;min-height:1px"></div>
-            <div title="Logins: ${b.logins}" style="width:10px;background:var(--accent);border-radius:3px 3px 0 0;height:${(b.logins/max*88)||1}px;min-height:1px"></div>
-            <div title="Disbursements: ${b.disb}" style="width:10px;background:var(--good);border-radius:3px 3px 0 0;height:${(b.disb/max*88)||1}px;min-height:1px"></div>
-          </div>
-          <div style="font-size:10.5px;color:var(--muted)">${b.label}</div>
-        </div>
-      `).join('')}
+  boardEl.innerHTML=`
+    <div class="table">
+      <table>
+        <thead><tr>${headHtml}</tr></thead>
+        <tbody>${bodyHtml}</tbody>
+      </table>
     </div>
   `;
 }
-
-
 function checkLogin(){
-  let u = $('loginUser').value.trim(), p = $('loginPass').value.trim();
-  if(u === auth.user && p === auth.pass){
-    $('loginScreen').style.display = 'none';
-    $('appMain').classList.add('active');
-    render();
-  } else {
-    alert('❌ Invalid Credentials');
-  }
+  // Real implementation is installed by the Firebase Authentication module
+  // script near the bottom of this file (search "Firebase Authentication").
+  // This stub only runs if that script hasn't loaded yet (e.g. no internet).
+  alert('Still connecting to the login service — please check your internet connection and try again in a moment.');
 }
-
 function logout(){
-  $('appMain').classList.remove('active');
-  $('loginScreen').style.display = 'flex';
+  alert('Still connecting to the login service — please wait a moment and try again.');
 }
-
 function openChangePassModal(){
-  $('modalTitle').textContent = '🔑 Change Credentials';
+  $('modalTitle').textContent = '🔑 Change Password';
   $('formArea').innerHTML = `
     <div class="form">
       <label class="full">Current Password<input type="password" id="curPass"></label>
-      <label class="full">New User ID<input type="text" id="newUser" value="${auth.user}"></label>
       <label class="full">New Password<input type="password" id="newPass"></label>
     </div><br>
-    <button class="btn" style="width:100%" onclick="saveCredentials()">Update</button>
+    <button class="btn" style="width:100%" onclick="saveCredentials()">Update Password</button>
   `;
   $('modal').classList.add('show');
 }
-
 function saveCredentials(){
-  let cp = $('curPass').value.trim(), nu = $('newUser').value.trim(), np = $('newPass').value.trim();
-  if(cp !== auth.pass) return alert('❌ Incorrect current password!');
-  if(!nu || !np) return alert('❌ Cannot be empty!');
-  auth.user = nu; auth.pass = np;
-  localStorage.setItem(AUTH_KEY, JSON.stringify(auth));
-  alert('✅ Updated successfully!'); closeModal();
+  alert('Still connecting to the login service — please wait a moment and try again.');
 }
-
-function save(){localStorage.setItem(KEY,JSON.stringify(db));render();}
-
+function save(){ try { db=normalizeDb(db); autoSyncPipeline(); db=normalizeDb(db); localStorage.setItem(KEY,JSON.stringify(db)); render(); return true; } catch(e) { alert('Could not save CRM data: '+e.message); return false; } }
 function go(id,el){
+  const page=$(id);
+  if(!page) return;
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  $(id).classList.add('active');
+  page.classList.add('active');
   document.querySelectorAll('.menu button').forEach(x=>x.classList.remove('active'));
-  el.classList.add('active');
+  if(el) el.classList.add('active');
   render();
-  if(id==='invoice') populateInvoiceDropdown();
   if(id==='cibil') populateCibilDropdown();
   if(id==='nurture') renderNurture();
 }
-
 function badge(s){
   let c=['Approved','Disbursed','Converted'].includes(s)?'good':['Rejected'].includes(s)?'bad':'blue';
-  return `<span class="badge ${c}">${s||'-'}</span>`;
+  return `<span class="badge ${c}">${escapeHtml(s||'-')}</span>`;
 }
-
 function openForm(type, editId = null){
  let editData = null;
  if(editId){
    if(type==='lead') editData = db.leads.find(x => x.id === editId);
    if(type==='login') editData = db.logins.find(x => x.id === editId);
    if(type==='disb') editData = db.disb.find(x => x.id === editId);
+   if(type==='payout') editData = db.payouts.find(x => x.id === editId);
  }
-
  let title={
    lead: editId ? '✏️ Edit Lead' : '👤 Add New Lead',
    login: editId ? '✏️ Edit Loan Login' : '📥 New Loan Login',
-   disb: editId ? '✏️ Edit Disbursement' : '💰 New Disbursement'
+   disb: editId ? '✏️ Edit Disbursement' : '💰 New Disbursement',
+   payout: editId ? '✏️ Edit Connector Payout' : '💸 Add Connector Payout'
  }[type];
- 
+
  $('modalTitle').textContent=title;
  let h='';
  const products = ['Personal Loan', 'Business Loan', 'Home Loan', 'Loan Against Property', 'Car Loan', 'Gold Loan', 'Microfinance', 'Working Capital'];
-
  if(type==='lead'){
    h=`<div class="form" id="leadForm">
-        <label>Customer Name *<input id="f1" value="${editData?editData.name:''}"></label>
-        <label>Mobile Number<input id="f2" inputmode="tel" value="${editData?editData.mobile:''}"></label>
-        <label>Profession<input id="f_prof" value="${editData?editData.prof||'':''}"></label>
+        <label>Customer Name *<input id="f1" value="${editData?escapeHtml(editData.name||''):''}"></label>
+        <label>Mobile Number<input id="f2" inputmode="tel" value="${editData?escapeHtml(editData.mobile||''):''}"></label>
+        <label>Profession<input id="f_prof" value="${editData?escapeHtml(editData.prof||''):''}"></label>
         <label>Monthly Income (₹)<input id="f_inc" type="text" value="${editData?formatIndianNum(editData.inc):''}" oninput="formatCurrencyInput(this)"></label>
         <label>Loan Product<select id="f3">${products.map(p=>`<option ${editData&&editData.product===p?'selected':''}>${p}</option>`).join('')}</select></label>
         <label>Required Amount (₹)<input id="f4" type="text" value="${editData?formatIndianNum(editData.amount):''}" oninput="formatCurrencyInput(this)"></label>
-        <label>CIBIL Score<input id="f_cibil" type="number" placeholder="e.g. 750" value="${editData?editData.cibil||'':''}"></label>
-        <label>Reference Name<input id="f_ref" value="${editData?editData.ref||'':''}"></label>
+        <label>CIBIL Score<input id="f_cibil" type="number" placeholder="e.g. 750" value="${editData?escapeHtml(editData.cibil||''):''}"></label>
+        <label>Reference Name<input id="f_ref" value="${editData?escapeHtml(editData.ref||''):''}"></label>
+        <label>Connector Name<input id="f_connector" value="${editData?escapeHtml(editData.connector||''):''}" placeholder="Connector / Partner"></label>
+        <label>Connector Payout (%)<input id="f_payoutPct" type="number" min="0" max="100" step="0.01" value="${editData&&editData.payoutPct!=null?editData.payoutPct:''}" placeholder="e.g. 1.5"></label>
         <label>Status
           <select id="f5">
             <option ${editData&&editData.status==='New'?'selected':''}>New</option>
@@ -813,20 +741,23 @@ function openForm(type, editId = null){
             <option ${editData&&editData.status==='Converted'?'selected':''}>Converted</option>
           </select>
         </label>
-        <label>Next Follow-up Date<input id="f6" type="date" value="${editData?editData.date:''}"></label>
-        <label class="full">Notes<textarea id="f7" rows="2">${editData?editData.note:''}</textarea></label>
+        <label>Next Follow-up Date<input id="f6" type="text" inputmode="numeric" class="date-ddmm" placeholder="DD/MM/YYYY" maxlength="10" value="${editData&&editData.date?isoToDdmmyyyy(editData.date):''}"></label>
+        <label class="full">Reject Reason <span style="color:var(--muted);font-size:11px">(if rejected)</span><textarea id="f_rejectReason" rows="2" placeholder="Reason for rejection">${editData?escapeHtml(editData.rejectReason||''):''}</textarea></label>
+        <label class="full">Approval Notes <span style="color:var(--muted);font-size:11px">(if approved)</span><textarea id="f_approvalNote" rows="2" placeholder="Approval details / notes">${editData?escapeHtml(editData.approvalNote||''):''}</textarea></label>
+        <label class="full">Notes<textarea id="f7" rows="2">${editData?escapeHtml(editData.note||''):''}</textarea></label>
       </div><br>
       <button class="btn" style="width:100%" onclick="saveLead(${editId})">${editId?'Update':'Save Lead'}</button>`;
  }
-
  if(type==='login'){
    h=`<div class="form" id="loginForm">
-        <label>Customer Name *<input id="f1" value="${editData?editData.name:''}"></label>
-        <label>Banker Name<input id="f_banker" value="${editData?editData.banker||'':''}"></label>
-        <label>Lender / Bank<input id="f2" value="${editData?editData.lender:''}"></label>
+        <label>Customer Name *<input id="f1" value="${editData?escapeHtml(editData.name||''):''}"></label>
+        <label>Banker Name<input id="f_banker" value="${editData?escapeHtml(editData.banker||''):''}"></label>
+        <label>Lender / Bank<input id="f2" value="${editData?escapeHtml(editData.lender||''):''}"></label>
         <label>Login Amount (₹)<input id="f3" type="text" value="${editData?formatIndianNum(editData.amount):''}" oninput="formatCurrencyInput(this)"></label>
-        <label>Reference<input id="f_ref" value="${editData?editData.ref||'':''}"></label>
-        <label>Login Date<input id="f4" type="date" value="${editData?editData.date:todayISO()}"></label>
+        <label>Reference<input id="f_ref" value="${editData?escapeHtml(editData.ref||''):''}"></label>
+        <label>Connector Name<input id="f_connector" value="${editData?escapeHtml(editData.connector||''):''}" placeholder="Connector / Partner"></label>
+        <label>Connector Payout (%)<input id="f_payoutPct" type="number" min="0" max="100" step="0.01" value="${editData&&editData.payoutPct!=null?editData.payoutPct:''}" placeholder="e.g. 1.5"></label>
+        <label>Login Date<input id="f4" type="text" inputmode="numeric" class="date-ddmm" placeholder="DD/MM/YYYY" maxlength="10" value="${editData&&editData.date?isoToDdmmyyyy(editData.date):isoToDdmmyyyy(todayISO())}"></label>
         <label>Status
           <select id="f5">
             <option ${editData&&editData.status==='Login'?'selected':''}>Login</option>
@@ -836,112 +767,184 @@ function openForm(type, editId = null){
             <option ${editData&&editData.status==='Disbursed'?'selected':''}>Disbursed</option>
           </select>
         </label>
-        <label>Login ID<input id="f6" value="${editData?editData.lid:''}"></label>
+        <label>Login ID<input id="f6" value="${editData?escapeHtml(editData.lid||''):''}"></label>
       </div><br>
       <button class="btn light" style="width:100%" onclick="saveLogin(${editId})">${editId?'Update':'Save Login'}</button>`;
  }
-
  if(type==='disb'){
    h=`<div class="form" id="disbForm">
-        <label>Customer Name *<input id="f1" value="${editData?editData.name:''}"></label>
+        <label>Customer Name *<input id="f1" value="${editData?escapeHtml(editData.name||''):''}"></label>
         <label>Loan Type<select id="f2">${products.map(p=>`<option ${editData&&editData.product===p?'selected':''}>${p}</option>`).join('')}</select></label>
         <label>Disbursed Amount (₹)<input id="f3" type="text" value="${editData?formatIndianNum(editData.amount):''}" oninput="formatCurrencyInput(this)"></label>
-        <label>Payout (%)<input id="f_pct" type="number" step="0.01" value="${editData?editData.pct||'1.5':''}"></label>
-        <label>Date<input id="f4" type="date" value="${editData?editData.date:todayISO()}"></label>
-        <label>Reference / Lender<input id="f5" value="${editData?editData.ref:''}"></label>
+        <label>Date<input id="f4" type="text" inputmode="numeric" class="date-ddmm" placeholder="DD/MM/YYYY" maxlength="10" value="${editData&&editData.date?isoToDdmmyyyy(editData.date):isoToDdmmyyyy(todayISO())}"></label>
+        <label>Reference / Lender<input id="f5" value="${editData?escapeHtml(editData.ref||''):''}"></label>
+        <label>Connector Name<input id="f_connector" value="${editData?escapeHtml(editData.connector||''):''}" placeholder="Connector / Partner"></label>
+        <label>Connector Payout (%)<input id="f_payoutPct" type="number" min="0" max="100" step="0.01" value="${editData&&editData.payoutPct!=null?editData.payoutPct:''}" placeholder="e.g. 1.5"></label>
       </div><br>
-      <button class="btn green" style="width:100%" onclick="saveDisb(${editId})">${editId?'Update':'Save & Generate Tax Invoice'}</button>`;
+      <button class="btn green" style="width:100%" onclick="saveDisb(${editId})">${editId?'Update':'Save Disbursement'}</button>`;
  }
-
+ if(type==='payout'){
+   h=`<div class="form" id="payoutForm">
+        <label>Connector Name *<input id="f1" value="${editData?escapeHtml(editData.connector||''):''}" placeholder="Connector / Partner name"></label>
+        <label>Customer Name<input id="f2" value="${editData?escapeHtml(editData.customer||''):''}"></label>
+        <label>Lender / Bank<input id="f3" value="${editData?escapeHtml(editData.lender||''):''}"></label>
+        <label>Disbursed Amount (₹)<input id="f4" type="text" value="${editData?formatIndianNum(editData.disbAmount):''}" oninput="formatCurrencyInput(this); calcPayoutForm()"></label>
+        <label>Payout (%)<input id="f5" type="number" min="0" step="0.01" value="${editData?editData.pct??'':''}" oninput="calcPayoutForm()"></label>
+        <label>Expected Payout (₹)<input id="f6" type="text" value="${editData?formatIndianNum(editData.expected):''}" readonly></label>
+        <label>Received Amount (₹)<input id="f7" type="text" value="${editData?formatIndianNum(editData.received):''}" oninput="formatCurrencyInput(this)"></label>
+        <label>Status<select id="f8"><option ${!editData||editData.status==='Pending'?'selected':''}>Pending</option><option ${editData&&editData.status==='Partial'?'selected':''}>Partial</option><option ${editData&&editData.status==='Clear'?'selected':''}>Clear</option></select></label>
+        <label>Clear / Received Date<input id="f9" type="text" inputmode="numeric" class="date-ddmm" placeholder="DD/MM/YYYY" maxlength="10" value="${editData&&editData.date?isoToDdmmyyyy(editData.date):isoToDdmmyyyy(todayISO())}"></label>
+        <label class="full">Reference / Notes<input id="f10" value="${editData?escapeHtml(editData.ref||''):''}"></label>
+      </div><br>
+      <button class="btn green" style="width:100%" onclick="savePayout(${editId})">${editId?'Update Payout':'Save Payout'}</button>`;
+   setTimeout(calcPayoutForm,0);
+ }
  $('formArea').innerHTML=h;
  $('modal').classList.add('show');
 }
-
 function closeModal(){$('modal').classList.remove('show');}
-
 function saveLead(editId){
   if(!$('f1').value.trim()) return alert('Name required');
-  let data = { name: $('f1').value, mobile: $('f2').value, prof: $('f_prof').value, inc: parseCurrencyNum($('f_inc').value), product: $('f3').value, amount: parseCurrencyNum($('f4').value), cibil: $('f_cibil').value, ref: $('f_ref').value, status: $('f5').value, date: $('f6').value, note: $('f7').value };
-  if(editId){ Object.assign(db.leads.find(x => x.id === editId), data); }
-  else { db.leads.push({id:Date.now(), createdAt:Date.now(), ...data}); }
-  closeModal(); save();
+  const rawPct=parseFloat($('f_payoutPct')?.value); const payoutPct=Number.isFinite(rawPct)?Math.min(100,Math.max(0,rawPct)):0;
+  const data={name:$('f1').value.trim(),mobile:$('f2').value.trim(),prof:$('f_prof').value.trim(),inc:parseCurrencyNum($('f_inc').value),product:$('f3').value,amount:parseCurrencyNum($('f4').value),cibil:$('f_cibil').value.trim(),ref:$('f_ref').value.trim(),connector:$('f_connector')?.value.trim()||'',payoutPct,status:$('f5').value,date:ddmmyyyyToIso($('f6').value)||'',note:$('f7').value.trim()};
+  let lead;
+  if(editId){lead=db.leads.find(x=>x.id===editId);if(!lead)return alert('Lead not found. Please refresh and try again.');Object.assign(lead,data,{updatedAt:Date.now()});}
+  else{lead={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),...data};db.leads.push(lead);}
+  if(data.status==='Login') autoCreateOrUpdateLoginFromLead(lead);
+  if(save()) closeModal();
 }
-
 function saveLogin(editId){
   if(!$('f1').value.trim()) return alert('Name required');
-  let data = { name: $('f1').value, banker: $('f_banker').value, lender: $('f2').value, amount: parseCurrencyNum($('f3').value), ref: $('f_ref').value, date: $('f4').value, status: $('f5').value, lid: $('f6').value };
-  if(editId){ Object.assign(db.logins.find(x => x.id === editId), data); }
-  else { db.logins.push({id:Date.now(), ...data}); }
-  closeModal(); save();
+  const rawPct=parseFloat($('f_payoutPct')?.value); const payoutPct=Number.isFinite(rawPct)?Math.min(100,Math.max(0,rawPct)):0;
+  const data={name:$('f1').value.trim(),banker:$('f_banker').value.trim(),lender:$('f2').value.trim(),amount:parseCurrencyNum($('f3').value),ref:$('f_ref').value.trim(),connector:$('f_connector')?.value.trim()||'',payoutPct,date:ddmmyyyyToIso($('f4').value)||todayISO(),status:$('f5').value,lid:$('f6').value.trim()};
+  let login;
+  if(editId){login=db.logins.find(x=>x.id===editId);if(!login)return alert('Login not found. Please refresh and try again.');Object.assign(login,data,{updatedAt:Date.now()});}
+  else{login={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),...data};db.logins.push(login);}
+  if(data.status==='Disbursed') autoCreateOrUpdateDisbFromLogin(login);
+  if(save()) closeModal();
 }
-
 function saveDisb(editId){
   if(!$('f1').value.trim()) return alert('Name required');
-  let data = { name: $('f1').value, product: $('f2').value, amount: parseCurrencyNum($('f3').value), pct: $('f_pct').value||'1.5', date: $('f4').value, ref: $('f5').value };
-  if(editId){ Object.assign(db.disb.find(x => x.id === editId), data); }
-  else { db.disb.push({id:Date.now(), ...data}); }
-  closeModal(); save();
-  
-  /* Auto load into Invoice View */
-  go('invoice', document.querySelectorAll('.menu button')[7]);
-  $('invDisbSelect').value = db.disb.length - 1;
-  loadInvoiceData();
+  const rawPct=parseFloat($('f_payoutPct')?.value); const payoutPct=Number.isFinite(rawPct)?Math.min(100,Math.max(0,rawPct)):0;
+  const data={name:$('f1').value.trim(),product:$('f2').value,amount:parseCurrencyNum($('f3').value),date:ddmmyyyyToIso($('f4').value)||todayISO(),ref:$('f5').value.trim(),connector:$('f_connector')?.value.trim()||'',payoutPct};
+  let disb;
+  if(editId){disb=db.disb.find(x=>x.id===editId);if(!disb)return alert('Disbursement not found. Please refresh and try again.');Object.assign(disb,data,{updatedAt:Date.now()});}
+  else{disb={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),...data};db.disb.push(disb);}
+  autoCreateOrUpdatePayoutFromDisb(disb);
+  if(save()) closeModal();
 }
+function findBySource(collection,field,id){return collection.find(x=>String(x[field]||'')===String(id));}
+function autoCreateOrUpdateLoginFromLead(lead){
+  // Bridges a Lead into the Pipeline ONLY the first time its status becomes
+  // 'Login'. Once that Login record exists, this never touches it again —
+  // otherwise every unrelated save() elsewhere in the app (autoSyncPipeline
+  // runs on every save) would silently reset its stage back to 'Login',
+  // wiping out any manual progress made on the Pipeline page (Approved,
+  // Rejected, Disbursed, edited Login ID, etc).
+  let login=findBySource(db.logins,'sourceLeadId',lead.id);
+  if(login){ lead.loginId=login.id; return login; }
+  login={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),sourceLeadId:lead.id,
+    name:lead.name||'',banker:'',lender:'',product:lead.product||'Personal Loan',
+    amount:Number(lead.amount||0),ref:lead.ref||'',connector:lead.connector||'',
+    payoutPct:Number(lead.payoutPct||0),date:todayISO(),status:'Login',lid:''};
+  db.logins.push(login);
+  lead.loginId=login.id;
+  return login;
+}
+function autoCreateOrUpdateDisbFromLogin(login){
+  // Same one-time-bridge principle as above: create once, then hands off full
+  // ownership to the Disbursement page — never overwrites an existing record.
+  let disb=findBySource(db.disb,'sourceLoginId',login.id);
+  if(disb){ login.disbId=disb.id; return disb; }
+  disb={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),sourceLoginId:login.id,
+    name:login.name||'',product:login.product||'Personal Loan',amount:Number(login.amount||0),
+    date:todayISO(),ref:login.ref||login.lender||'',connector:login.connector||'',
+    payoutPct:Number(login.payoutPct||0)};
+  db.disb.push(disb);
+  login.disbId=disb.id;
+  autoCreateOrUpdatePayoutFromDisb(disb);
+  return disb;
+}
+function autoCreateOrUpdatePayoutFromDisb(disb){
+  // Same one-time-bridge principle: create once, then the Payout Tracker page
+  // fully owns received-amount/status — never silently reset here again.
+  let payout=findBySource(db.payouts,'sourceDisbId',disb.id);
+  if(payout){ disb.payoutId=payout.id; return payout; }
+  const pct=Math.min(100,Math.max(0,Number(disb.payoutPct||0)));
+  const expected=Number(disb.amount||0)*pct/100;
+  payout={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),sourceDisbId:disb.id,
+    connector:disb.connector||'',customer:disb.name||'',lender:disb.ref||'',
+    disbAmount:Number(disb.amount||0),pct,expected,received:0,status:'Pending',
+    date:disb.date||todayISO(),ref:disb.ref||''};
+  db.payouts.push(payout);
+  disb.payoutId=payout.id;
+  return payout;
+}
+function autoSyncPipeline(){db.leads.forEach(x=>{if(x.status==='Login')autoCreateOrUpdateLoginFromLead(x);});db.logins.forEach(x=>{if(x.status==='Disbursed')autoCreateOrUpdateDisbFromLogin(x);});db.disb.forEach(x=>autoCreateOrUpdatePayoutFromDisb(x));}
 
-/* Feature: CIBIL Score Helper */
+function calcPayoutForm(){
+  if(!$('f4') || !$('f5') || !$('f6')) return;
+  const amount=parseCurrencyNum($('f4').value); const pct=Math.max(0,parseFloat($('f5').value)||0);
+  $('f6').value=formatIndianNum((amount*pct)/100);
+}
+function savePayout(editId){
+  const connector=$('f1').value.trim(); if(!connector) return alert('Connector name required');
+  const disbAmount=parseCurrencyNum($('f4').value); const pct=parseFloat($('f5').value)||0;
+  if(disbAmount<0 || pct<0) return alert('Amount/percentage cannot be negative');
+  const expected=(disbAmount*pct)/100; const received=Math.max(0,parseCurrencyNum($('f7').value));
+  if(received>expected && expected>0) return alert('Received amount cannot be greater than expected payout');
+  let status=$('f8').value; if(received<=0) status='Pending'; else if(expected>0 && received>=expected) status='Clear'; else status='Partial';
+  const data={connector,customer:$('f2').value.trim(),lender:$('f3').value.trim(),disbAmount,pct,expected,received,status,date:ddmmyyyyToIso($('f9').value)||todayISO(),ref:$('f10').value.trim()};
+  if(editId){const item=db.payouts.find(x=>x.id===editId);if(!item)return alert('Payout not found. Please refresh and try again.');Object.assign(item,data,{updatedAt:Date.now()});}else db.payouts.push({id:newId(),createdAt:Date.now(),updatedAt:Date.now(),...data});
+  if(save()) closeModal();
+}
+function payoutStatusBadge(s){ const c=s==='Clear'?'status-clear':s==='Partial'?'status-partial':'status-pending'; return `<span class="badge ${c}">${escapeHtml(s||'Pending')}</span>`; }
+
 function populateCibilDropdown(){
   let sel = $('cibilLeadSelect');
-  sel.innerHTML = '<option value="">-- Select Customer --</option>' + 
-    db.leads.map((x,i) => `<option value="${i}">${x.name} (${x.mobile||'No mobile'}) - CIBIL: ${x.cibil||'N/A'}</option>`).join('');
+  sel.innerHTML = '<option value="">-- Select Customer --</option>' +
+    db.leads.map(x => `<option value="${x.id}">${escapeHtml(x.name)} (${escapeHtml(x.mobile||'No mobile')}) - CIBIL: ${escapeHtml(x.cibil||'N/A')}</option>`).join('');
 }
-
 function saveCibilScore(){
   let idx = $('cibilLeadSelect').value;
   let score = $('cibilScoreInput').value;
   if(idx === "" || !score) return alert('Select customer and enter score!');
-  db.leads[idx].cibil = score;
-  save();
-  alert('✅ CIBIL Score saved successfully!');
+  const lead = db.leads.find(x=>String(x.id)===String(idx));
+  if(!lead) return alert('Customer not found. Please refresh and try again.');
+  const n=Number(score); if(!Number.isInteger(n) || n<300 || n>900) return alert('CIBIL score must be between 300 and 900.');
+  lead.cibil = String(n);
+  if(save()) alert('✅ CIBIL Score saved successfully!');
 }
-
-/* Feature 1: Automated Eligibility Engine */
 function calculateEligibility(){
-  let inc = parseCurrencyNum($('elIncome').value);
-  let emi = parseCurrencyNum($('elEmi').value);
-  let foir = (parseFloat($('elFoir').value) || 50) / 100;
-  let tenureYrs = parseFloat($('elTenure').value) || 5;
-  let rate = parseFloat($('elRate').value) || 11;
-
-  let maxEmi = inc * foir;
-  let availEmi = Math.max(0, maxEmi - emi);
-  
-  let r = rate / 12 / 100;
-  let n = tenureYrs * 12;
-  let maxLoan = 0;
-
-  if(r > 0 && n > 0 && availEmi > 0){
-    maxLoan = (availEmi * (Math.pow(1 + r, n) - 1)) / (r * Math.pow(1 + r, n));
+  const inc=Math.max(0,parseCurrencyNum($('elIncome').value));
+  const emi=Math.max(0,parseCurrencyNum($('elEmi').value));
+  const foirRaw=parseFloat($('elFoir').value);
+  const foir=Math.min(1,Math.max(0,Number.isFinite(foirRaw)?foirRaw/100:0.5));
+  const tenureRaw=parseFloat($('elTenure').value);
+  const tenureYrs=Math.min(40,Math.max(0,Number.isFinite(tenureRaw)?tenureRaw:5));
+  const rateRaw=parseFloat($('elRate').value);
+  const rate=Math.min(100,Math.max(0,Number.isFinite(rateRaw)?rateRaw:11));
+  const maxEmi=inc*foir;
+  const availEmi=Math.max(0,maxEmi-emi);
+  const r=rate/12/100, n=tenureYrs*12;
+  let maxLoan=0;
+  if(availEmi>0 && n>0){
+    maxLoan=r>0 ? (availEmi*(Math.pow(1+r,n)-1))/(r*Math.pow(1+r,n)) : availEmi*n;
   }
-
-  $('resMaxEmi').textContent = money(Math.round(maxEmi));
-  $('resAvailEmi').textContent = money(Math.round(availEmi));
-  $('resMaxLoan').textContent = money(Math.round(maxLoan));
+  $('resMaxEmi').textContent=money(Math.round(maxEmi));
+  $('resAvailEmi').textContent=money(Math.round(availEmi));
+  $('resMaxLoan').textContent=money(Math.round(maxLoan));
 }
-
-/* Feature 2: Bank Statement Analyzer */
 function analyzeStatement(){
   let b1 = parseCurrencyNum($('b1').value);
   let b2 = parseCurrencyNum($('b2').value);
   let b3 = parseCurrencyNum($('b3').value);
   let credits = parseCurrencyNum($('bCredits').value);
   let bounce = parseInt($('bBounce').value) || 0;
-
   let abb = (b1 + b2 + b3) / 3;
   let avgCred = credits / 3;
-
   $('resABB').textContent = money(Math.round(abb));
   $('resAvgCredit').textContent = money(Math.round(avgCred));
-
   let healthEl = $('resBankHealth');
   if(bounce === 0 && abb > 25000){
     healthEl.textContent = 'Excellent (Low Risk)';
@@ -954,144 +957,95 @@ function analyzeStatement(){
     healthEl.className = 'badge bad';
   }
 }
-
-/* Feature 3: Tax Invoice Generator & Dynamic Annexure Calculations */
-function populateInvoiceDropdown(){
-  let sel = $('invDisbSelect');
-  sel.innerHTML = '<option value="">-- Select Disbursed Customer --</option>' + 
-    db.disb.map((x,i) => `<option value="${i}">${x.name} - ${money(x.amount)} (${x.product})</option>`).join('');
-}
-
-function loadInvoiceData(){
-  let idx = $('invDisbSelect').value;
-  if(idx === "") return;
-  let item = db.disb[idx];
-  $('invDate').value = item.date;
-  $('buyerName').value = item.ref || 'Nomisma Mobile Solutions Pvt. Ltd.';
-  $('annCase').value = item.name;
-  $('annDisb').value = item.amount;
-  $('annPct').value = item.pct || '1.5';
-  calculateAnnexure();
-}
-
-function calculateTaxInvoice() {
-  let baseAmt = parseFloat($('amt1').value) || 0;
-  let cgstRate = parseFloat($('cgstRate').value) || 0;
-  let sgstRate = parseFloat($('sgstRate').value) || 0;
-
-  let cgstVal = Math.round((baseAmt * cgstRate) / 100);
-  let sgstVal = Math.round((baseAmt * sgstRate) / 100);
-  let total = baseAmt + cgstVal + sgstVal;
-
-  $('cgstAmt').innerText = cgstVal;
-  $('sgstAmt').innerText = sgstVal;
-  $('totalAmt').innerText = '₹' + formatIndianNum(total);
-}
-
-function calculateAnnexure() {
-  let disb = parseFloat($('annDisb').value) || 0;
-  let pct = parseFloat($('annPct').value) || 0;
-  let comm = Math.round((disb * pct) / 100);
-
-  $('annComm').innerText = comm;
-  $('annTotal').innerText = '₹' + formatIndianNum(comm);
-  
-  /* Update main table base amount automatically */
-  $('amt1').value = comm;
-  calculateTaxInvoice();
-}
-
-/* Feature 4: Lead Re-engagement & Nurturing */
 function renderNurture(){
   let filter = $('nurtureFilter').value;
+  const THIRTY_DAYS=30*24*60*60*1000, cutoff=Date.now()-THIRTY_DAYS;
   let list = db.leads.filter(x => {
     if(filter === 'Rejected') return x.status === 'Rejected';
     if(filter === 'Follow-up') return x.status === 'Follow-up';
-    return x.status === 'New' || x.status === 'Follow-up';
+    return (x.status === 'New' || x.status === 'Follow-up') && Number(x.updatedAt||x.createdAt||0) < cutoff;
   });
-
   $('nurtureList').innerHTML = list.map(x => {
-    let msg = encodeURIComponent(`Hello ${x.name}, Moneylight Finance se call back request tha. Kya aapko ${x.product || 'Loan'} requirement abhi active hai? High approval rate ke saath new offers available hain!`);
-    let waLink = `https://wa.me/91${x.mobile}?text=${msg}`;
+    const phone=String(x.mobile||'').replace(/\D/g,'');
+    const msg=encodeURIComponent(`Hello ${x.name||''}, Moneylight Finance se call back request tha. Kya aapko ${x.product || 'Loan'} requirement abhi active hai? High approval rate ke saath new offers available hain!`);
+    const waLink=phone ? `https://wa.me/91${phone}?text=${msg}` : '';
     return `
       <div class="todo" style="display:flex; justify-content:space-between; align-items:center;">
         <div>
-          <b>${x.name}</b> (${x.mobile || 'No Mobile'}) — ${badge(x.status)}
-          <small>Product: ${x.product} | Req: ${money(x.amount)}</small>
+          <b>${escapeHtml(x.name||'Unnamed')}</b> (${escapeHtml(x.mobile || 'No Mobile')}) — ${badge(x.status)}
+          <small>Product: ${escapeHtml(x.product||'-')} | Req: ${money(x.amount)}</small>
         </div>
         <div>
-          ${x.mobile ? `<a href="${waLink}" target="_blank" class="btn green btn-sm" style="text-decoration:none">💬 WhatsApp Re-engage</a>` : ''}
+          ${phone ? `<a href="${waLink}" target="_blank" rel="noopener noreferrer" class="btn green btn-sm" style="text-decoration:none">💬 WhatsApp Re-engage</a>` : ''}
         </div>
       </div>
     `;
   }).join('') || '<div class="empty">No leads found under this nurturing category.</div>';
 }
-
-function updateLeadStatus(id,val){
-  let x = db.leads.find(item=>item.id===id);
-  if(x){ x.status=val; save(); }
-}
-
-function updateLoginStatus(id,val){
-  let x = db.logins.find(item=>item.id===id);
-  if(x){ x.status=val; save(); }
-}
-
+function updateLeadStatus(id,val){let x=db.leads.find(item=>item.id===id);if(x){x.status=val;if(val==='Login')autoCreateOrUpdateLoginFromLead(x);save();}}
+function updateLoginStatus(id,val){let x=db.logins.find(item=>item.id===id);if(x){x.status=val;if(val==='Disbursed')autoCreateOrUpdateDisbFromLogin(x);save();}}
 function removeLead(id){if(confirm('Delete lead?')){db.leads=db.leads.filter(x=>x.id!==id);save();}}
 function removeLogin(id){if(confirm('Delete login?')){db.logins=db.logins.filter(x=>x.id!==id);save();}}
 function removeDisb(id){if(confirm('Delete disbursement?')){db.disb=db.disb.filter(x=>x.id!==id);save();}}
-
+function removePayout(id){if(confirm('Delete payout record?')){db.payouts=db.payouts.filter(x=>x.id!==id);save();}}
 function calcEMI(){
-  let p = parseCurrencyNum($('emiAmount').value);
-  let r = (parseFloat($('emiRate').value) || 0) / 12 / 100;
-  let n = (parseFloat($('emiTenure').value) || 0) * 12;
-  if(p > 0 && r > 0 && n > 0){
-    let emi = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-    let totalAmt = emi * n;
-    $('resEmi').textContent = money(Math.round(emi));
-    $('resInterest').textContent = money(Math.round(totalAmt - p));
-    $('resTotal').textContent = money(Math.round(totalAmt));
-  } else {
-    $('resEmi').textContent = '₹0'; $('resInterest').textContent = '₹0'; $('resTotal').textContent = '₹0';
+  const p=Math.max(0,parseCurrencyNum($('emiAmount').value));
+  const rateRaw=parseFloat($('emiRate').value);
+  const rate=Math.min(100,Math.max(0,Number.isFinite(rateRaw)?rateRaw:0));
+  const tenureRaw=parseFloat($('emiTenure').value);
+  const n=Math.min(480,Math.max(0,Number.isFinite(tenureRaw)?tenureRaw:0))*12;
+  if(p>0 && n>0){
+    const r=rate/12/100;
+    const emi=r>0 ? (p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1) : p/n;
+    const totalAmt=emi*n;
+    $('resEmi').textContent=money(Math.round(emi));
+    $('resInterest').textContent=money(Math.max(0,Math.round(totalAmt-p)));
+    $('resTotal').textContent=money(Math.round(totalAmt));
+  }else{
+    $('resEmi').textContent='₹0'; $('resInterest').textContent='₹0'; $('resTotal').textContent='₹0';
   }
 }
-
 function calcPercent(){
-  let total = parseCurrencyNum($('pTotalAmount').value);
-  let pct = parseFloat($('pPercentage').value) || 0;
-  $('resPercentVal').textContent = money((total * pct) / 100);
+  const total=Math.max(0,parseCurrencyNum($('pTotalAmount').value));
+  const pctRaw=parseFloat($('pPercentage').value);
+  const pct=Math.min(100,Math.max(0,Number.isFinite(pctRaw)?pctRaw:0));
+  $('resPercentVal').textContent=money((total*pct)/100);
 }
-
 function render(){
+ autoSyncPipeline();
  $('today').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  let month=todayISO().slice(0,7), today=todayISO();
  let disbTotal=db.disb.reduce((a,x)=>a+Number(x.amount||0),0);
  let approved=db.logins.filter(x=>x.status==='Approved').reduce((a,x)=>a+Number(x.amount||0),0);
-
  $('cLead').textContent=db.leads.length;
  $('cLogin').textContent=db.logins.filter(x=>x.date?.startsWith(month)).length;
  $('cApproved').textContent=money(approved);
  $('cDisb').textContent=money(disbTotal);
  $('cFollow').textContent=db.leads.filter(x=>x.date&&x.date<=today&&x.status==='Follow-up').length;
+ const payoutExpected=db.payouts.reduce((a,x)=>a+Number(x.expected||0),0); const payoutReceived=db.payouts.reduce((a,x)=>a+Number(x.received||0),0); const payoutPending=Math.max(0,payoutExpected-payoutReceived);
+ if($('dashPayoutExpected')) $('dashPayoutExpected').textContent=money(payoutExpected);
+ if($('dashPayoutReceived')) $('dashPayoutReceived').textContent=money(payoutReceived);
+ if($('dashPayoutPending')) $('dashPayoutPending').textContent=money(payoutPending);
+ if($('pExpected')) $('pExpected').textContent=money(payoutExpected);
+ if($('pReceived')) $('pReceived').textContent=money(payoutReceived);
+ if($('pPending')) $('pPending').textContent=money(payoutPending);
  renderMonthChart();
-
  $('dTotal').textContent=money(disbTotal);
  $('dFiles').textContent=db.disb.length;
  $('rTotal').textContent=money(disbTotal);
  $('rAvg').textContent=money(db.disb.length?disbTotal/db.disb.length:0);
  $('rConv').textContent=(db.leads.length?Math.round(db.leads.filter(x=>x.status==='Converted').length/db.leads.length*100):0)+'%';
-
  let q=($('search')?.value||'').toLowerCase(), sf=$('statusFilter')?.value||'';
- 
+
  $('leadTable').innerHTML=db.leads.filter(x=>(!q||[x.name,x.mobile,x.product,x.ref,x.prof].join(' ').toLowerCase().includes(q))&&(!sf||x.status===sf)).map(x=>`
   <tr>
-    <td><b>${x.name}</b></td>
-    <td>${x.mobile||'-'}</td>
-    <td>${x.prof||'-'} <br><small style="color:var(--muted)">${x.inc?money(x.inc)+'/m':''}</small></td>
-    <td>${x.product}</td>
+    <td><b>${escapeHtml(x.name||'-')}</b></td>
+    <td>${escapeHtml(x.mobile||'-')}</td>
+    <td>${escapeHtml(x.prof||'-')} <br><small style="color:var(--muted)">${x.inc?money(x.inc)+'/m':''}</small></td>
+    <td>${escapeHtml(x.product||'-')}</td>
     <td>${money(x.amount)}</td>
-    <td><b>${x.cibil||'N/A'}</b></td>
-    <td>${x.ref||'-'}</td>
+    <td><b>${escapeHtml(x.cibil||'N/A')}</b></td>
+    <td>${escapeHtml(x.ref||'-')}</td>
     <td>
       <select onchange="updateLeadStatus(${x.id},this.value)" style="padding:3px;font-size:11px;">
         <option ${x.status==='New'?'selected':''}>New</option>
@@ -1109,76 +1063,48 @@ function render(){
     </td>
   </tr>
  `).join('')||`<tr><td colspan="10" class="empty">No leads found</td></tr>`;
-
- $('loginTable').innerHTML=db.logins.map(x=>`
-  <tr>
-    <td><b>${x.name}</b></td>
-    <td>${x.banker||'-'}</td>
-    <td>${x.lender||'-'}</td>
-    <td>${money(x.amount)}</td>
-    <td>${x.ref||'-'}</td>
-    <td>${formatDDMMYY(x.date)}</td>
-    <td>
-      <select onchange="updateLoginStatus(${x.id},this.value)" style="padding:3px;font-size:11px;">
-        <option ${x.status==='Login'?'selected':''}>Login</option>
-        <option ${x.status==='Under Process'?'selected':''}>Under Process</option>
-        <option ${x.status==='Approved'?'selected':''}>Approved</option>
-        <option ${x.status==='Rejected'?'selected':''}>Rejected</option>
-        <option ${x.status==='Disbursed'?'selected':''}>Disbursed</option>
-      </select>
-    </td>
-    <td>${x.lid||'-'}</td>
-    <td>
-      <button class="btn light btn-sm" onclick="openForm('login', ${x.id})">Edit</button>
-      <button class="btn red btn-sm" onclick="removeLogin(${x.id})">Delete</button>
-    </td>
-  </tr>
- `).join('')||`<tr><td colspan="9" class="empty">No logins found</td></tr>`;
-
+ renderPipelineBoard();
  $('disbTable').innerHTML=db.disb.map(x=>`
   <tr>
-    <td><b>${x.name}</b></td>
-    <td>${x.product}</td>
+    <td><b>${escapeHtml(x.name||'-')}</b></td>
+    <td>${escapeHtml(x.product||'-')}</td>
     <td>${money(x.amount)}</td>
-    <td>${x.pct?x.pct+'% ('+money((x.amount*x.pct)/100)+')':'-'}</td>
     <td>${formatDDMMYY(x.date)}</td>
-    <td>${x.ref||'-'}</td>
+    <td>${escapeHtml(x.ref||'-')}</td>
     <td>
       <button class="btn light btn-sm" onclick="openForm('disb', ${x.id})">Edit</button>
       <button class="btn red btn-sm" onclick="removeDisb(${x.id})">Delete</button>
     </td>
   </tr>
- `).join('')||`<tr><td colspan="7" class="empty">No disbursements found</td></tr>`;
-
- let tasks=db.leads.filter(x=>x.date).sort((a,b)=>a.date.localeCompare(b.date));
- let taskHTML=tasks.map(x=>`<div class="todo">📅 <b>${x.date<=today?'⚠️ ':''}${formatDDMMYY(x.date)}</b> — <b>${x.name}</b> — ${badge(x.status)}<small>📞 ${x.mobile||'No mobile'} ${x.note?' • '+x.note:''}</small></div>`).join('')||'<div class="empty">No follow-ups due 🎉</div>';
+ `).join('')||`<tr><td colspan="6" class="empty">No disbursements found</td></tr>`;
+ let pq=($('payoutSearch')?.value||'').toLowerCase(), ps=$('payoutStatusFilter')?.value||'';
+ $('payoutTable').innerHTML=db.payouts.filter(x=>(!pq||Object.values(x).join(' ').toLowerCase().includes(pq))&&(!ps||x.status===ps)).map(x=>`
+  <tr><td><b>${escapeHtml(x.connector||'-')}</b></td><td>${escapeHtml(x.customer||'-')}</td><td>${escapeHtml(x.lender||'-')}</td><td>${money(x.disbAmount)}</td><td>${Number(x.pct||0).toFixed(2)}%</td><td>${money(x.expected)}</td><td>${money(x.received)}</td><td>${money(Math.max(0,Number(x.expected||0)-Number(x.received||0)))}</td><td>${payoutStatusBadge(x.status)}</td><td>${formatDDMMYY(x.date)}</td><td>${escapeHtml(x.ref||'-')}</td><td><button class="btn light btn-sm" onclick="openForm('payout',${x.id})">Edit</button><button class="btn red btn-sm" onclick="removePayout(${x.id})">Delete</button></td></tr>`).join('')||'<tr><td colspan="12" class="empty">No payout records found</td></tr>';
+ let dashPayouts=db.payouts.filter(x=>x.status!=='Clear').slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))).slice(0,5);
+ if($('dashPayoutList')) $('dashPayoutList').innerHTML=dashPayouts.map(x=>`<div class="todo"><b>${escapeHtml(x.connector||'-')}</b> — ${escapeHtml(x.customer||'-')} <span style="float:right">${payoutStatusBadge(x.status)}</span><small>Expected: ${money(x.expected)} • Received: ${money(x.received)} • Pending: ${money(Math.max(0,Number(x.expected||0)-Number(x.received||0)))}</small></div>`).join('')||'<div class="empty">No pending payouts 🎉</div>';
+ const rejected=db.leads.filter(x=>x.status==='Rejected').slice().sort((a,b)=>Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0));
+ const approvedLeads=db.leads.filter(x=>x.status==='Approved').slice().sort((a,b)=>Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0));
+ $('dashRejected').innerHTML=rejected.map(x=>`<div class="todo"><b>${escapeHtml(x.name||'-')}</b><span style="float:right">${badge(x.status)}</span><small>Reason: ${escapeHtml(x.rejectReason||'Not added')}</small><button class="btn light btn-sm" onclick="openForm('lead',${x.id})">Edit</button></div>`).join('')||'<div class="empty">No rejected leads</div>';
+ $('dashApproved').innerHTML=approvedLeads.map(x=>`<div class="todo"><b>${escapeHtml(x.name||'-')}</b><span style="float:right">${badge(x.status)}</span><small>Note: ${escapeHtml(x.approvalNote||'Not added')}</small><button class="btn light btn-sm" onclick="openForm('lead',${x.id})">Edit</button></div>`).join('')||'<div class="empty">No approved leads</div>';
+ let tasks=db.leads.filter(x=>x.date&&!['Approved','Rejected','Converted'].includes(x.status)).sort((a,b)=>a.date.localeCompare(b.date));
+ let taskHTML=tasks.map(x=>`<div class="todo">📅 <b>${x.date<=today?'⚠️ ':''}${formatDDMMYY(x.date)}</b> — <b>${escapeHtml(x.name||'-')}</b> — ${badge(x.status)}<small>📞 ${escapeHtml(x.mobile||'No mobile')} ${x.note?' • '+escapeHtml(x.note):''}</small></div>`).join('')||'<div class="empty">No follow-ups due 🎉</div>';
  $('dashFollow').innerHTML=taskHTML;
  $('followList').innerHTML=taskHTML;
-
  let map={};db.disb.forEach(x=>map[x.product]=(map[x.product]||0)+Number(x.amount||0));
- $('productReport').innerHTML=Object.keys(map).map(k=>`<div class="todo"><b>${k}</b><span style="float:right">${money(map[k])}</span></div>`).join('')||'<div class="empty">No data</div>';
+ $('productReport').innerHTML=Object.keys(map).map(k=>`<div class="todo"><b>${escapeHtml(k)}</b><span style="float:right">${money(map[k])}</span></div>`).join('')||'<div class="empty">No data</div>';
 }
-
-/* MULTI-OPTION BACKUP ENGINE */
-/* getFreshDb(): backups always read straight from localStorage (the real saved
-   copy) instead of trusting whatever is currently in the in-memory `db`
-   variable. This is the single source of truth check that guards against a
-   stale/short backup — if this ever comes back smaller than expected, it
-   means the data itself was never saved (see save() calls), not a backup bug. */
 function getFreshDb(){
   try {
-    return JSON.parse(localStorage.getItem(KEY) || '{"leads":[],"logins":[],"disb":[]}');
+    return normalizeDb(JSON.parse(localStorage.getItem(KEY)||JSON.stringify(db)));
   } catch(e) {
-    return db; // fall back to in-memory copy if localStorage is somehow corrupted
+    return normalizeDb(db);
   }
 }
-
 function backupOptions(){
   $('modalTitle').textContent = '💾 Backup Data Options';
   let freshDb = getFreshDb();
   let jsonStr = JSON.stringify(freshDb, null, 2);
-  let counts = `Leads: ${freshDb.leads.length} • Logins: ${freshDb.logins.length} • Disbursements: ${freshDb.disb.length}`;
-
+  let counts = `Leads: ${freshDb.leads.length} • Logins: ${freshDb.logins.length} • Disbursements: ${freshDb.disb.length} • Payouts: ${(freshDb.payouts||[]).length}`;
   $('formArea').innerHTML = `
     <div style="display:flex; flex-direction:column; gap:10px;">
       <div class="notice">📊 Current saved data — ${counts}<br>
@@ -1199,72 +1125,54 @@ function backupOptions(){
   `;
   $('modal').classList.add('show');
 }
-
 function directDownloadBackup(){
   try {
     const freshDb = getFreshDb();
     const dataStr = JSON.stringify(freshDb, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
     a.download = `Moneylight_CRM_Backup_${todayISO()}.json`;
     a.style.display = 'none';
     document.body.appendChild(a);
     a.click();
-
     setTimeout(() => {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }, 1000);
-
-    alert(`✅ Backup file download shuru ho gaya (${freshDb.leads.length} leads, ${freshDb.logins.length} logins, ${freshDb.disb.length} disbursements). Agar phone ke "Downloads" folder me file nahi milti, to WebView/in-app browser download ko block kar raha hai — Option 2 (Copy to Clipboard) use karein.`);
+    alert(`✅ Backup file download shuru ho gaya (${freshDb.leads.length} leads, ${freshDb.logins.length} logins, ${freshDb.disb.length} disbursements, ${(freshDb.payouts||[]).length} payouts).`);
   } catch(e) {
-    alert('⚠️ Is browser ne file download block kar diya. Kripya "Copy to Clipboard" option use karein ya niche diye text box se data manually copy karein.');
+    alert('⚠️ Is browser ne file download block kar diya. Kripya "Copy to Clipboard" option use karein.');
   }
 }
-
 function copyBackupToClipboard(){
   let jsonStr = JSON.stringify(getFreshDb(), null, 2);
   navigator.clipboard.writeText(jsonStr).then(() => {
-    alert('✅ Backup data copied to clipboard! Paste it into WhatsApp, Email, or Notes.');
+    alert('✅ Backup data copied to clipboard!');
   }).catch(() => {
     alert('Please select text below and copy manually.');
   });
 }
-
-/* FULL APP BACKUP — one self-contained .html file with the app's design AND
-   the current data baked in together. If everything gets deleted, just open
-   this one downloaded file on any phone/computer and the whole CRM (look +
-   data) comes back — no separate restore step needed. */
 function downloadFullAppBackup(){
   try {
     const freshDb = getFreshDb();
-
-    // Clone the live page so the running session on screen is untouched
     const clone = document.documentElement.cloneNode(true);
-
-    // Reset runtime UI state on the clone so the downloaded copy opens fresh at login
     const cloneLogin = clone.querySelector('#loginScreen');
     if(cloneLogin) cloneLogin.style.display = '';
     const cloneApp = clone.querySelector('#appMain');
     if(cloneApp) cloneApp.classList.remove('active');
     const cloneModal = clone.querySelector('#modal');
     if(cloneModal) cloneModal.classList.remove('show');
-
-    // Embed current data as a JSON script block, right before the main app script
     const dataScript = clone.ownerDocument.createElement('script');
     dataScript.type = 'application/json';
     dataScript.id = 'embeddedBackupData';
     dataScript.textContent = JSON.stringify(freshDb);
     const mainScript = clone.querySelector('script');
     mainScript.parentNode.insertBefore(dataScript, mainScript);
-
     const htmlText = '<!doctype html>\n' + clone.outerHTML;
     const blob = new Blob([htmlText], { type: 'text/html;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
     a.download = `Moneylight_CRM_FULL_BACKUP_${todayISO()}.html`;
@@ -1272,14 +1180,11 @@ function downloadFullAppBackup(){
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1000);
-
-    alert(`✅ Poori app + aapka data (${freshDb.leads.length} leads, ${freshDb.logins.length} logins, ${freshDb.disb.length} disbursements) ek single HTML file me download ho gaya.\n\nYe file safe jagah rakhein (Google Drive/Email me apne aap ko bhej dein). Kabhi bhi data delete ho jaaye, to bas ye file kisi bhi phone/computer me browser se kholein — poora CRM design + aapka data turant wapas aa jaayega.`);
+    alert(`✅ Poori app + aapka data ek single HTML file me download ho gaya.`);
   } catch(e) {
     alert('⚠️ Full backup banane me dikkat aayi: ' + e.message);
   }
 }
-
-/* RESTORE FUNCTION (FILE UPLOAD OR TEXT PASTE) */
 function restore(){
   $('modalTitle').textContent = '↩ Restore Data';
   $('formArea').innerHTML = `
@@ -1297,7 +1202,6 @@ function restore(){
   `;
   $('modal').classList.add('show');
 }
-
 function restoreFromFile(){
   let fileInput = $('restoreFileAcc');
   if (!fileInput.files.length) return alert('Please choose a file first!');
@@ -1311,7 +1215,6 @@ function restoreFromFile(){
   };
   reader.readAsText(file);
 }
-
 function restoreFromText(){
   let txt = $('restoreTextAcc').value.trim();
   if(!txt) return alert('Please paste JSON text!');
@@ -1320,52 +1223,39 @@ function restoreFromText(){
     applyRestore(data);
   } catch(err) { alert('❌ Invalid JSON Text!'); }
 }
-
 function applyRestore(data){
-  if (data && (data.leads || data.logins || data.disb)) {
-    db = {
-      leads: Array.isArray(data.leads) ? data.leads : [],
-      logins: Array.isArray(data.logins) ? data.logins : [],
-      disb: Array.isArray(data.disb) ? data.disb : []
-    };
-    save();
-    closeModal();
-    alert(`✅ Backup restored successfully! (${db.leads.length} leads, ${db.logins.length} logins, ${db.disb.length} disbursements)`);
+  if (data && (Array.isArray(data.leads) || Array.isArray(data.logins) || Array.isArray(data.disb) || Array.isArray(data.payouts))) {
+    if(!confirm('Restore this backup? Current CRM data will be replaced.')) return;
+    const previous=db;
+    db=normalizeDb(data);
+    if(save()){ closeModal(); alert('✅ Backup restored successfully!'); }
+    else db=previous;
   } else {
     alert('❌ Invalid CRM backup format!');
   }
 }
-
-// Offline support: only registers when hosted on a real server (http/https).
-// Opening index.html directly as a local file (file://) skips this safely —
-// the app still works exactly the same, just without offline caching.
+document.addEventListener('keydown',function(e){
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){
+    e.preventDefault();
+    const input=$('globalSearchInput');
+    if(input){ input.focus(); input.select(); }
+  }
+});
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.protocol === 'http:')) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   });
 }
-
-/* ===== ENTER-TO-ADVANCE (added on request — rest of the file left untouched) =====
-   Har form me: kisi bhi field me detail bharke Enter dabao to focus apne aap
-   agle field par chala jaata hai. Last field par Enter dabane se us form ka
-   Save/Update button khud-ba-khud click ho jaata hai — form ko poora bharne
-   ke baad mouse se "Save" dabane ki zarurat nahi. Address/Notes wale bade
-   text-box (textarea) me Enter pehle jaisa hi normal (nayi line) kaam karta
-   rahega, taaki multi-line likhne me dikkat na ho. */
 document.addEventListener('keydown', function(e){
   if (e.key !== 'Enter') return;
   const t = e.target;
-  if (t.tagName !== 'INPUT' && t.tagName !== 'SELECT') return; // textarea/button normal rahenge
-
-  const container = t.closest('#formArea, .panel, .card, .page') || document;
+  if (t.tagName !== 'INPUT' && t.tagName !== 'SELECT') return;
+  const container = t.closest('#formArea, .panel, .card, .page, .login-card') || document;
   const fields = Array.from(container.querySelectorAll('input, select'))
     .filter(el => !el.disabled && el.type !== 'hidden' && el.offsetParent !== null);
-
   const idx = fields.indexOf(t);
   if (idx === -1) return;
-
   e.preventDefault();
-
   if (idx < fields.length - 1) {
     fields[idx + 1].focus();
     if (typeof fields[idx + 1].select === 'function') fields[idx + 1].select();
@@ -1376,13 +1266,22 @@ document.addEventListener('keydown', function(e){
     else t.blur();
   }
 });
+// Auto-inserts "/" as you type in any DD/MM/YYYY date field, so typing stays
+// simple (just the 8 digits) while the field always reads DD/MM/YYYY.
+document.addEventListener('input', function(e){
+  const t = e.target;
+  if(!t.classList || !t.classList.contains('date-ddmm')) return;
+  let digits = t.value.replace(/\D/g,'').slice(0,8);
+  let formatted = digits;
+  if(digits.length > 4) formatted = digits.slice(0,2)+'/'+digits.slice(2,4)+'/'+digits.slice(4);
+  else if(digits.length > 2) formatted = digits.slice(0,2)+'/'+digits.slice(2);
+  t.value = formatted;
+});
 </script>
 <script type="module">
-  // 1. Firebase Imports
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
   import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-  // 2. Firebase Credentials
+  import { getAuth, setPersistence, browserSessionPersistence, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword, EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
   const firebaseConfig = {
     apiKey: "AIzaSyAFjl8AV6DdwzSVofO-PXaP7UcqUstAP6s",
     authDomain: "moneylight-finance-solution.firebaseapp.com",
@@ -1392,393 +1291,133 @@ document.addEventListener('keydown', function(e){
     messagingSenderId: "699867093786",
     appId: "1:699867093786:web:876424eb478a3d404eeaa3"
   };
+  // Previously only "leads" was synced to Firebase — Logins, Disbursements and
+  // Payouts stayed device-local only, so anything added on one device silently
+  // never showed up on another. This now syncs all four the same safe way.
+  const COLLECTIONS=['leads','logins','disb','payouts'];
+  try{
+    const app=initializeApp(firebaseConfig);
+    const fbDb=getDatabase(app);
+    const fbAuth=getAuth(app);
+    // Session-only persistence: staying logged in survives a page REFRESH
+    // (so you don't have to re-enter your password every reload), but closing
+    // the tab/browser clears it — next time you open the app, it asks to log
+    // in again. Firebase's default behaviour keeps you logged in forever
+    // (even after closing the tab) until you explicitly log out; this changes
+    // that.
+    setPersistence(fbAuth,browserSessionPersistence).catch(err=>console.error('Could not set login persistence:',err.message));
+    const refs={}; COLLECTIONS.forEach(c=>{ refs[c]=ref(fbDb,'crm_'+c); });
+    let suppressPush=false;
+    let syncStarted=false;
 
-  // 3. Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const fbDb = getDatabase(app);            // named fbDb on purpose — the CRM's own
-                                             // data object is also called `db`, so this
-                                             // avoids any confusion between the two.
-  const leadsRef = ref(fbDb, "crm_leads");
+    function pushCollection(name,items){
+      const obj={}; (items||[]).forEach(item=>{ if(item&&item.id!=null) obj[item.id]=item; });
+      set(refs[name],obj).catch(err=>console.error('Firebase sync failed ('+name+'):',err.message));
+    }
 
-  let suppressPush = false; // stops a Firebase update from bouncing straight back to Firebase
+    // Database read/write only starts AFTER a successful login — matches the
+    // Realtime Database security rules (auth != null) you set in the Firebase
+    // Console, and avoids permission-denied errors while signed out.
+    function startSync(){
+      if(syncStarted) return;
+      syncStarted=true;
 
-  // 4. LOCAL -> FIREBASE
-  // The app already has ONE single choke-point every add/edit/delete/restore goes
-  // through: its save() function (writes to localStorage, then re-renders the
-  // screen). Instead of guessing which button was clicked, we simply run our sync
-  // right after the real save() finishes — this covers every case automatically,
-  // and never touches the original save() code itself.
-  const originalSave = window.save;
-  window.save = function(){
-    originalSave();
-    if (suppressPush) return;
-    const current = window.getFreshDb();          // always the true current data
-    const leadsObj = {};
-    current.leads.forEach(lead => { leadsObj[lead.id] = lead; });
-    set(leadsRef, leadsObj).catch((err) => console.error('Firebase sync failed:', err.message));
-  };
+      const originalSave=window.save;
+      window.save=function(){
+        const ok=originalSave();
+        if(!ok || suppressPush) return ok;
+        const current=window.getFreshDb();
+        COLLECTIONS.forEach(c=>pushCollection(c,current[c]));
+        return ok;
+      };
 
-  // 5. FIREBASE -> LOCAL
-  // When leads change from ANY device, pull them into this device's storage and
-  // redraw using the app's own real render() — so the Leads table always keeps its
-  // correct columns/edit/delete buttons, instead of a separately-built mini table.
-  onValue(leadsRef, (snapshot) => {
-    const remote = snapshot.val() || {};
-    const remoteLeads = Object.values(remote);
+      COLLECTIONS.forEach(collectionName=>{
+        onValue(refs[collectionName],(snapshot)=>{
+          const remote=snapshot.val();
+          const remoteItems=remote && typeof remote==='object' ? Object.values(remote).filter(x=>x && typeof x==='object') : [];
+          const current=window.getFreshDb();
+          const localItems=current[collectionName]||[];
 
-    const current = window.getFreshDb();
-    if (JSON.stringify(current.leads) === JSON.stringify(remoteLeads)) return; // no real change
+          if(!remoteItems.length){
+            if(localItems.length) pushCollection(collectionName,localItems); // seed Firebase with what we already have locally
+            return;
+          }
 
-    suppressPush = true;
-    current.leads = remoteLeads;
-    localStorage.setItem('moneylight_crm_v1', JSON.stringify(current));
-    if (typeof window.render === 'function') window.render();
-    suppressPush = false;
-  }, (error) => {
-    console.error('Firebase read failed (check your Realtime Database security rules):', error.message);
-  });
-<!-- ========================================================================= -->
-<!-- MONEYLIGHT FINANCE - ADVANCED CRM EXTENSION (ADD ONLY - DO NOT TOUCH OLD CODE) -->
-<!-- ========================================================================= -->
+          const localById=new Map(localItems.map(x=>[String(x.id),x]));
+          const remoteById=new Map(remoteItems.map(x=>[String(x.id),x]));
+          const allIds=new Set([...localById.keys(),...remoteById.keys()]);
+          const merged=[];
+          allIds.forEach(id=>{
+            const local=localById.get(id), remoteItem=remoteById.get(id);
+            if(!local) merged.push(remoteItem);
+            else if(!remoteItem) merged.push(local);
+            else{
+              const lu=Number(local.updatedAt||local.createdAt||0), ru=Number(remoteItem.updatedAt||remoteItem.createdAt||0);
+              merged.push(ru>=lu?remoteItem:local);
+            }
+          });
+          merged.sort((a,b)=>Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0));
 
-<style>
-  #mfs-extension-panel {
-    margin: 30px 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-  }
-  .mfs-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-bottom: 25px;
-  }
-  .mfs-card {
-    background: #ffffff;
-    padding: 18px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    border-left: 5px solid #2563eb;
-  }
-  .mfs-card.login { border-left-color: #f59e0b; }
-  .mfs-card.disb { border-left-color: #10b981; }
-  .mfs-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-  }
-  .mfs-card-title {
-    font-size: 12px;
-    color: #64748b;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .mfs-edit-btn {
-    background: none;
-    border: none;
-    color: #2563eb;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .mfs-value {
-    font-size: 26px;
-    font-weight: 800;
-    color: #0f172a;
-  }
-  .mfs-sub {
-    font-size: 12px;
-    color: #64748b;
-  }
-  .mfs-gauge-box {
-    background: #fff;
-    border-radius: 14px;
-    padding: 22px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
-  }
-  .mfs-gauge {
-    position: relative;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: conic-gradient(#10b981 0deg, #e2e8f0 0deg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .mfs-gauge-inner {
-    position: absolute;
-    width: 95px;
-    height: 95px;
-    border-radius: 50%;
-    background: #fff;
-  }
-  .mfs-gauge-text {
-    position: relative;
-    font-size: 22px;
-    font-weight: 800;
-    color: #0f172a;
-  }
-  .mfs-invoice-box {
-    background: #fff;
-    border-radius: 14px;
-    padding: 22px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    border: 1px solid #e2e8f0;
-  }
-  .mfs-invoice-box h3 {
-    margin: 0 0 12px;
-    color: #1e293b;
-    border-bottom: 2px solid #2563eb;
-    padding-bottom: 8px;
-  }
-  .mfs-editable {
-    outline: none;
-    border-bottom: 1px dashed #94a3b8;
-    padding: 2px 4px;
-  }
-  .mfs-editable:focus {
-    background: #eff6ff;
-    border-radius: 4px;
-  }
-</style>
+          const localJson=JSON.stringify(localItems), mergedJson=JSON.stringify(merged);
+          if(localJson===mergedJson) return;
 
-<div id="mfs-extension-panel">
-
-  <!-- 1. Editable Stats Cards -->
-  <div class="mfs-cards">
-    <div class="mfs-card">
-      <div class="mfs-card-header">
-        <span class="mfs-card-title">Total Leads</span>
-        <button class="mfs-edit-btn" onclick="mfsEdit('mfs-leads')">Edit</button>
-      </div>
-      <div class="mfs-value" id="mfs-leads">0</div>
-      <div class="mfs-sub">Fresh Enquiries</div>
-    </div>
-
-    <div class="mfs-card login">
-      <div class="mfs-card-header">
-        <span class="mfs-card-title">Logins</span>
-        <button class="mfs-edit-btn" onclick="mfsEdit('mfs-logins')">Edit</button>
-      </div>
-      <div class="mfs-value" id="mfs-logins">0</div>
-      <div class="mfs-sub">Bank Submitted Files</div>
-    </div>
-
-    <div class="mfs-card disb">
-      <div class="mfs-card-header">
-        <span class="mfs-card-title">Disbursed</span>
-        <button class="mfs-edit-btn" onclick="mfsEdit('mfs-disb')">Edit</button>
-      </div>
-      <div class="mfs-value" id="mfs-disb">₹0</div>
-      <div class="mfs-sub">Total Amount Disbursed</div>
-    </div>
-  </div>
-
-  <!-- 2. Circular Percentage Gauge -->
-  <div class="mfs-gauge-box">
-    <div style="text-align:center;">
-      <div class="mfs-gauge" id="mfsGauge">
-        <div class="mfs-gauge-inner"></div>
-        <span class="mfs-gauge-text" id="mfsGaugeText">0%</span>
-      </div>
-      <div style="margin-top:10px; font-weight:700; color:#475569; font-size:13px;">
-        Conversion Rate
-      </div>
-    </div>
-    <div style="max-width:420px;">
-      <h3 style="margin:0 0 6px; color:#0f172a;">Live Pipeline Conversion</h3>
-      <p style="margin:0; font-size:13px; color:#64748b; line-height:1.5;">
-        Yeh circular gauge Lead se Disbursement tak ka conversion percentage live dikhata hai.
-        Aap manually bhi Edit kar sakte ho.
-      </p>
-    </div>
-  </div>
-
-  <!-- 3. Updated Tax Invoice Details (Editable) -->
-  <div class="mfs-invoice-box">
-    <h3>Tax Invoice Details <small style="color:#2563eb; font-size:12px;">[Editable]</small></h3>
-    <div style="line-height:1.7; font-size:14px; color:#334155;">
-      <div contenteditable="true" class="mfs-editable" style="font-size:18px; font-weight:700; color:#0f172a; display:inline-block;">
-        Moneylight Finance Solutions
-      </div><br>
-      <strong>Email:</strong>
-      <span contenteditable="true" class="mfs-editable">moneylightfinance24@gmail.com</span><br>
-      <strong>Office Address:</strong>
-      <span contenteditable="true" class="mfs-editable">
-        Office No. 75, Shreenath Plaza, Near Dnyaneshwar Paduka Chowk, F.C. Road, Shivajinagar, Pune, 411005
-      </span><br>
-      <strong>Website:</strong>
-      <span contenteditable="true" class="mfs-editable">moneylightfinance.com</span>
-    </div>
-  </div>
-</div>
-
-<script>
-(function() {
-  // ====================== CONFIG ======================
-  const NOTIFY_NUMBER = "8380960245";
-  let manualOverride = {
-    leads: null,
-    logins: null,
-    disb: null
-  };
-
-  // ====================== HELPERS ======================
-  function mfsEdit(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const current = el.innerText;
-    const newVal = prompt("Nayi value daaliye:", current);
-    if (newVal === null) return;
-
-    el.innerText = newVal;
-
-    if (id === "mfs-leads") manualOverride.leads = newVal;
-    if (id === "mfs-logins") manualOverride.logins = newVal;
-    if (id === "mfs-disb") manualOverride.disb = newVal;
-  }
-
-  function updateGauge(percent) {
-    const gauge = document.getElementById("mfsGauge");
-    const text = document.getElementById("mfsGaugeText");
-    if (!gauge || !text) return;
-
-    percent = Math.max(0, Math.min(100, percent));
-    const angle = (percent / 100) * 360;
-    gauge.style.background = `conic-gradient(#10b981 ${angle}deg, #e2e8f0 0deg)`;
-    text.innerText = Math.round(percent) + "%";
-  }
-
-  // ====================== MAIN SYNC ======================
-  function mfsSync() {
-    if (typeof db === "undefined") return;
-
-    const totalLeads = db.leads ? db.leads.length : 0;
-    const totalLogins = db.logins ? db.logins.length : 0;
-    let totalDisbAmt = 0;
-
-    if (db.disb) {
-      db.disb.forEach(d => {
-        totalDisbAmt += Number(d.amount || 0);
+          suppressPush=true;
+          const freshNow=window.getFreshDb();
+          db=normalizeDb({...freshNow,[collectionName]:merged});
+          try{ localStorage.setItem(KEY,JSON.stringify(db)); }catch(e){ console.error('Firebase merge save failed:',e.message); }
+          if(typeof window.render==='function') window.render();
+          suppressPush=false;
+          pushCollection(collectionName,merged);
+        },error=>console.error('Firebase read failed ('+collectionName+'):',error.message));
       });
     }
 
-    if (manualOverride.leads === null) {
-      const el = document.getElementById("mfs-leads");
-      if (el) el.innerText = totalLeads;
-    }
-    if (manualOverride.logins === null) {
-      const el = document.getElementById("mfs-logins");
-      if (el) el.innerText = totalLogins;
-    }
-    if (manualOverride.disb === null) {
-      const el = document.getElementById("mfs-disb");
-      if (el) el.innerText = "₹" + totalDisbAmt.toLocaleString("en-IN");
-    }
+    // ===== Firebase Authentication — replaces the old plaintext local login =====
+    // The password is never stored anywhere in this file's code; Firebase itself
+    // verifies it and only tells this app "signed in" or "wrong password".
+    window.checkLogin=function(){
+      const emailEl=document.getElementById('loginUser'), passEl=document.getElementById('loginPass');
+      const email=emailEl?emailEl.value.trim():'', pass=passEl?passEl.value:'';
+      if(!email||!pass){ alert('Please enter your email and password.'); return; }
+      signInWithEmailAndPassword(fbAuth,email,pass).catch(err=>{
+        const friendly=['auth/invalid-credential','auth/wrong-password','auth/user-not-found','auth/invalid-email'].includes(err.code)
+          ? 'Invalid email or password.' : err.message;
+        alert('❌ '+friendly);
+      });
+    };
+    window.logout=function(){ signOut(fbAuth); };
+    window.saveCredentials=function(){
+      const curPassEl=document.getElementById('curPass'), newPassEl=document.getElementById('newPass');
+      const curPass=curPassEl?curPassEl.value:'', newPass=newPassEl?newPassEl.value.trim():'';
+      const user=fbAuth.currentUser;
+      if(!user){ alert('You are not signed in.'); return; }
+      if(!newPass || newPass.length<6){ alert('New password must be at least 6 characters.'); return; }
+      const credential=EmailAuthProvider.credential(user.email,curPass);
+      reauthenticateWithCredential(user,credential)
+        .then(()=>updatePassword(user,newPass))
+        .then(()=>{ alert('✅ Password updated successfully!'); if(typeof window.closeModal==='function') window.closeModal(); })
+        .catch(err=>{
+          const friendly=err.code==='auth/wrong-password'?'Current password is incorrect.':err.message;
+          alert('❌ '+friendly);
+        });
+    };
 
-    let conv = 0;
-    if (totalLeads > 0) {
-      conv = (totalLogins / totalLeads) * 100;
-    }
-    updateGauge(conv);
-  }
-
-  // ====================== AUTO PROGRESSION ======================
-  function checkAutoProgression() {
-    if (typeof db === "undefined" || !db.leads || !db.logins) return;
-
-    db.leads.forEach(lead => {
-      if (lead.status === "Login") {
-        const alreadyExists = db.logins.some(l => 
-          l.name === lead.name && (l.mobile === lead.mobile || (!l.mobile && !lead.mobile))
-        );
-
-        if (!alreadyExists) {
-          db.logins.push({
-            id: Date.now() + Math.floor(Math.random() * 1000),
-            name: lead.name,
-            banker: "",
-            lender: "",
-            amount: lead.amount || 0,
-            ref: lead.ref || "",
-            date: new Date().toISOString().slice(0, 10),
-            status: "Login",
-            lid: ""
-          });
-
-          if (typeof save === "function") {
-            save();
-          }
-          console.log("Auto Progression: Lead → Login created for", lead.name);
-        }
+    onAuthStateChanged(fbAuth,(user)=>{
+      const loginScreen=document.getElementById('loginScreen'), appMain=document.getElementById('appMain');
+      if(user){
+        if(loginScreen) loginScreen.style.display='none';
+        if(appMain) appMain.classList.add('active');
+        startSync();
+        if(typeof window.render==='function') window.render();
+      }else{
+        if(loginScreen) loginScreen.style.display='flex';
+        if(appMain) appMain.classList.remove('active');
       }
     });
+  }catch(err){
+    console.error('Firebase initialization failed:',err.message);
+    alert('⚠️ Could not connect to the login service. Please check your internet connection and reload the page.');
   }
-
-  // ====================== DAILY FOLLOW-UP ======================
-  window.mfsSendDailyAlerts = function() {
-    if (typeof db === "undefined" || !db.leads) return alert("Data nahi mila");
-
-    const today = new Date().toISOString().slice(0, 10);
-    const due = db.leads.filter(l => l.date && l.date <= today && (l.status === "Follow-up" || l.status === "New"));
-
-    if (due.length === 0) {
-      alert("Aaj koi follow-up pending nahi hai");
-      return;
-    }
-
-    due.forEach((l, i) => {
-      setTimeout(() => {
-        const msg = encodeURIComponent(
-          `*Moneylight Finance Daily Follow-up*\n\n` +
-          `*Client:* ${l.name}\n` +
-          `*Mobile:* ${l.mobile || "-"}\n` +
-          `*Date:* ${l.date}\n` +
-          `*Status:* ${l.status}`
-        );
-        window.open(`https://api.whatsapp.com/send?phone=91${NOTIFY_NUMBER}&text=${msg}`, "_blank");
-      }, i * 1200);
-    });
-  };
-
-  // ====================== INIT ======================
-  function initExtension() {
-    mfsSync();
-    checkAutoProgression();
-
-    setInterval(() => {
-      mfsSync();
-      checkAutoProgression();
-    }, 4000);
-
-    if (typeof window.save === "function") {
-      const oldSave = window.save;
-      window.save = function() {
-        oldSave();
-        setTimeout(() => {
-          mfsSync();
-          checkAutoProgression();
-        }, 300);
-      };
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initExtension);
-  } else {
-    setTimeout(initExtension, 1000);
-  }
-
-  window.mfsEdit = mfsEdit;
-  window.mfsSync = mfsSync;
-})();
 </script>
-</body>                       
-</html><script async src="/.netlify/scripts/hud?variant=owner-private" data-nf-variant="owner-private" data-netlify-site-id="9b23eb6b-e4f2-4af8-b562-047dbae44232" data-app-host="app.netlify.com"></script>
-<script async src="/.netlify/scripts/hud?variant=owner-private" data-nf-variant="owner-private" data-netlify-site-id="9b23eb6b-e4f2-4af8-b562-047dbae44232" data-app-host="app.netlify.com"></script>
+</body>
+</html>
