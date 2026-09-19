@@ -302,23 +302,20 @@ th{background:#f8fafc;color:#607089}
 <!-- Connector Payout Tracker -->
 <section id="payout" class="page">
 <div class="top">
-  <div class="title">💸 Connector Payout Tracker</div>
+  <div class="title">💸 Payout Tracker</div>
   <button class="btn green" onclick="openForm('payout')">+ Add Payout</button>
 </div>
-<div class="payout-summary">
-  <div class="card"><div class="label">Total Expected</div><div class="num" id="pExpected">₹0</div></div>
-  <div class="card"><div class="label">Total Received / Clear</div><div class="num" id="pReceived">₹0</div></div>
-  <div class="card"><div class="label">Total Pending</div><div class="num accent" id="pPending">₹0</div></div>
-</div>
+<div id="payoutTabs" style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0"></div>
+<div class="payout-summary" id="payoutSummary"></div>
 <div class="toolbar">
-  <input id="payoutSearch" placeholder="🔎 Search Connector / Customer / Lender / Ref" oninput="render()">
+  <input id="payoutSearch" placeholder="🔎 Search Customer / Lender / Ref" oninput="render()">
   <select id="payoutStatusFilter" onchange="render()">
     <option value="">All Payouts</option><option value="Pending">Pending</option><option value="Partial">Partial</option><option value="Clear">Clear</option>
   </select>
 </div>
 <div class="table">
   <table>
-    <thead><tr><th>Connector</th><th>Customer</th><th>Lender</th><th>Disb. Amount</th><th>Payout %</th><th>Expected</th><th>Received</th><th>Pending</th><th>Status</th><th>Date</th><th>Reference</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Connector</th><th>Customer</th><th>Lender</th><th>Disb. Amount</th><th>Payout %</th><th>Expected</th><th>Consumer Comm. %</th><th>Consumer Comm. ₹</th><th>Received</th><th>Pending</th><th>Status</th><th>Date</th><th>Reference</th><th>Actions</th></tr></thead>
     <tbody id="payoutTable"></tbody>
   </table>
 </div>
@@ -463,9 +460,22 @@ function normalizeDb(value){
     leads:Array.isArray(src.leads)?src.leads.map(x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)})):[],
     logins:Array.isArray(src.logins)?src.logins.map(x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)})):[],
     disb:Array.isArray(src.disb)?src.disb.map(x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)})):[],
-    payouts:Array.isArray(src.payouts)?src.payouts:[]
+    // Existing payout records saved before the Moneylight/Connector split are
+    // re-checked here too, so a record already saved under "Kuntiram" (or with
+    // no connector at all) correctly shows up under Moneylight immediately —
+    // not just newly-saved ones.
+    payouts:Array.isArray(src.payouts)?src.payouts.map(x=>({...x,
+      connector:normalizeConnectorName(x.connector),
+      custCommissionPct:Number(x.custCommissionPct||0),
+      custCommissionAmount:Number(x.custCommissionAmount||0)
+    })):[]
   };
   return clean;
+}
+function normalizeConnectorName(name){
+  const n=(name||'').trim();
+  if(!n || n.toLowerCase()==='kuntiram') return 'Moneylight';
+  return n;
 }
 let db=normalizeDb(DEFAULT_DB);
 try { db=normalizeDb(JSON.parse(localStorage.getItem(KEY)||JSON.stringify(__embeddedData||DEFAULT_DB))); } catch(e) { console.warn('CRM data reset because saved data was invalid.'); }
@@ -662,6 +672,61 @@ function renderPipelineBoard(){
     </div>
   `;
 }
+let payoutTab='connector';
+function switchPayoutTab(key){ payoutTab=key; renderPayoutBoard(); }
+function renderPayoutBoard(){
+  const tabsEl=$('payoutTabs'), summaryEl=$('payoutSummary'), tableEl=$('payoutTable');
+  if(!tabsEl||!summaryEl||!tableEl) return;
+
+  const pq=($('payoutSearch')?.value||'').toLowerCase(), ps=$('payoutStatusFilter')?.value||'';
+  const searchFiltered=db.payouts.filter(x=>(!pq||Object.values(x).join(' ').toLowerCase().includes(pq))&&(!ps||x.status===ps));
+
+  const connectorItems=searchFiltered.filter(x=>(x.connector||'Moneylight')!=='Moneylight');
+  const moneylightItems=searchFiltered.filter(x=>(x.connector||'Moneylight')==='Moneylight');
+  const groups={connector:connectorItems,moneylight:moneylightItems};
+
+  const TABS=[
+    {key:'connector',label:'🔗 Connector Payouts'},
+    {key:'moneylight',label:'🏢 Moneylight Payouts'}
+  ];
+  tabsEl.innerHTML=TABS.map(t=>{
+    const active=t.key===payoutTab;
+    return `<button class="btn ${active?'':'light'}" onclick="switchPayoutTab('${t.key}')">${t.label} <span class="badge" style="margin-left:4px">${groups[t.key].length}</span></button>`;
+  }).join('');
+
+  const items=groups[payoutTab]||[];
+  const expected=items.reduce((a,x)=>a+Number(x.expected||0),0);
+  const received=items.reduce((a,x)=>a+Number(x.received||0),0);
+  const pending=Math.max(0,expected-received);
+  const custCommission=items.reduce((a,x)=>a+Number(x.custCommissionAmount||0),0);
+  const disbTotalForTab=items.reduce((a,x)=>a+Number(x.disbAmount||0),0);
+  summaryEl.innerHTML=`
+    <div class="card"><div class="label">Total Disb. Amount</div><div class="num">${money(disbTotalForTab)}</div></div>
+    <div class="card"><div class="label">Total Expected</div><div class="num">${money(expected)}</div></div>
+    <div class="card"><div class="label">Total Received</div><div class="num">${money(received)}</div></div>
+    <div class="card"><div class="label">Total Pending</div><div class="num accent">${money(pending)}</div></div>
+    <div class="card"><div class="label">Total Consumer Commission</div><div class="num">${money(custCommission)}</div></div>
+  `;
+
+  tableEl.innerHTML=items.map(x=>`
+    <tr>
+      <td><b>${escapeHtml(x.connector||'Moneylight')}</b></td>
+      <td>${escapeHtml(x.customer||'-')}</td>
+      <td>${escapeHtml(x.lender||'-')}</td>
+      <td>${money(x.disbAmount)}</td>
+      <td>${Number(x.pct||0).toFixed(2)}%</td>
+      <td>${money(x.expected)}</td>
+      <td>${Number(x.custCommissionPct||0).toFixed(2)}%</td>
+      <td>${money(x.custCommissionAmount)}</td>
+      <td>${money(x.received)}</td>
+      <td>${money(Math.max(0,Number(x.expected||0)-Number(x.received||0)))}</td>
+      <td>${payoutStatusBadge(x.status)}</td>
+      <td>${formatDDMMYY(x.date)}</td>
+      <td>${escapeHtml(x.ref||'-')}</td>
+      <td><button class="btn light btn-sm" onclick="openForm('payout',${x.id})">Edit</button><button class="btn red btn-sm" onclick="removePayout(${x.id})">Delete</button></td>
+    </tr>
+  `).join('')||`<tr><td colspan="14" class="empty">No payout records found</td></tr>`;
+}
 function checkLogin(){
   // Real implementation is installed by the Firebase Authentication module
   // script near the bottom of this file (search "Firebase Authentication").
@@ -785,12 +850,14 @@ function openForm(type, editId = null){
  }
  if(type==='payout'){
    h=`<div class="form" id="payoutForm">
-        <label>Connector Name *<input id="f1" value="${editData?escapeHtml(editData.connector||''):''}" placeholder="Connector / Partner name"></label>
+        <label>Connector Name<input id="f1" value="${editData?escapeHtml(editData.connector||''):''}" placeholder="Leave blank or 'Kuntiram' for your own Moneylight deals"></label>
         <label>Customer Name<input id="f2" value="${editData?escapeHtml(editData.customer||''):''}"></label>
         <label>Lender / Bank<input id="f3" value="${editData?escapeHtml(editData.lender||''):''}"></label>
         <label>Disbursed Amount (₹)<input id="f4" type="text" value="${editData?formatIndianNum(editData.disbAmount):''}" oninput="formatCurrencyInput(this); calcPayoutForm()"></label>
         <label>Payout (%)<input id="f5" type="number" min="0" step="0.01" value="${editData?editData.pct??'':''}" oninput="calcPayoutForm()"></label>
         <label>Expected Payout (₹)<input id="f6" type="text" value="${editData?formatIndianNum(editData.expected):''}" readonly></label>
+        <label>Consumer Commission (%)<input id="f11" type="number" min="0" step="0.01" value="${editData?editData.custCommissionPct??'':''}" oninput="calcPayoutForm()" placeholder="% charged to the customer directly"></label>
+        <label>Consumer Commission Amount (₹)<input id="f12" type="text" value="${editData?formatIndianNum(editData.custCommissionAmount):''}" readonly></label>
         <label>Received Amount (₹)<input id="f7" type="text" value="${editData?formatIndianNum(editData.received):''}" oninput="formatCurrencyInput(this)"></label>
         <label>Status<select id="f8"><option ${!editData||editData.status==='Pending'?'selected':''}>Pending</option><option ${editData&&editData.status==='Partial'?'selected':''}>Partial</option><option ${editData&&editData.status==='Clear'?'selected':''}>Clear</option></select></label>
         <label>Clear / Received Date<input id="f9" type="text" inputmode="numeric" class="date-ddmm" placeholder="DD/MM/YYYY" maxlength="10" value="${editData&&editData.date?isoToDdmmyyyy(editData.date):isoToDdmmyyyy(todayISO())}"></label>
@@ -873,8 +940,8 @@ function autoCreateOrUpdatePayoutFromDisb(disb){
   const pct=Math.min(100,Math.max(0,Number(disb.payoutPct||0)));
   const expected=Number(disb.amount||0)*pct/100;
   payout={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),sourceDisbId:disb.id,
-    connector:disb.connector||'',customer:disb.name||'',lender:disb.ref||'',
-    disbAmount:Number(disb.amount||0),pct,expected,received:0,status:'Pending',
+    connector:normalizeConnectorName(disb.connector),customer:disb.name||'',lender:disb.ref||'',
+    disbAmount:Number(disb.amount||0),pct,expected,custCommissionPct:0,custCommissionAmount:0,received:0,status:'Pending',
     date:disb.date||todayISO(),ref:disb.ref||''};
   db.payouts.push(payout);
   disb.payoutId=payout.id;
@@ -886,15 +953,21 @@ function calcPayoutForm(){
   if(!$('f4') || !$('f5') || !$('f6')) return;
   const amount=parseCurrencyNum($('f4').value); const pct=Math.max(0,parseFloat($('f5').value)||0);
   $('f6').value=formatIndianNum((amount*pct)/100);
+  if($('f11') && $('f12')){
+    const custPct=Math.max(0,parseFloat($('f11').value)||0);
+    $('f12').value=formatIndianNum((amount*custPct)/100);
+  }
 }
 function savePayout(editId){
-  const connector=$('f1').value.trim(); if(!connector) return alert('Connector name required');
+  const connector=normalizeConnectorName($('f1').value);
   const disbAmount=parseCurrencyNum($('f4').value); const pct=parseFloat($('f5').value)||0;
   if(disbAmount<0 || pct<0) return alert('Amount/percentage cannot be negative');
   const expected=(disbAmount*pct)/100; const received=Math.max(0,parseCurrencyNum($('f7').value));
   if(received>expected && expected>0) return alert('Received amount cannot be greater than expected payout');
   let status=$('f8').value; if(received<=0) status='Pending'; else if(expected>0 && received>=expected) status='Clear'; else status='Partial';
-  const data={connector,customer:$('f2').value.trim(),lender:$('f3').value.trim(),disbAmount,pct,expected,received,status,date:ddmmyyyyToIso($('f9').value)||todayISO(),ref:$('f10').value.trim()};
+  const custCommissionPct=Math.max(0,parseFloat($('f11')?.value)||0);
+  const custCommissionAmount=(disbAmount*custCommissionPct)/100;
+  const data={connector,customer:$('f2').value.trim(),lender:$('f3').value.trim(),disbAmount,pct,expected,custCommissionPct,custCommissionAmount,received,status,date:ddmmyyyyToIso($('f9').value)||todayISO(),ref:$('f10').value.trim()};
   if(editId){const item=db.payouts.find(x=>x.id===editId);if(!item)return alert('Payout not found. Please refresh and try again.');Object.assign(item,data,{updatedAt:Date.now()});}else db.payouts.push({id:newId(),createdAt:Date.now(),updatedAt:Date.now(),...data});
   if(save()) closeModal();
 }
@@ -1026,9 +1099,6 @@ function render(){
  if($('dashPayoutExpected')) $('dashPayoutExpected').textContent=money(payoutExpected);
  if($('dashPayoutReceived')) $('dashPayoutReceived').textContent=money(payoutReceived);
  if($('dashPayoutPending')) $('dashPayoutPending').textContent=money(payoutPending);
- if($('pExpected')) $('pExpected').textContent=money(payoutExpected);
- if($('pReceived')) $('pReceived').textContent=money(payoutReceived);
- if($('pPending')) $('pPending').textContent=money(payoutPending);
  renderMonthChart();
  $('dTotal').textContent=money(disbTotal);
  $('dFiles').textContent=db.disb.length;
@@ -1077,9 +1147,7 @@ function render(){
     </td>
   </tr>
  `).join('')||`<tr><td colspan="6" class="empty">No disbursements found</td></tr>`;
- let pq=($('payoutSearch')?.value||'').toLowerCase(), ps=$('payoutStatusFilter')?.value||'';
- $('payoutTable').innerHTML=db.payouts.filter(x=>(!pq||Object.values(x).join(' ').toLowerCase().includes(pq))&&(!ps||x.status===ps)).map(x=>`
-  <tr><td><b>${escapeHtml(x.connector||'-')}</b></td><td>${escapeHtml(x.customer||'-')}</td><td>${escapeHtml(x.lender||'-')}</td><td>${money(x.disbAmount)}</td><td>${Number(x.pct||0).toFixed(2)}%</td><td>${money(x.expected)}</td><td>${money(x.received)}</td><td>${money(Math.max(0,Number(x.expected||0)-Number(x.received||0)))}</td><td>${payoutStatusBadge(x.status)}</td><td>${formatDDMMYY(x.date)}</td><td>${escapeHtml(x.ref||'-')}</td><td><button class="btn light btn-sm" onclick="openForm('payout',${x.id})">Edit</button><button class="btn red btn-sm" onclick="removePayout(${x.id})">Delete</button></td></tr>`).join('')||'<tr><td colspan="12" class="empty">No payout records found</td></tr>';
+ renderPayoutBoard();
  let dashPayouts=db.payouts.filter(x=>x.status!=='Clear').slice().sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))).slice(0,5);
  if($('dashPayoutList')) $('dashPayoutList').innerHTML=dashPayouts.map(x=>`<div class="todo"><b>${escapeHtml(x.connector||'-')}</b> — ${escapeHtml(x.customer||'-')} <span style="float:right">${payoutStatusBadge(x.status)}</span><small>Expected: ${money(x.expected)} • Received: ${money(x.received)} • Pending: ${money(Math.max(0,Number(x.expected||0)-Number(x.received||0)))}</small></div>`).join('')||'<div class="empty">No pending payouts 🎉</div>';
  const rejected=db.leads.filter(x=>x.status==='Rejected').slice().sort((a,b)=>Number(b.updatedAt||b.createdAt||0)-Number(a.updatedAt||a.createdAt||0));
