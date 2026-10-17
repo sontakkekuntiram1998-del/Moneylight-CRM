@@ -205,12 +205,12 @@ tr.flag td{background:#fff8eb}
   <div class="logo">Moneylight<small>FINANCE CRM</small></div>
 </div>
 <nav class="menu" id="menu">
-<button class="" onclick="go('home',this)">🏠 Dashboard</button>
+<button class="active" aria-current="page" onclick="go('home',this)">🏠 Dashboard</button>
 <button onclick="go('monthly',this)">📅 Monthly View</button>
 <button onclick="go('leads',this)" class="">👥 Leads</button>
 <button onclick="go('cibil',this)" class="">📊 CIBIL Score Check</button>
 <button onclick="go('pipeline',this)" class="">📁 Pipeline</button>
-<button onclick="go('disb',this)" class="active" aria-current="page">💰 Disbursement</button>
+<button onclick="go('disb',this)">💰 Disbursement</button>
 <button onclick="go('payout',this)">💸 Payout Tracker</button>
 <button onclick="go('eligibility',this)">⚡ Eligibility Engine</button>
 <button onclick="go('analyzer',this)">📄 Statement Analyzer</button>
@@ -247,7 +247,7 @@ tr.flag td{background:#fff8eb}
 </div>
 
 <!-- Dashboard Page -->
-<section id="home" class="page">
+<section id="home" class="page active">
 <div class="cards">
   <div class="card"><div class="label">Total Leads</div><div class="num" id="cLead">41</div></div>
   <div class="card"><div class="label">This Month Login</div><div class="num" id="cLogin">8</div></div>
@@ -374,7 +374,7 @@ tr.flag td{background:#fff8eb}
 </section>
 
 <!-- Disbursement -->
-<section id="disb" class="page active">
+<section id="disb" class="page">
 <div class="top">
   <div class="title">Disbursements</div>
   <button class="btn green" onclick="openForm('disb')">+ Add Disbursement</button>
@@ -1470,7 +1470,8 @@ function autoSyncPipeline(){
 // Login status change in one place so every screen behaves the same
 function setLoginStatus(login,val){
   if(login.status===val) return;
-  const today=todayISO();
+  const today=todayISO(); const prevStatus=login.status;
+  if(canonStatus(prevStatus)==='Disbursed' && val!=='Disbursed' && login.disbId && db.disb.some(d=>String(d.id)===String(login.disbId))) toast('Stage changed, but the disbursement record (and payout) is kept. If this loan was not really disbursed, delete it from the Disbursement page.','warn');
   login.status=val; login.updatedAt=Date.now();
   login.statusDates=login.statusDates&&typeof login.statusDates==='object'?login.statusDates:{};
   if(val==='Approved') login.statusDates.approved=today;
@@ -1558,7 +1559,7 @@ function openForm(type,editId=null,opts={}){
         <label>Mobile Number<input id="f2" inputmode="tel" value="${v('mobile')}" maxlength="20"></label>
         <label>Profession<input id="f_prof" value="${v('prof')}" maxlength="80"></label>
         <label>Monthly Income (₹)<input id="f_inc" type="text" inputmode="decimal" value="${editData?formatIndianNum(editData.inc):''}" oninput="formatCurrencyInput(this)"></label>
-        <label>Loan Product<select id="f3">${productOptions(editData?editData.product:'')}</select></label>
+        <label>Loan Product<select id="f3">${productOptions(editData?editData.product:'',!editData||!editData.product)}</select></label>
         <label>Required Amount (₹)<input id="f4" type="text" inputmode="decimal" value="${editData?formatIndianNum(editData.amount):''}" oninput="formatCurrencyInput(this)"></label>
         <label>CIBIL Score<input id="f_cibil" type="number" placeholder="e.g. 750" value="${v('cibil')}"></label>
         <label>Reference Name<input id="f_ref" value="${v('ref')}"></label>
@@ -1695,10 +1696,10 @@ function saveDisb(editId){
   const dateTxt=$('f4').value.trim(); const dateIso=ddmmyyyyToIso(dateTxt);
   if(dateTxt && !dateIso) return formError('Date must be a real date in DD/MM/YYYY format.');
   const data={name,product:$('f2').value,amount,date:dateIso||todayISO(),ref:$('f5').value.trim(),connector:$('f_connector')?.value.trim()||'',payoutPct:readPct('f_payoutPct')};
-  let disb;
-  if(editId){ disb=db.disb.find(x=>x.id===editId); if(!disb) return formError('Disbursement not found. Please refresh and try again.'); Object.assign(disb,data,{updatedAt:Date.now()}); }
+  let disb, payoutLocked=false;
+  if(editId){ disb=db.disb.find(x=>x.id===editId); if(!disb) return formError('Disbursement not found. Please refresh and try again.'); const old={...disb}; Object.assign(disb,data,{updatedAt:Date.now()}); ['amount','payoutPct','connector','name'].forEach(f=>{ if(old[f]!==disb[f] && syncPayoutFromDisb(disb,f)==='locked') payoutLocked=true; }); }
   else{ disb={id:newId(),createdAt:Date.now(),updatedAt:Date.now(),...data}; db.disb.push(disb); autoCreateOrUpdatePayoutFromDisb(disb,true); }
-  if(save()){ closeModal(); toast(editId?'Disbursement updated':'Disbursement saved','ok'); }
+  if(save()){ closeModal(); if(payoutLocked) payoutLockedToast(); else toast(editId?'Disbursement updated':'Disbursement saved','ok'); }
 }
 function calcPayoutForm(){
   if(!$('f4')||!$('f5')||!$('f6')) return;
@@ -1998,6 +1999,21 @@ function fillDisbFilters(){
   const months=[...new Set(db.disb.map(x=>String(x.date||'').slice(0,7)).filter(k=>/^\d{4}-\d{2}$/.test(k)))].sort().reverse();
   sync('disbMonthFilter',months.map(k=>[k,(MON_SHORT[Number(k.slice(5))-1]||k.slice(5))+' '+k.slice(0,4)]),'All Months');
 }
+/* When a disbursement is edited, keep its linked payout in step (unless money is already received / cleared) */
+function syncPayoutFromDisb(disb,field){
+  const po=payoutOfDisb(disb); if(!po) return 'none';
+  if(po.status==='Clear'||Number(po.received||0)>0) return 'locked';
+  if(field==='amount') po.disbAmount=Number(disb.amount||0);
+  if(field==='payoutPct') po.pct=Math.min(100,Math.max(0,Number(disb.payoutPct||0)));
+  if(field==='connector') po.connector=normalizeConnectorName(disb.connector);
+  if(field==='name') po.customer=disb.name||po.customer;
+  if(field==='amount'||field==='payoutPct'){
+    po.expected=Math.round((Number(po.disbAmount||0)*Number(po.pct||0))/100*100)/100;
+    po.custCommissionAmount=Math.round((Number(po.disbAmount||0)*Number(po.custCommissionPct||0))/100*100)/100;
+  }
+  po.updatedAt=Date.now(); return 'synced';
+}
+function payoutLockedToast(){ toast('Disbursement updated. Its payout already has money received / is Clear, so it was not changed — edit it in Payout Tracker if needed.','warn'); }
 function payoutOfDisb(x){ return db.payouts.find(p=>String(p.id)===String(x.payoutId)||String(p.sourceDisbId)===String(x.id)); }
 function quickSetDisb(id,field,val){
   const x=db.disb.find(d=>d.id===id); if(!x) return toast('Disbursement not found — please refresh and try again.','warn');
@@ -2009,7 +2025,8 @@ function quickSetDisb(id,field,val){
   else v=String(val||'').trim();
   if(x[field]===v) return;
   x[field]=v; x.updatedAt=Date.now();
-  if(save()) toast('Disbursement updated','ok');
+  const ps=['amount','payoutPct','connector','name'].includes(field)?syncPayoutFromDisb(x,field):'none';
+  if(save()){ if(ps==='locked') payoutLockedToast(); else toast('Disbursement updated','ok'); }
 }
 function renderDisb(){
   fillDisbFilters();
