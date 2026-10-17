@@ -172,6 +172,38 @@ tr.flag td{background:#fff8eb}
   .title{font-size:20px}
 }
 @media (max-width:480px){.cards,.cards.c4,.cards.c3,.payout-summary{grid-template-columns:1fr}}
+/* ===== Calculators: sidebar + standard / scientific / converters ===== */
+.calc-shell{display:grid;grid-template-columns:230px 1fr;gap:16px;margin-top:16px;align-items:start}
+.calc-side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px;position:sticky;top:12px;max-height:calc(100vh - 40px);overflow:auto}
+.calc-side h4{margin:12px 8px 4px;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.calc-side h4:first-child{margin-top:6px}
+.calc-side button{display:flex;gap:9px;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:9px 10px;border-radius:10px;font-size:13px;color:var(--ink);cursor:pointer}
+.calc-side button:hover{background:#eef6f4}
+.calc-side button.active{background:var(--primary);color:#fff;font-weight:700}
+.calc-main{min-width:0}
+.cx-pane{display:none}.cx-pane.active{display:block}
+.cx-grid{display:grid;grid-template-columns:minmax(0,430px) 1fr;gap:18px;align-items:start}
+.cx-display{position:relative;background:#0f2b28;color:#fff;border-radius:14px;padding:14px 16px 12px;margin-bottom:12px;text-align:right;min-height:84px}
+.cx-expr{font-size:14px;color:#a9c9c4;min-height:20px;word-break:break-all}
+.cx-res{font-size:34px;font-weight:800;line-height:1.2;word-break:break-all}
+.cx-res.err{font-size:18px;color:#fecaca}
+.cx-mem,.cx-mode{position:absolute;left:14px;top:12px;font-size:11px;font-weight:800;background:#ffffff26;border-radius:6px;padding:2px 7px}
+.cx-keys{display:grid;gap:8px}
+.cx-keys.k4{grid-template-columns:repeat(4,1fr)}.cx-keys.k5{grid-template-columns:repeat(5,1fr)}
+.cx-keys button{padding:14px 0;font-size:16px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:650;color:var(--ink);transition:background .1s}
+.cx-keys button:hover{background:#eef6f4}.cx-keys button:active{transform:scale(.97)}
+.cx-keys button.fn{background:#f3f6fb;font-size:14px}.cx-keys button.op{background:#e6f4f1;color:var(--primary);font-size:18px}
+.cx-keys button.eq{background:var(--primary);color:#fff;font-size:20px}.cx-keys button.wide{grid-column:span 3}.cx-keys button.ac{background:#fee2e2;color:#991b1b}
+.cx-hist{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:10px;max-height:420px;overflow:auto}
+.cx-hist-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.cx-hist button.cx-h{display:block;width:100%;text-align:right;border:0;background:transparent;padding:6px 4px;border-bottom:1px dashed var(--line);cursor:pointer;color:var(--ink)}
+.cx-hist button.cx-h small{display:block;color:var(--muted);font-size:12px}.cx-hist button.cx-h b{font-size:15px}
+@media (max-width:900px){
+  .calc-shell{grid-template-columns:1fr}
+  .calc-side{position:static;display:flex;gap:6px;overflow-x:auto;max-height:none;padding:8px}
+  .calc-side h4{display:none}.calc-side button{width:auto;white-space:nowrap;flex:0 0 auto;background:#f3f6fb}
+  .cx-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -546,9 +578,41 @@ tr.flag td{background:#fff8eb}
 
 <!-- Calculators -->
 <section id="calculators" class="page">
-<div class="title">🧮 Financial Calculators</div>
-<div class="grid2" style="margin-top:18px">
-  <div class="panel">
+<div class="title">🧮 Calculators</div>
+<div class="calc-shell">
+  <nav class="calc-side" id="cxSide" aria-label="Calculator type"></nav>
+  <div class="calc-main">
+
+    <div class="cx-pane" id="cxp-std">
+      <div class="panel">
+        <h3>🔢 Standard Calculator</h3>
+        <div class="cx-grid">
+          <div>
+            <div class="cx-display" aria-live="polite"><div class="cx-expr" id="cxstdExpr">&nbsp;</div><div class="cx-res" id="cxstdRes">0</div><span class="cx-mem" id="cxstdMem" hidden>M</span></div>
+            <div class="cx-keys k4" id="cxKeysStd"></div>
+            <div class="hint" style="margin-top:8px">Keyboard works too: 0-9 . + − × ÷ ( ) %, Enter (=), Backspace, Esc (clear).</div>
+          </div>
+          <div class="cx-hist"><div class="cx-hist-h"><b>History</b><button class="btn light btn-sm" onclick="cxHistClear()">Clear</button></div><div id="cxHistStd"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cx-pane" id="cxp-sci">
+      <div class="panel">
+        <h3>🧪 Scientific Calculator</h3>
+        <div class="cx-grid">
+          <div>
+            <div class="cx-display" aria-live="polite"><div class="cx-expr" id="cxsciExpr">&nbsp;</div><div class="cx-res" id="cxsciRes">0</div><span class="cx-mode" id="cxsciMode">DEG</span></div>
+            <div class="cx-keys k5" id="cxKeysSci"></div>
+            <div class="hint" style="margin-top:8px">Trig functions follow the DEG / RAD switch. Use ( ) freely, 2π and 3(4+1) multiply automatically, % works like a phone calculator (200 + 10% = 220).</div>
+          </div>
+          <div class="cx-hist"><div class="cx-hist-h"><b>History</b><button class="btn light btn-sm" onclick="cxHistClear()">Clear</button></div><div id="cxHistSci"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cx-pane" id="cxp-emi">
+      <div class="panel">
     <h3>📊 Loan EMI Calculator</h3>
     <div class="form">
       <label class="full">Loan Amount (₹)<input type="text" inputmode="decimal" id="emiAmount" placeholder="500,000" oninput="formatCurrencyInput(this); calcEMI()"></label>
@@ -561,7 +625,10 @@ tr.flag td{background:#fff8eb}
       <div>Total Amount Payable: <span id="resTotal">₹0</span></div>
     </div>
   </div>
-  <div class="panel">
+    </div>
+
+    <div class="cx-pane" id="cxp-pct">
+      <div class="panel">
     <h3>📈 Percentage &amp; Commission Calculator</h3>
     <div class="form">
       <label class="full">What do you want to work out?
@@ -581,6 +648,29 @@ tr.flag td{background:#fff8eb}
       <div id="pExtra" class="hint" style="margin-top:6px"></div>
     </div>
     <div class="hint" style="margin-top:8px">No upper limit — 150%, 250%, 500% or 1,000% all work. Results are calculated with exact decimal arithmetic and rounded to 2 decimals (4 for “what %”).</div>
+  </div>
+    </div>
+
+    <div class="cx-pane" id="cxp-conv">
+      <div class="panel">
+        <h3 id="cxConvTitle">📏 Converter</h3>
+        <div class="form">
+          <label class="full">Value<input id="cxVal" type="text" inputmode="decimal" autocomplete="off" placeholder="Enter a number" oninput="cxConvRun()"></label>
+          <label>From<select id="cxFrom" onchange="cxConvRun()"></select></label>
+          <label>To<select id="cxTo" onchange="cxConvRun()"></select></label>
+        </div>
+        <div style="margin-top:10px"><button class="btn light" onclick="cxSwap()">⇄ Swap units</button></div>
+        <div class="calc-result">
+          <div id="cxConvEq" class="hint">&nbsp;</div>
+          <div><span id="cxConvRes" style="color:var(--good);font-size:22px">—</span> <span id="cxConvUnit"></span>
+            <button class="btn light btn-sm" style="margin-left:8px" onclick="cxCopy('cxConvRes')">Copy</button></div>
+          <div class="field-error" id="cxConvErr" role="alert"></div>
+        </div>
+        <h4 style="margin:16px 0 6px">All units</h4>
+        <div class="table"><table style="min-width:0"><thead><tr><th>Unit</th><th class="num-r">Value</th></tr></thead><tbody id="cxConvAll"></tbody></table></div>
+      </div>
+    </div>
+
   </div>
 </div>
 </section>
@@ -2472,6 +2562,224 @@ function analyzeStatement(){
 /* =====================================================================
    Global search
    ===================================================================== */
+/* =====================================================================
+   Calculators — one sidebar: Standard, Scientific, Loan EMI, Percentage, and unit converters
+   (safe expression parser — no eval; results rounded to 12 significant digits so 0.1 + 0.2 = 0.3)
+   ===================================================================== */
+const CXS={active:'std',deg:true,hist:[],std:{expr:'',ans:0,done:false,last:'',mem:0},sci:{expr:'',ans:0,done:false,last:'',mem:0},conv:'length'};
+const CX_NAV=[
+  {g:'Calculators',items:[['std','🔢','Standard'],['sci','🧪','Scientific']]},
+  {g:'Finance',items:[['emi','🏦','Loan EMI'],['pct','％','Percentage & Commission']]},
+  {g:'Unit converters',items:[['length','📏','Length'],['mass','⚖️','Mass / Weight'],['area','⬛','Area (incl. gaj, guntha)'],['volume','🧪','Volume'],['temp','🌡️','Temperature'],['speed','🚗','Speed'],['time','⏱️','Time'],['data','💾','Data Size'],['angle','📐','Angle'],['pressure','🎈','Pressure'],['energy','⚡','Energy'],['power','🔌','Power']]}
+];
+const SQFT=0.09290304; // m² per sq ft (exact)
+const CX_UNITS={
+  length:{name:'Length',icon:'📏',def:['km','mi'],u:[['mm','Millimetre (mm)',0.001],['cm','Centimetre (cm)',0.01],['m','Metre (m)',1],['km','Kilometre (km)',1000],['in','Inch (in)',0.0254],['ft','Foot (ft)',0.3048],['yd','Yard (yd)',0.9144],['mi','Mile (mi)',1609.344],['nmi','Nautical mile',1852],['um','Micrometre (µm)',1e-6],['nm','Nanometre (nm)',1e-9]]},
+  mass:{name:'Mass / Weight',icon:'⚖️',def:['kg','lb'],u:[['mg','Milligram (mg)',1e-6],['g','Gram (g)',0.001],['kg','Kilogram (kg)',1],['q','Quintal (100 kg)',100],['t','Tonne (1000 kg)',1000],['oz','Ounce (oz)',0.028349523125],['lb','Pound (lb)',0.45359237],['st','Stone (st)',6.35029318],['tola','Tola (11.664 g)',0.011664],['ct','Carat (0.2 g)',0.0002]]},
+  area:{name:'Area',icon:'⬛',def:['acre','sqft'],u:[['sqmm','Sq millimetre',1e-6],['sqcm','Sq centimetre',1e-4],['sqm','Sq metre (m²)',1],['sqkm','Sq kilometre (km²)',1e6],['ha','Hectare',10000],['acre','Acre',4046.8564224],['sqft','Sq foot (sq ft)',SQFT],['sqin','Sq inch',0.00064516],['sqyd','Sq yard (gaj)',0.83612736],['guntha','Guntha (1,089 sq ft)',1089*SQFT],['cent','Cent (435.6 sq ft)',435.6*SQFT],['sqmi','Sq mile',2589988.110336]]},
+  volume:{name:'Volume',icon:'🧪',def:['l','gal'],u:[['ml','Millilitre (ml)',1e-6],['l','Litre (L)',0.001],['m3','Cubic metre (m³)',1],['cm3','Cubic centimetre (cm³)',1e-6],['ft3','Cubic foot (ft³)',0.028316846592],['tsp','Teaspoon (US)',4.92892159375e-6],['tbsp','Tablespoon (US)',1.478676478125e-5],['floz','Fluid ounce (US)',2.95735295625e-5],['cup','Cup (US)',2.365882365e-4],['pt','Pint (US)',4.73176473e-4],['qt','Quart (US)',9.46352946e-4],['gal','Gallon (US)',3.785411784e-3],['galuk','Gallon (UK)',4.54609e-3]]},
+  speed:{name:'Speed',icon:'🚗',def:['kmh','mph'],u:[['ms','Metre / second',1],['kmh','Kilometre / hour',1/3.6],['mph','Mile / hour',0.44704],['kn','Knot',1852/3600],['fts','Foot / second',0.3048]]},
+  time:{name:'Time',icon:'⏱️',def:['h','min'],u:[['ms','Millisecond',0.001],['s','Second',1],['min','Minute',60],['h','Hour',3600],['d','Day',86400],['wk','Week',604800],['mo','Month (average)',2629800],['yr','Year (365.25 days)',31557600]]},
+  data:{name:'Data Size',icon:'💾',def:['gb','mb'],u:[['bit','Bit',0.125],['b','Byte (B)',1],['kb','Kilobyte (KB = 1,000 B)',1e3],['mb','Megabyte (MB)',1e6],['gb','Gigabyte (GB)',1e9],['tb','Terabyte (TB)',1e12],['pb','Petabyte (PB)',1e15],['kib','Kibibyte (KiB = 1,024 B)',1024],['mib','Mebibyte (MiB)',1048576],['gib','Gibibyte (GiB)',1073741824],['tib','Tebibyte (TiB)',1099511627776]]},
+  angle:{name:'Angle',icon:'📐',def:['deg','rad'],u:[['deg','Degree (°)',1],['rad','Radian (rad)',180/Math.PI],['grad','Gradian (grad)',0.9],['turn','Turn',360],['arcmin','Arcminute (′)',1/60],['arcsec','Arcsecond (″)',1/3600]]},
+  pressure:{name:'Pressure',icon:'🎈',def:['bar','psi'],u:[['pa','Pascal (Pa)',1],['kpa','Kilopascal (kPa)',1e3],['mpa','Megapascal (MPa)',1e6],['bar','Bar',1e5],['atm','Atmosphere (atm)',101325],['psi','PSI',6894.757293168],['mmhg','mmHg (torr)',133.322387415],['kgf','kgf / cm²',98066.5]]},
+  energy:{name:'Energy',icon:'⚡',def:['kwh','kj'],u:[['j','Joule (J)',1],['kj','Kilojoule (kJ)',1e3],['cal','Calorie (cal)',4.184],['kcal','Kilocalorie (kcal)',4184],['wh','Watt-hour (Wh)',3600],['kwh','Kilowatt-hour (kWh)',3.6e6],['btu','BTU',1055.05585262],['ftlb','Foot-pound',1.3558179483314]]},
+  power:{name:'Power',icon:'🔌',def:['kw','hp'],u:[['w','Watt (W)',1],['kw','Kilowatt (kW)',1e3],['mw','Megawatt (MW)',1e6],['hp','Horsepower (hp)',745.69987158227],['ps','Metric HP (PS)',735.49875],['btuh','BTU / hour',0.29307107]]},
+  temp:{name:'Temperature',icon:'🌡️',def:['c','f'],temp:true,u:[['c','Celsius (°C)'],['f','Fahrenheit (°F)'],['k','Kelvin (K)']]}
+};
+const CX_TOC={c:x=>x,f:x=>(x-32)*5/9,k:x=>x-273.15}, CX_FROMC={c:x=>x,f:x=>x*9/5+32,k:x=>x+273.15};
+
+function cxClean(v){ if(!Number.isFinite(v)) throw new Error('Math error'); return Number(v.toPrecision(12)); }
+function cxFmtNum(v){
+  if(!Number.isFinite(v)) return '—'; if(v===0) return '0';
+  const a=Math.abs(v); if(a>=1e15||a<1e-9) return Number(v.toPrecision(7)).toExponential().replace('e+','e');
+  return Number(v.toPrecision(12)).toLocaleString('en-IN',{maximumFractionDigits:12});
+}
+
+/* ---- expression engine ---- */
+function cxTokenize(src,ans){
+  const s=String(src).replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/√/g,'sqrt'); const out=[]; let i=0;
+  const F=['asin','acos','atan','sin','cos','tan','ln','log','sqrt','abs','exp'];
+  while(i<s.length){
+    const c=s[i];
+    if(/\s/.test(c)){ i++; continue; }
+    if(/[0-9.]/.test(c)){ let j=i; while(j<s.length&&/[0-9.]/.test(s[j])) j++; const raw=s.slice(i,j);
+      if(raw==='.'||(raw.match(/\./g)||[]).length>1) throw new Error('Invalid number'); out.push({k:'n',v:parseFloat(raw)}); i=j; continue; }
+    if(c==='π'){ out.push({k:'n',v:Math.PI}); i++; continue; }
+    if(/[a-zA-Z]/.test(c)){ let j=i; while(j<s.length&&/[a-zA-Z]/.test(s[j])) j++; let w=s.slice(i,j).toLowerCase();
+      if(w==='pi') out.push({k:'n',v:Math.PI}); else if(w==='e') out.push({k:'n',v:Math.E}); else if(w==='ans') out.push({k:'n',v:ans});
+      else if(F.includes(w)) out.push({k:'f',v:w}); else throw new Error('Unknown: '+w); i=j; continue; }
+    if('+-*/^()!%'.includes(c)){ out.push({k:'o',v:c}); i++; continue; }
+    throw new Error('Invalid character');
+  }
+  return out;
+}
+function cxEval(src,opt){
+  const deg=opt.deg, tk=cxTokenize(src,opt.ans||0); let p=0;
+  const peek=()=>tk[p], isOp=o=>peek()&&peek().k==='o'&&peek().v===o;
+  const val=x=>x.pct?x.v/100:x.v;
+  const chk=v=>{ if(!Number.isFinite(v)) throw new Error('Math error'); return v; };
+  const rad=x=>deg?x*Math.PI/180:x, back=x=>deg?x*180/Math.PI:x, z=x=>Math.abs(x)<1e-12?0:x;
+  const FN={
+    sin:x=>z(Math.sin(rad(x))), cos:x=>z(Math.cos(rad(x))),
+    tan:x=>{ if(Math.abs(Math.cos(rad(x)))<1e-12) throw new Error('Undefined'); return z(Math.tan(rad(x))); },
+    asin:x=>{ if(x<-1||x>1) throw new Error('Out of range'); return back(Math.asin(x)); },
+    acos:x=>{ if(x<-1||x>1) throw new Error('Out of range'); return back(Math.acos(x)); },
+    atan:x=>back(Math.atan(x)),
+    ln:x=>{ if(x<=0) throw new Error('Must be > 0'); return Math.log(x); },
+    log:x=>{ if(x<=0) throw new Error('Must be > 0'); return Math.log10(x); },
+    sqrt:x=>{ if(x<0) throw new Error('Invalid input'); return Math.sqrt(x); },
+    abs:Math.abs, exp:Math.exp
+  };
+  function fact(n){ if(!Number.isInteger(n)||n<0||n>170) throw new Error('Factorial needs 0–170'); let r=1; for(let i=2;i<=n;i++) r*=i; return r; }
+  const startsOperand=()=>{ const t=peek(); return t&&(t.k==='n'||t.k==='f'||(t.k==='o'&&t.v==='(')); };
+  function expr(){ let l=term();
+    while(isOp('+')||isOp('-')){ const op=tk[p++].v; const r=term(); const lv=val(l); const rv=r.pct?lv*r.v/100:r.v; l={v:chk(op==='+'?lv+rv:lv-rv)}; }
+    return l; }
+  function term(){ let l=unary();
+    for(;;){
+      if(isOp('*')||isOp('/')){ const op=tk[p++].v; const r=unary(); const a=val(l), b=val(r);
+        if(op==='/'){ if(b===0) throw new Error('Cannot divide by zero'); l={v:chk(a/b)}; } else l={v:chk(a*b)}; }
+      else if(startsOperand()){ const r=unary(); l={v:chk(val(l)*val(r))}; }
+      else break; }
+    return l; }
+  function unary(){ if(isOp('-')){ p++; return {v:-val(unary())}; } if(isOp('+')){ p++; return unary(); } return power(); }
+  function power(){ const b=postfix(); if(isOp('^')){ p++; const e=unary(); return {v:chk(Math.pow(val(b),val(e)))}; } return b; }
+  function postfix(){ let x=primary();
+    for(;;){ if(isOp('!')){ p++; x={v:fact(val(x))}; } else if(isOp('%')){ p++; x={v:val(x),pct:true}; } else break; }
+    return x; }
+  function primary(){ const t=tk[p++]; if(!t) throw new Error('Incomplete');
+    if(t.k==='n') return {v:t.v};
+    if(t.k==='f'){ if(!(peek()&&peek().k==='o'&&peek().v==='(')) throw new Error('Use '+t.v+'( )'); p++; const a=expr(); if(isOp(')')) p++; return {v:chk(FN[t.v](val(a)))}; }
+    if(t.k==='o'&&t.v==='('){ const a=expr(); if(isOp(')')) p++; return a; }
+    throw new Error('Invalid expression'); }
+  if(!tk.length) return 0;
+  const r=expr(); if(p<tk.length) throw new Error('Invalid expression');
+  return cxClean(val(r));
+}
+
+/* ---- calculator UI (shared by Standard + Scientific) ---- */
+const CX_KEYS_STD=[['MC','fn'],['MR','fn'],['M+','fn'],['M−','fn'],['AC','ac'],['(','fn'],[')','fn'],['⌫','fn'],['7'],['8'],['9'],['÷','op'],['4'],['5'],['6'],['×','op'],['1'],['2'],['3'],['−','op'],['±','fn'],['0'],['.'],['+','op'],['%','fn'],['=','eq wide']];
+const CX_KEYS_SCI=[['DEG','fn'],['sin','fn'],['cos','fn'],['tan','fn'],['⌫','fn'],['π','fn'],['asin','fn'],['acos','fn'],['atan','fn'],['AC','ac'],['e','fn'],['ln','fn'],['log','fn'],['√','fn'],['x!','fn'],['(','fn'],[')','fn'],['x²','fn'],['xʸ','fn'],['1/x','fn'],['7'],['8'],['9'],['÷','op'],['%','fn'],['4'],['5'],['6'],['×','op'],['Ans','fn'],['1'],['2'],['3'],['−','op'],['M+','fn'],['±','fn'],['0'],['.'],['+','op'],['=','eq']];
+function cxBuildKeys(){
+  const mk=(arr,id,w)=>{ $(id).innerHTML=arr.map(([k,c])=>`<button type="button" class="${c||''}" data-k="${escapeHtml(k)}" onclick="cxPress('${w}',this.dataset.k)" aria-label="${escapeHtml(k)}">${escapeHtml(k)}</button>`).join(''); };
+  mk(CX_KEYS_STD,'cxKeysStd','std');
+  mk(CX_KEYS_SCI,'cxKeysSci','sci');
+}
+function cxPress(w,label){
+  const map={'÷':'/','×':'*','−':'-','M−':'M-','⌫':'C','√':'sqrt(','x²':'^2','xʸ':'^','x!':'!','sin':'sin(','cos':'cos(','tan':'tan(','asin':'asin(','acos':'acos(','atan':'atan(','ln':'ln(','log':'log(','Ans':'ans'};
+  cxKey(w,map[label]||label);
+}
+function cxKey(w,k){
+  const s=CXS[w], ops='+-*/^'; const last=s.expr.slice(-1);
+  const startsNew=()=>{ if(s.done){ s.expr=''; s.done=false; } };
+  const curVal=()=>{ try{ return s.done?s.ans:cxEval(s.expr||'0',{deg:CXS.deg,ans:s.ans}); }catch(e){ return null; } };
+  s.err='';
+  if(k==='AC'){ s.expr=''; s.done=false; s.last=''; }
+  else if(k==='C'){ if(s.done){ s.expr=''; s.done=false; } else s.expr=s.expr.replace(/(asin\(|acos\(|atan\(|sin\(|cos\(|tan\(|ln\(|log\(|sqrt\(|exp\(|abs\(|ans|.)$/u,''); }
+  else if(k==='DEG'){ CXS.deg=!CXS.deg; }
+  else if(k==='='){
+    if(!s.done&&s.expr.trim()){ try{ const v=cxEval(s.expr,{deg:CXS.deg,ans:s.ans}); CXS.hist.unshift({e:s.expr,r:v}); CXS.hist=CXS.hist.slice(0,25); s.last=s.expr; s.ans=v; s.expr='ans'; s.done=true; }catch(e){ s.err=e.message; } }
+  }
+  else if(/^[0-9.]$/.test(k)){ startsNew(); if(k==='.'){ const seg=s.expr.match(/[0-9.]*$/)[0]; if(seg.includes('.')) return cxRender(w); if(!seg) s.expr+='0'; } s.expr+=k; }
+  else if(ops.includes(k)&&k.length===1){
+    if(s.done){ s.done=false; }
+    if(!s.expr){ if(k==='-') s.expr='-'; else if(s.ans||s.ans===0){ s.expr='ans'+k; } }
+    else if(ops.includes(last)){ if(k==='-'&&'*/^'.includes(last)) s.expr+=k; else if(s.expr.length>1||last!=='-') s.expr=s.expr.slice(0,-1)+k; }
+    else if(last==='('){ if(k==='-') s.expr+=k; }
+    else s.expr+=k;
+  }
+  else if(k==='%'||k==='!'){ if(s.expr&&!ops.includes(last)&&last!=='('){ if(s.done) s.done=false; s.expr+=k; } }
+  else if(k==='±'){
+    if(s.done){ s.ans=-s.ans; }
+    else { const m=s.expr.match(/\(-([0-9.]+)\)$/); if(m) s.expr=s.expr.slice(0,-m[0].length)+m[1]; else { const n=s.expr.match(/([0-9.]+)$/); if(n) s.expr=s.expr.slice(0,-n[0].length)+'(-'+n[0]+')'; else if(!s.expr) s.expr='-'; } }
+  }
+  else if(k==='M+'||k==='M-'){ const v=curVal(); if(v!==null){ s.mem=cxClean(s.mem+(k==='M+'?v:-v)); if(!s.done&&s.expr){ s.last=s.expr; s.ans=v; s.expr='ans'; s.done=true; } } }
+  else if(k==='MC'){ s.mem=0; }
+  else if(k==='MR'){ if(s.mem){ startsNew(); s.expr=s.expr.replace(/[0-9.]+$/,''); const m=Number(s.mem.toPrecision(12)); s.expr+=m<0?'('+m+')':String(m); } }
+  else if(k==='1/x'){ const base=s.done?'ans':s.expr; if(base){ s.expr='1/('+base+')'; s.done=false; } }
+  else if(k==='('){ startsNew(); s.expr+=k; }
+  else if(k===')'){ if((s.expr.match(/\(/g)||[]).length>(s.expr.match(/\)/g)||[]).length&&!ops.includes(last)&&last!=='(') s.expr+=k; }
+  else { /* π, e, ans, functions, ^2 */
+    if(k==='^2'){ if(s.expr&&!ops.includes(last)&&last!=='('){ if(s.done) s.done=false; s.expr+=k; } }
+    else { if(s.done&&k!=='ans') startsNew(); else if(s.done&&k==='ans'){ s.done=false; s.expr=''; }
+      if(k==='ans'||k==='π'||k==='e'||/\($/.test(k)){ if(/[0-9.)πe]$|ans$/.test(s.expr)) s.expr+='*'; } s.expr+=k; }
+  }
+  cxRender(w);
+}
+function cxRender(w){
+  const s=CXS[w]; const eEl=$('cx'+w+'Expr'), rEl=$('cx'+w+'Res');
+  const pretty=x=>String(x).replace(/\*/g,'×').replace(/\//g,'÷').replace(/sqrt\(/g,'√(');
+  let res='0', err=s.err||'';
+  if(!err){
+    if(s.done) res=cxFmtNum(s.ans);
+    else if(s.expr){ try{ res=cxFmtNum(cxEval(s.expr,{deg:CXS.deg,ans:s.ans})); }catch(e){ res=$('cx'+w+'Res').dataset.keep||'0'; } }
+  }
+  eEl.innerHTML=(s.done?escapeHtml(pretty(s.last))+' =':escapeHtml(pretty(s.expr)))||'&nbsp;';
+  rEl.classList.toggle('err',!!err); rEl.textContent=err||res; if(!err) rEl.dataset.keep=res;
+  const mem=$('cx'+w+'Mem'); if(mem) mem.hidden=!s.mem;
+  const md=$('cxsciMode'); if(md) md.textContent=CXS.deg?'DEG':'RAD';
+  document.querySelectorAll('#cxKeysSci button[data-k="DEG"]').forEach(b=>b.textContent=CXS.deg?'DEG':'RAD');
+  cxHistRender();
+}
+function cxHistRender(){
+  const h=CXS.hist.map((x,i)=>`<button type="button" class="cx-h" onclick="cxHistUse(${i})"><small>${escapeHtml(String(x.e).replace(/\*/g,'×').replace(/\//g,'÷'))} =</small><b>${escapeHtml(cxFmtNum(x.r))}</b></button>`).join('')||'<div class="hint">No calculations yet.</div>';
+  ['cxHistStd','cxHistSci'].forEach(id=>{ const el=$(id); if(el) el.innerHTML=h; });
+}
+function cxHistUse(i){ const w=CXS.active==='sci'?'sci':'std', x=CXS.hist[i]; if(!x) return; const s=CXS[w]; s.expr=x.e; s.done=false; s.err=''; cxRender(w); }
+function cxHistClear(){ CXS.hist=[]; cxHistRender(); }
+function cxCopy(id){ const t=$(id).textContent; if(!t||t==='—') return; (navigator.clipboard?navigator.clipboard.writeText(t.replace(/,/g,'')):Promise.reject()).then(()=>toast('Copied: '+t,'ok')).catch(()=>toast('Copy not available in this browser.','warn')); }
+document.addEventListener('keydown',e=>{
+  const pg=document.getElementById('calculators'); if(!pg||!pg.classList.contains('active')) return;
+  const w=CXS.active; if(w!=='std'&&w!=='sci') return;
+  const tg=e.target; if(tg&&/^(INPUT|SELECT|TEXTAREA)$/.test(tg.tagName)) return;
+  if(e.ctrlKey||e.metaKey||e.altKey) return;
+  const k=e.key; let m=null;
+  if(/^[0-9.]$/.test(k)) m=k; else if(k.length===1&&'+-*/^()%!'.includes(k)) m=k; else if(k==='x'||k==='X') m='*';
+  else if(k==='Enter'||k==='=') m='='; else if(k==='Backspace') m='C'; else if(k==='Escape'||k==='Delete') m='AC';
+  if(m){ e.preventDefault(); cxKey(w,m); }
+});
+
+/* ---- unit converters ---- */
+function cxConvSet(key){
+  const c=CX_UNITS[key]; CXS.conv=key; $('cxConvTitle').textContent=c.icon+' '+c.name+' Converter';
+  const opts=c.u.map(u=>`<option value="${u[0]}">${escapeHtml(u[1])}</option>`).join('');
+  $('cxFrom').innerHTML=opts; $('cxTo').innerHTML=opts; $('cxFrom').value=c.def[0]; $('cxTo').value=c.def[1]; $('cxVal').value='1'; cxConvRun();
+}
+function cxConvert(c,v,from,to){
+  if(c.temp) return cxClean(CX_FROMC[to](CX_TOC[from](v)));
+  const f=c.u.find(u=>u[0]===from)[2], t=c.u.find(u=>u[0]===to)[2]; return cxClean(v*f/t);
+}
+function cxConvRun(){
+  const c=CX_UNITS[CXS.conv]; const raw=$('cxVal').value.trim().replace(/,/g,''); const from=$('cxFrom').value, to=$('cxTo').value;
+  const err=$('cxConvErr'); err.textContent='';
+  const nm=u=>c.u.find(x=>x[0]===u)[1];
+  let v=raw===''?1:NaN; if(raw!==''&&/^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(raw)) v=Number(raw);
+  if(!Number.isFinite(v)){ $('cxConvRes').textContent='—'; $('cxConvUnit').textContent=''; $('cxConvEq').innerHTML='&nbsp;'; $('cxConvAll').innerHTML=''; err.textContent='Enter a valid number, e.g. 12.5 or 1,000.'; return; }
+  if(c.temp){ const k=CX_TOC[from](v)+273.15; if(k<-1e-9){ $('cxConvRes').textContent='—'; $('cxConvUnit').textContent=''; $('cxConvEq').innerHTML='&nbsp;'; $('cxConvAll').innerHTML=''; err.textContent='That is below absolute zero (−273.15 °C).'; return; } }
+  try{
+    const r=cxConvert(c,v,from,to);
+    $('cxConvRes').textContent=cxFmtNum(r); $('cxConvUnit').textContent=nm(to);
+    $('cxConvEq').textContent=cxFmtNum(v)+' '+nm(from)+' ='; 
+    $('cxConvAll').innerHTML=c.u.map(u=>`<tr${u[0]===to?' style="background:#e6f4f1;font-weight:700"':''}><td>${escapeHtml(u[1])}</td><td class="num-r">${escapeHtml(cxFmtNum(cxConvert(c,v,from,u[0])))}</td></tr>`).join('');
+  }catch(e){ err.textContent='Value is too large to convert.'; }
+}
+function cxSwap(){ const f=$('cxFrom'), t=$('cxTo'); const a=f.value; f.value=t.value; t.value=a; cxConvRun(); }
+
+/* ---- sidebar ---- */
+function cxShow(key){
+  CXS.active=key;
+  const isConv=!!CX_UNITS[key]; const pane=isConv?'conv':key;
+  ['std','sci','emi','pct','conv'].forEach(p=>$('cxp-'+p).classList.toggle('active',p===pane));
+  $('cxSide').querySelectorAll('button').forEach(b=>{ const on=b.dataset.k===key; b.classList.toggle('active',on); if(on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+  if(isConv) cxConvSet(key); else if(key==='std'||key==='sci') cxRender(key);
+}
+function cxInit(){
+  $('cxSide').innerHTML=CX_NAV.map(g=>`<h4>${escapeHtml(g.g)}</h4>`+g.items.map(i=>`<button type="button" data-k="${i[0]}" onclick="cxShow('${i[0]}')"><span aria-hidden="true">${i[1]}</span>${escapeHtml(i[2])}</button>`).join('')).join('');
+  cxBuildKeys(); cxRender('std'); cxRender('sci'); cxShow('std');
+}
+cxInit();
+
 function globalSearch(){
   const raw=$('globalSearchInput').value.trim().toLowerCase();
   const panel=$('searchResultsPanel'), list=$('searchResultsList');
@@ -2604,6 +2912,7 @@ document.addEventListener('keydown',function(e){
   if(e.key!=='Enter') return; const t=e.target;
   if(t.tagName!=='INPUT'&&t.tagName!=='SELECT') return;
   if(t.id==='loginUser'||t.id==='loginPass') return; // the login <form> submits itself
+  if(String(t.id).startsWith('cx')) return;          // calculator converter fields
   if(t.id==='globalSearchInput'||t.id==='search'||t.id==='pipeSearch'||t.id==='disbSearch'||t.id==='payoutSearch'||t.id==='anQ') return;
   const container=t.closest('#formArea, .panel, .card, .page')||document;
   const fields=Array.from(container.querySelectorAll('input, select')).filter(el=>!el.disabled&&el.type!=='hidden'&&el.type!=='file'&&el.offsetParent!==null);
