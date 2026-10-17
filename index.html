@@ -176,8 +176,8 @@ tr.flag td{background:#fff8eb}
 </head>
 <body>
 <!-- Login Screen -->
-<div id="loginScreen">
-  <form class="login-card" id="loginForm" onsubmit="event.preventDefault();checkLogin();" novalidate>
+<div id="loginScreen" style="">
+  <form class="login-card" id="loginForm" onsubmit="event.preventDefault();checkLogin();" novalidate="">
     <div class="brand-logo-img logo-fallback" aria-hidden="true">MF</div>
     <h2>Moneylight Finance</h2>
     <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Sign in to access your CRM</p>
@@ -188,8 +188,8 @@ tr.flag td{background:#fff8eb}
       <span class="pw-wrap">
         <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password">
         <button type="button" class="pw-toggle" id="loginPassToggle" aria-label="Show password" aria-pressed="false" aria-controls="loginPass" onclick="togglePassword('loginPass',this)">
-          <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
-          <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
         </button>
       </span>
     </label>
@@ -205,12 +205,12 @@ tr.flag td{background:#fff8eb}
   <div class="logo">Moneylight<small>FINANCE CRM</small></div>
 </div>
 <nav class="menu" id="menu">
-<button class="active" onclick="go('home',this)">🏠 Dashboard</button>
+<button class="" onclick="go('home',this)">🏠 Dashboard</button>
 <button onclick="go('monthly',this)">📅 Monthly View</button>
-<button onclick="go('leads',this)">👥 Leads</button>
-<button onclick="go('cibil',this)">📊 CIBIL Score Check</button>
-<button onclick="go('pipeline',this)">📁 Pipeline</button>
-<button onclick="go('disb',this)">💰 Disbursement</button>
+<button onclick="go('leads',this)" class="">👥 Leads</button>
+<button onclick="go('cibil',this)" class="">📊 CIBIL Score Check</button>
+<button onclick="go('pipeline',this)" class="">📁 Pipeline</button>
+<button onclick="go('disb',this)" class="active" aria-current="page">💰 Disbursement</button>
 <button onclick="go('payout',this)">💸 Payout Tracker</button>
 <button onclick="go('eligibility',this)">⚡ Eligibility Engine</button>
 <button onclick="go('analyzer',this)">📄 Statement Analyzer</button>
@@ -230,15 +230,15 @@ tr.flag td{background:#fff8eb}
   <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false" onclick="toggleMenu()">☰</button>
   <div>
     <div class="title">Good Day 👋</div>
-    <div class="date" id="today"></div>
+    <div class="date" id="today">Friday, 16 October 2026</div>
   </div>
   <div class="global-search-container">
     <input type="search" id="globalSearchInput" class="global-search-input" aria-label="Search entire CRM" placeholder="🔍 Search entire CRM (Name, Mobile, Bank, etc.)..." oninput="globalSearchDebounced()">
   </div>
-  <span class="sync-chip" id="syncChip" role="status" aria-live="polite">Connecting…</span>
+  <span class="sync-chip ok" id="syncChip" role="status" aria-live="polite">Synced ✓</span>
   <button class="btn" onclick="openForm('lead')">+ New Lead</button>
 </div>
-<div id="searchResultsPanel">
+<div id="searchResultsPanel" style="display: none;">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
     <h3 style="margin:0; font-size:16px; color:var(--primary);">🔍 Global Search Results</h3>
     <button class="btn light btn-sm" onclick="clearGlobalSearch()">✕ Close Search</button>
@@ -247,13 +247,13 @@ tr.flag td{background:#fff8eb}
 </div>
 
 <!-- Dashboard Page -->
-<section id="home" class="page active">
+<section id="home" class="page">
 <div class="cards">
-  <div class="card"><div class="label">Total Leads</div><div class="num" id="cLead">0</div></div>
-  <div class="card"><div class="label">This Month Login</div><div class="num" id="cLogin">0</div></div>
+  <div class="card"><div class="label">Total Leads</div><div class="num" id="cLead">41</div></div>
+  <div class="card"><div class="label">This Month Login</div><div class="num" id="cLogin">8</div></div>
   <div class="card"><div class="label">Approved Amount</div><div class="num" id="cApproved">₹0</div></div>
-  <div class="card"><div class="label">Disbursed Amount</div><div class="num" id="cDisb">₹0</div></div>
-  <div class="card"><div class="label">Follow-ups Due (today &amp; overdue)</div><div class="num accent" id="cFollow">0</div></div>
+  <div class="card"><div class="label">Disbursed Amount</div><div class="num" id="cDisb">₹80,62,000</div></div>
+  <div class="card"><div class="label">Follow-ups Due (today &amp; overdue)</div><div class="num accent" id="cFollow">28</div></div>
 </div>
 <div class="grid2">
   <div class="panel">
@@ -266,7 +266,7 @@ tr.flag td{background:#fff8eb}
   </div>
   <div class="panel">
     <h3>🎯 Status Overview</h3>
-    <div id="snapshot">Loading…</div>
+    <div id="snapshot"></div>
   </div>
 </div>
 <div class="panel">
@@ -276,9 +276,9 @@ tr.flag td{background:#fff8eb}
 <div class="panel">
   <h3>💸 Connector Payout</h3>
   <div class="cards payout-summary" style="margin:0 0 12px">
-    <div class="card"><div class="label">Expected Payout</div><div class="num" id="dashPayoutExpected">₹0</div></div>
-    <div class="card"><div class="label">Received / Clear</div><div class="num" id="dashPayoutReceived">₹0</div></div>
-    <div class="card"><div class="label">Pending Payout</div><div class="num accent" id="dashPayoutPending">₹0</div></div>
+    <div class="card"><div class="label">Expected Payout</div><div class="num" id="dashPayoutExpected">₹82,678</div></div>
+    <div class="card"><div class="label">Received / Clear</div><div class="num" id="dashPayoutReceived">₹72,678</div></div>
+    <div class="card"><div class="label">Pending Payout</div><div class="num accent" id="dashPayoutPending">₹10,000</div></div>
   </div>
   <div id="dashPayoutList"></div>
   <button class="btn light btn-sm" onclick="openPayoutPage()">Open Payout Tracker →</button>
@@ -320,7 +320,7 @@ tr.flag td{background:#fff8eb}
     <option value="">All Statuses</option>
     <option>New</option><option>Follow-up</option><option>Login</option><option>Approved</option><option>Rejected</option><option>Converted</option>
   </select>
-  <select id="productFilter" aria-label="Filter by loan type" onchange="filterChanged('leads')"><option value="">All Loan Types</option></select>
+  <select id="productFilter" aria-label="Filter by loan type" onchange="filterChanged('leads')" data-sig="Personal Loan|Business Loan|Home Loan|Loan Against Property|Car Loan|Gold Loan|Microfinance|Working Capital|Vehicle Loan|Insurance Loan|Overdraft (OD)|Cash Credit (CC)|Balance Transfer|Commercial Property Purchase Loan|Construction Loan"><option value="">All Loan Types</option><option>Personal Loan</option><option>Business Loan</option><option>Home Loan</option><option>Loan Against Property</option><option>Car Loan</option><option>Gold Loan</option><option>Microfinance</option><option>Working Capital</option><option>Vehicle Loan</option><option>Insurance Loan</option><option>Overdraft (OD)</option><option>Cash Credit (CC)</option><option>Balance Transfer</option><option>Commercial Property Purchase Loan</option><option>Construction Loan</option></select>
 </div>
 <div class="table">
   <table>
@@ -374,19 +374,27 @@ tr.flag td{background:#fff8eb}
 </section>
 
 <!-- Disbursement -->
-<section id="disb" class="page">
+<section id="disb" class="page active">
 <div class="top">
   <div class="title">Disbursements</div>
   <button class="btn green" onclick="openForm('disb')">+ Add Disbursement</button>
 </div>
 <div class="cards c3">
-  <div class="card"><div class="label">Total Disbursed</div><div class="num" id="dTotal">₹0</div></div>
-  <div class="card"><div class="label">Total Files</div><div class="num" id="dFiles">0</div></div>
+  <div class="card"><div class="label">Total Disbursed</div><div class="num" id="dTotal">₹1,10,62,000</div></div>
+  <div class="card"><div class="label">Total Files</div><div class="num" id="dFiles">8</div></div>
 </div>
-<div class="toolbar"><input id="disbSearch" aria-label="Search disbursements" placeholder="🔎 Search disbursements" oninput="filterChanged('disb')"></div>
+<div class="toolbar">
+  <input id="disbSearch" aria-label="Filter disbursements" placeholder="🔎 Filter Disbursements (Name / Loan / Lender / Connector / Date)" oninput="filterChanged('disb')">
+  <select id="disbProductFilter" aria-label="Filter by loan type" onchange="filterChanged('disb')"><option value="">All Loan Types</option></select>
+  <select id="disbConnectorFilter" aria-label="Filter by connector" onchange="filterChanged('disb')"><option value="">All Connectors</option></select>
+  <select id="disbMonthFilter" aria-label="Filter by month" onchange="filterChanged('disb')"><option value="">All Months</option></select>
+  <select id="disbPayoutFilter" aria-label="Filter by payout status" onchange="filterChanged('disb')">
+    <option value="">All Payout Status</option><option>Pending</option><option>Partial</option><option>Clear</option><option value="none">No payout record</option>
+  </select>
+</div>
 <div class="table">
   <table>
-    <thead><tr><th>Customer</th><th>Loan Type</th><th>Amount</th><th>Date</th><th>Reference / Lender</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Customer</th><th>Loan Type</th><th>Amount</th><th>Date</th><th>Reference / Lender</th><th>Connector</th><th>Payout %</th><th>Payout Status</th><th>Actions</th></tr></thead>
     <tbody id="disbTable"></tbody>
   </table>
 </div>
@@ -463,7 +471,7 @@ tr.flag td{background:#fff8eb}
       <input type="file" id="anFile" accept="application/pdf,.pdf" style="display:none" onchange="anHandleFile(this.files[0]); this.value='';">
     </div>
     <div class="toolbar">
-      <label style="display:flex;gap:6px;align-items:center;font-size:13px"><input type="checkbox" id="anOcr" checked> Try OCR if the PDF is a scan (slower, less accurate — downloads a text-recognition engine)</label>
+      <label style="display:flex;gap:6px;align-items:center;font-size:13px"><input type="checkbox" id="anOcr" checked=""> Try OCR if the PDF is a scan (slower, less accurate — downloads a text-recognition engine)</label>
     </div>
     <div id="anPassBox" style="display:none" class="notice warn">
       <b>This PDF is password-protected.</b>
@@ -471,8 +479,8 @@ tr.flag td{background:#fff8eb}
         <span class="pw-wrap" style="flex:1;min-width:200px">
           <input type="password" id="anPass" placeholder="PDF password" autocomplete="off">
           <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false" onclick="togglePassword('anPass',this)">
-            <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
-            <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
           </button>
         </span>
         <button class="btn" onclick="anRetryPassword()">Unlock &amp; analyse</button>
@@ -597,7 +605,7 @@ tr.flag td{background:#fff8eb}
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="box">
     <button class="close" onclick="closeModal()" aria-label="Close dialog">✕</button>
-    <h2 id="modalTitle" style="margin-top:0">Moneylight</h2>
+    <h2 id="modalTitle" style="margin-top:0">💾 Backup Data Options</h2>
     <div id="formArea"></div>
   </div>
 </div>
@@ -613,7 +621,7 @@ tr.flag td{background:#fff8eb}
   </div>
 </div>
 <div id="toasts" aria-live="polite"></div>
-<script>
+<script type="application/json" id="embeddedBackupData">{"leads":[{"amount":1000000,"approvalNote":"","cibil":"750","connector":"Adesh","createdAt":1792056390435,"date":"2026-10-16","id":1792056391310,"inc":100000,"loginId":1792136214730,"mobile":"7798891882","name":"Pratik Nilopant","note":"Garanter cibil isue sachin kad dilay check karayla","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Adesh","rejectReason":"","status":"Login","updatedAt":1792136214397},{"amount":300000,"approvalNote":"","cibil":"700","connector":"Kuntiram","createdAt":1792057432161,"date":"2026-10-16","id":1792057433036,"inc":19000,"mobile":"","name":"Harshad Rokade Mother","note":"","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Kuntiram","rejectReason":"","status":"New","updatedAt":1792057432161},{"amount":500000,"approvalNote":"","cibil":"700","connector":"Trushal","createdAt":1791975857159,"date":"","id":1791975857859,"inc":500000,"mobile":"","name":"Aksahy Sawant","note":"","payoutPct":0,"product":"Business Loan","prof":"Business","ref":"Trushal","rejectReason":"","status":"New","updatedAt":1791975857159},{"amount":2500000,"approvalNote":"","cibil":"700","connector":"Rahul","createdAt":1790230454669,"date":"2026-09-27","id":1790230455484,"inc":50000,"mobile":"7773943077","name":"Anita Borawake","note":"Ujjivan La process Chalu ahe home loan sathi\n\njhali process tikadun no need","payoutPct":0,"product":"Home Loan","prof":"Job","ref":"Rahul","rejectReason":"","status":"New","updatedAt":1791882034587},{"amount":0,"approvalNote":"","cibil":"700","connector":"Rahul","createdAt":1790242896038,"date":"2026-10-15","id":1790242896214,"inc":5000000,"mobile":"9370382187","name":"Joseph Lawrence","note":"2 divsat final honar jahlyavar sangto","payoutPct":0,"product":"Home Loan","prof":"Business","ref":"Rahul","rejectReason":"","status":"Follow-up","updatedAt":1791881994160},{"amount":2500000,"approvalNote":"","cibil":"700","connector":"Kuntiram","createdAt":1790763898756,"date":"2026-10-03","id":1790763898822,"inc":25000,"mobile":"9764073372","name":"Nitin Thape","note":"Gharavarti polyhouse karat loan pahije 25 lakh ghari vicharun sangto \nNot conform","payoutPct":0,"product":"Loan Against Property","prof":"Job","ref":"Kuntiram","rejectReason":"","status":"New","updatedAt":1791881712136},{"amount":3000000,"cibil":"","connector":"Viashu","createdAt":1791379194951,"date":"","id":1791379195722,"inc":500000,"mobile":"","name":"Sohel shaikh","note":"","payoutPct":0,"product":"Loan Against Property","prof":"bisiness","ref":"Vaishu","status":"New","updatedAt":1791379194951},{"amount":5000000,"cibil":"700","connector":"Kuntiram","createdAt":1791190211020,"date":"2026-01-08","id":1791190211120,"inc":45000,"mobile":"kolhapur","name":"Sachin Patil","note":"","payoutPct":0,"product":"Loan Against Property","prof":"Job","ref":"Kuntiram","status":"Follow-up","updatedAt":1791190211020},{"amount":500000,"cibil":"700","connector":"Kuntiram","createdAt":1791182643040,"date":"2026-10-06","id":1791182643069,"inc":80000,"mobile":"","name":"Amol Mohire","note":"Over obligation car varti bt tip up karaychay","payoutPct":0,"product":"Car Loan","prof":"Job","ref":"Kuntiram","status":"Follow-up","updatedAt":1791182643040},{"amount":1000000,"cibil":"700","connector":"Pawar","createdAt":1791004476521,"date":"2026-10-05","id":1791004476784,"inc":45000,"loginId":1791182512375,"mobile":"8999288896","name":"Santosh Karle","note":"","payoutPct":0,"product":"Loan Against Property","prof":"Job","ref":"Pawar","status":"Login","updatedAt":1791004476521},{"amount":3000000,"cibil":"700","connector":"Kartik Tata","createdAt":1791003989819,"date":"","id":1791003990585,"inc":100000,"mobile":"7666697108","name":"Dnyaneshwaer karhale","note":"","payoutPct":0,"product":"Home Loan","prof":"Business","ref":"Kartik Tata","status":"New","updatedAt":1791003989819},{"amount":1000000,"cibil":"700","connector":"Kuntiram","createdAt":1790840794784,"date":"2027-01-01","id":1790840795036,"inc":80000,"mobile":"","name":"Rahul Dashnam","note":"Job Join Karnar ani mag loan ghenar 10 klakh","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Kuntiram","status":"New","updatedAt":1790840794784},{"amount":500000,"cibil":"700","connector":"Kuntiram","createdAt":1790838616294,"date":"2026-12-01","id":1790838616844,"inc":3000000,"mobile":"7620969343","name":"Gulchand","note":"2 monthnantar bl lagnar 5 lakh","payoutPct":0,"product":"Personal Loan","prof":"Business","ref":"Kuntiram","status":"New","updatedAt":1790838616294},{"amount":500000,"cibil":"706","connector":"Kuntiram","createdAt":1790837855053,"date":"2026-10-06","id":1790837855759,"inc":60000,"mobile":"99211 80769","name":"Girish Hampe","note":"","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Kuntiram","status":"New","updatedAt":1790837855053},{"amount":8000000,"cibil":"700","connector":"Kuntiram","createdAt":1790762455756,"date":"2026-10-08","id":1790762456471,"inc":10000000,"mobile":"8208770593","name":"Nakul Khasre","note":"Sleeper Bus Search 80 lak Budget call back 8 days nantar","payoutPct":0,"product":"Car Loan","prof":"Business","ref":"Kuntiram","status":"New","updatedAt":1790762455756},{"amount":200000,"cibil":"750","connector":"Kuntiram","createdAt":1790760441540,"date":"","id":1790760441707,"inc":20000,"mobile":"9834490438","name":"Harshad Rokade","note":"","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Kuntiram","status":"New","updatedAt":1790760441540},{"amount":2500000,"cibil":"700","connector":"Rahul","createdAt":1790230253743,"date":"2026-09-27","id":1790230253974,"inc":1000000,"mobile":"9822986752","name":"Prafull Dhamage","note":"Property finalise jahalyvar","payoutPct":0,"product":"Home Loan","prof":"BUSINESS","ref":"Rahul","status":"New","updatedAt":1790418938003},{"amount":2000000,"cibil":"660","connector":"","createdAt":1789466365566,"date":"2026-12-01","id":1789466365566,"inc":78000,"mobile":"9082315551","name":"Amar Navle","note":"Over Obligation ,and cibli issue","payoutPct":0,"product":"Personal Loan","prof":"job","ref":"Vaishu","status":"Rejected","updatedAt":1790399017882},{"amount":200000,"cibil":"700","connector":"Nilam","createdAt":1790240964750,"date":"2026-09-27","id":1790240964857,"inc":50000,"mobile":"9834949392","name":"Motiram Poul","note":"Sonarakadl sodun tyavar loan karne","payoutPct":0,"product":"Gold Loan","prof":"Business","ref":"Nilam","status":"New","updatedAt":1790240995518},{"amount":800000,"cibil":"700","connector":"Nilam","createdAt":1789805746524,"date":"2026-09-27","id":1789805747432,"inc":21000,"mobile":"9822728062","name":"Kaluram Cholage","note":"Property Conformation\njhalyavar Thoda property issue","payoutPct":0,"product":"Home Loan","prof":"Job","ref":"Nilam","status":"Follow-up","updatedAt":1790231064196},{"amount":2000000,"cibil":"700","connector":"Kartik","createdAt":1790230865950,"date":"2026-09-27","id":1790230866279,"inc":30000,"mobile":"82755 28041","name":"Ajay Shirke","note":"20 lakh pahij without co aplicant Charoli location property","payoutPct":0,"product":"Home Loan","prof":"Job","ref":"Kartik Navarange","status":"New","updatedAt":1790230865950},{"amount":1300000,"cibil":"700","connector":"Rahul","createdAt":1790230354625,"date":"2026-09-27","id":1790230354704,"inc":500000,"mobile":"9527901877","name":"Haribhau Tekale","note":"Bada dost purchase Loan Required","payoutPct":0,"product":"Car Loan","prof":"Business","ref":"Rahul","status":"New","updatedAt":1790230354625},{"amount":700000,"cibil":"700","connector":"Rahul","createdAt":1790230038447,"date":"2026-09-27","id":1790230038472,"inc":50000,"mobile":"9881010270","name":"Mr.Shankar Bodare","note":"CUNSTRUCTION SATHI LOAN PAHIJ DOCUMENTS PATHVUN DENAR","payoutPct":0,"product":"Loan Against Property","prof":"Business","ref":"Rahul","status":"New","updatedAt":1790230112776},{"amount":500000,"cibil":"700","connector":"Rahul","createdAt":1790229965682,"date":"2026-10-01","id":1790229965868,"inc":60000,"mobile":"8766582902","name":".Nutun Shinde","note":"Cunstruction Loan Requird ,mulashi bolun sangnar","payoutPct":0,"product":"Home Loan","prof":"Job\\ RENT","ref":"Rahul","status":"New","updatedAt":1790229965682},{"amount":300000,"cibil":"750","connector":"Kuntiram","createdAt":1789714002017,"date":"2026-09-18","id":1789714002711,"inc":15000,"loginId":1789714026748,"mobile":"98223 52581","name":"Suraj Sanjay Vala","note":"","payoutPct":2,"product":"Personal Loan","prof":"Job","ref":"Aniket Solunke","status":"Login","updatedAt":1789714026527},{"amount":200000,"cibil":"750","connector":"mandlik","createdAt":1789660013396,"date":"2026-09-18","id":1789660013836,"inc":15000,"mobile":"8805625961","name":"Jafar Shaikh","note":"","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"mandlik","status":"New","updatedAt":1789660013396},{"amount":200000,"cibil":"779","connector":"","createdAt":1789625802900,"date":"2026-09-18","id":1789625802932,"inc":20000,"loginId":1790231078871,"mobile":"94031 77658","name":"Suvarna Sonke","note":"","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Mahesh Potdar","status":"Login","updatedAt":1789625802900},{"amount":3000000,"cibil":"800","connector":"Nilam","createdAt":1789625682740,"date":"2026-09-20","id":1789625683160,"inc":40000,"mobile":"9604922963","name":"Bhagvat Garad","note":"meting la yenar","payoutPct":0,"product":"Home Loan","prof":"Job","ref":"Nilam","status":"New","updatedAt":1789625709759},{"amount":200000,"cibil":"750","connector":"","date":"2026-09-15","id":1789408432580,"inc":20000,"loginId":1789495042566,"mobile":"6299 629 707","name":"Govind Kumar","note":"Pl login werize low sallry ","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Akash patil","status":"Converted","updatedAt":1789495903941},{"amount":5000000,"cibil":"700","connector":"","createdAt":1789467104359,"date":"2026-09-16","id":1789467104359,"inc":5000000,"mobile":"7276537305","name":"Sachin Red Zone ","note":"","payoutPct":0,"product":"Home Loan","prof":"Business","ref":"Kuntiram","status":"Follow-up"},{"amount":2000000,"cibil":"700","connector":"","createdAt":1789466216084,"date":"2026-10-01","id":1789466216084,"inc":6000000,"mobile":"9011183488","name":"Sameer Shaikh ","note":"cst LOW ABB Solapur Location\n","payoutPct":0,"product":"Business Loan","prof":"Business","ref":"Vaishu","status":"Follow-up"},{"amount":200000,"cibil":"700","connector":"","createdAt":1789466079702,"date":"2026-10-01","id":1789466079702,"inc":20000,"mobile":"9811461582","name":"Nitesh  Kumar ","note":"cst did not responce\n","payoutPct":0,"product":"Personal Loan","prof":"Job ","ref":"Vaishu","status":"Rejected"},{"amount":1000000,"cibil":"700","connector":"","createdAt":1789465980428,"date":"2026-10-01","id":1789465980428,"inc":1000000,"mobile":"8888738169","name":"Neha Kamthe ","note":"low Abb Option Not Available \n","payoutPct":0,"product":"Business Loan","prof":"Busuness","ref":"Trushal","status":"Follow-up"},{"amount":150000000,"cibil":"700","connector":"","createdAt":1789465723503,"date":"2026-09-20","id":1789465723503,"inc":6000000,"mobile":"9763659966","name":"shubham Karande ","note":"Property Valuation Issue in proces","payoutPct":0,"product":"Loan Against Property","prof":"Bussiness","ref":"Kuntiram","status":"Follow-up"},{"amount":200000,"cibil":"700","connector":"","createdAt":1789465562230,"date":"2026-11-15","id":1789465562230,"inc":200000,"mobile":"7276482887","name":"Dinesh Kumar ","note":"mhada property document issue\n","payoutPct":0,"product":"Loan Against Property","prof":"Business","ref":"Kuntiram","status":"Follow-up"},{"amount":200000,"cibil":"","connector":"","date":"","id":1789053485922,"inc":20000,"mobile":"7499989440","name":"Rushikesh Udale","note":"\nDocuments Not Recived \n\n","payoutPct":0,"product":"Personal Loan","prof":"Job","ref":"Kuntiram","status":"Follow-up"},{"amount":10000000,"cibil":"720","connector":"","date":"2026-12-09","id":1789053642086,"inc":5000000,"loginId":1790231117093,"mobile":"9172831515","name":"Shubham Rathod","note":"","payoutPct":0,"product":"Business Loan","prof":"Business ","ref":"Kuntiram","status":"Login"},{"amount":120000000,"cibil":"750","connector":"","date":"2026-12-09","id":1789053807285,"inc":5000000,"mobile":"8605313445","name":"Ashwini More","note":"","payoutPct":0,"product":"Loan Against Property","prof":"Business Cloth Shop","ref":"Ayush","status":"Follow-up"},{"amount":0,"cibil":"","connector":"","date":"2026-09-15","id":1789054096361,"inc":5000000,"mobile":"9890769346","name":"Vinay Bahirat","note":"infuture sangnar\n","payoutPct":0,"product":"Loan Against Property","prof":"Business","ref":"Kuntiram","status":"Follow-up"},{"amount":5000000,"cibil":"650","connector":"","date":"2026-10-15","id":1789054198218,"inc":200000,"mobile":"9922602227","name":"Mahadev kambale ","note":"Not Respond\n\n","payoutPct":0,"product":"Loan Against Property","prof":"caterars business","ref":"shubham Rathod","status":"New"},{"amount":1000000,"cibil":"700","connector":"","date":"2026-10-15","id":1789054298350,"inc":45,"mobile":"8530242617","name":"suraj Bongale ","note":"","payoutPct":0,"product":"Personal Loan","prof":"Job ","ref":"Kuntiram","status":"Follow-up"}],"logins":[{"amount":3000000,"banker":"Pnkaj","connector":"Trushal","createdAt":1789496151502,"date":"2026-08-15","disbId":1792136624592,"id":1789496152211,"lender":"Bajaj","lid":"","name":"Vitthal Nivgune","payoutPct":0,"product":"Car Loan","ref":"Trushal","rejectReason":"","status":"Under Process","statusDates":{"disbursed":"2026-10-16"},"updatedAt":1792136635451},{"amount":1000000,"banker":"","connector":"Adesh","createdAt":1792136214398,"date":"2026-10-16","id":1792136214730,"lender":"","lid":"","name":"Pratik Nilopant","payoutPct":0,"product":"Personal Loan","ref":"Adesh","rejectReason":"","sourceLeadId":1792056391310,"status":"Under Process","updatedAt":1792136227990},{"amount":2000000,"banker":"Kishor","connector":"Chandrahans","createdAt":1792136068593,"date":"2026-10-10","id":1792136069158,"lender":"Motiwal Oswal","lid":"","name":"Nivrutti Dhakne","payoutPct":0,"product":"Construction Loan","ref":"Chandrahans","rejectReason":"","status":"Under Process","updatedAt":1792136077460},{"amount":5000000,"banker":"Mayur Galande","connector":"Pawar","date":"2026-09-15","id":1789466904892,"lender":"Easy Home Fin","lid":"","name":"Majhmul Haq","payoutPct":0,"product":"Loan Against Property","ref":"Pawar","rejectReason":"","status":"Under Process","statusDates":{"approved":"2026-10-13"},"updatedAt":1792062459608},{"amount":1500000,"banker":"","connector":"Trushal","createdAt":1791975797304,"date":"2026-10-14","id":1791975798124,"lender":"","lid":"","name":"Navnath Shelar","payoutPct":0,"product":"Business Loan","ref":"Trushal","rejectReason":"","status":"Login","updatedAt":1791975797304},{"amount":1000000,"banker":"Kudale","connector":"Kuntiram","createdAt":1791975716975,"date":"2026-10-14","id":1791975717136,"lender":"Protium","lid":"","name":"Kaillas Gadhe","payoutPct":0,"product":"Loan Against Property","ref":"Kuntiram","rejectReason":"","status":"Login","updatedAt":1791975716975},{"amount":1000000,"banker":"Sachin","connector":"Vaishu","createdAt":1791975659570,"date":"2026-10-14","id":1791975659770,"lender":"Idfc / Kotak","lid":"","name":"Santosh Pawal","payoutPct":0,"product":"Overdraft (OD)","ref":"Vaishu","rejectReason":"","status":"Under Process","updatedAt":1791975659571},{"amount":7000000,"banker":"","connector":"","date":"2026-09-15","id":1789466938983,"lender":"Icici Home Fin","lid":"","name":"Senthil Pillai","payoutPct":0,"product":"Balance Transfer","ref":"Kuntiram","rejectReason":"","status":"Under Process","updatedAt":1791975528100},{"amount":2000000,"banker":"Pawan Survanshi","connector":"Kuntiram","date":"2026-09-15","id":1789466643017,"lender":"Hero Housing","lid":"","name":"Krushna Londhe","payoutPct":0,"product":"Loan Against Property","ref":"Pawar","rejectReason":"","status":"Under Process","updatedAt":1791975499102},{"amount":9000000,"banker":"Pawan Survanshi","connector":"Kuntiram","date":"2026-09-15","id":1789466476813,"lender":"Hero Housing","lid":"","name":"Sumit Shah","payoutPct":0,"product":"Loan Against Property","ref":"Kuntiram","rejectReason":"","status":"Under Process","updatedAt":1791975462240},{"amount":3000000,"banker":"Nilima","connector":"Rutuja","createdAt":1789496212195,"date":"2026-08-15","id":1789496212313,"lender":"SMFG","lid":"","name":"Imran Pirjade","payoutPct":0,"product":"Loan Against Property","ref":"Rutuja","rejectReason":"","status":"Under Process","updatedAt":1791975440682},{"amount":10000000,"banker":"Nikhil","connector":"Kuntiram","createdAt":1790231116728,"date":"2026-09-24","id":1790231117093,"lender":"Mahindra Fin","lid":"","name":"Shubham Rathod","payoutPct":0,"product":"Commercial Property Purchase Loan","ref":"Kuntiram","rejectReason":"","sourceLeadId":1789053642086,"status":"Under Process","updatedAt":1791975391520},{"amount":300000,"banker":"","connector":"Aditya","createdAt":1791379141394,"date":"2026-10-08","id":1791379142296,"lender":"Increde/ Finable","lid":"","name":"Kishor Magar","payoutPct":0,"product":"","ref":"Aditya","rejectReason":"Cibil Issue","status":"Rejected","statusDates":{"rejected":"2026-10-13"},"updatedAt":1791887077481},{"amount":2800000,"banker":"Dhamne","connector":"Nilam","createdAt":1791887044543,"date":"2026-10-13","id":1791887044939,"lender":"Saraswat","lid":"","name":"Kisan chavhan","payoutPct":0,"product":"Home Loan","ref":"Kuntiram","rejectReason":"","status":"Login","updatedAt":1791887044543},{"amount":1000000,"banker":"","connector":"Pawar","createdAt":1791182511675,"date":"2026-10-05","id":1791182512375,"lender":"","lid":"","name":"Santosh Karle","payoutPct":0,"product":"Loan Against Property","ref":"Pawar","rejectReason":"Rate Issue","sourceLeadId":1791004476784,"status":"Rejected","statusDates":{"rejected":"2026-10-13"},"updatedAt":1791882413540},{"amount":1000000,"banker":"Sachin","connector":"pooja","createdAt":1789496265696,"date":"2026-08-15","id":1789496266348,"lender":"Increde","lid":"","lidBeforeMigration":"Not agree rate","name":"Rohit Sakure","payoutPct":0,"ref":"Pooja","rejectReason":"Not agree rate","status":"Rejected","updatedAt":1791618247900},{"amount":800000,"banker":"Pankaj","connector":"Vaishu","createdAt":1789496506096,"date":"2026-08-15","id":1789496506188,"lender":"Piramal/Equitas","lid":"","lidBeforeMigration":"Not eligible cibil issue","name":"Nishant Gadekar","payoutPct":0,"ref":"vaishu","rejectReason":"Not eligible cibil issue","status":"Rejected","updatedAt":1791618227560},{"amount":500000,"banker":"Manisha","connector":"Adesh","createdAt":1789496395870,"date":"2026-05-15","id":1789496396758,"lender":"Neogroth","lid":"","lidBeforeMigration":"Not eligible","name":"Santosh Tupe","payoutPct":0,"ref":"Adesh","rejectReason":"Not eligible","status":"Rejected","updatedAt":1791618201452},{"amount":500000,"banker":"Manisha","connector":"Pawar","createdAt":1789496438688,"date":"2026-08-15","id":1789496439650,"lender":"Neogroth","lid":"","lidBeforeMigration":"Not Eligible","name":"Mahesh Rajput","payoutPct":0,"ref":"Pawar","rejectReason":"Not Eligible","status":"Rejected","updatedAt":1791618191704},{"amount":120000,"banker":"Nilam","connector":"Mandlik","createdAt":1789659907928,"date":"2026-09-17","id":1789659908235,"lender":"Bajaj","lid":"","lidBeforeMigration":"Csst Not Agrre For Rate","name":"Mehraj Jafar Shaikh","payoutPct":0,"ref":"Mandlik","rejectReason":"Csst Not Agrre For Rate","status":"Rejected","updatedAt":1791618181175},{"amount":2000000,"banker":"Rushikesh Raut","connector":"","date":"2026-09-12","id":1789466546590,"lender":"Hero Fincorp","lid":"","lidBeforeMigration":"Legal Issue","name":"Mahesh Potdar","payoutPct":0,"ref":"Kuntiram","rejectReason":"Legal Issue","status":"Rejected","updatedAt":1791618169958},{"amount":100000,"banker":"Sammer Paygude","connector":"Vishu","createdAt":1789536046115,"date":"2026-09-16","id":1789536047083,"lender":"Swami samarth fin","lid":"","lidBeforeMigration":"Konich Nahi bhetal","name":"Rohit Pati","payoutPct":3,"ref":"Vaishu","rejectReason":"Konich Nahi bhetal","status":"Rejected","updatedAt":1791618153592},{"amount":2000000,"banker":"Ashish Satarkar","connector":"","date":"2026-09-15","id":1789466846491,"lender":"Hero Housing","lid":"","lidBeforeMigration":"Not Eligible property doc nahi","name":"Ramdas Landge","payoutPct":0,"ref":"Kuntiram","rejectReason":"Not Eligible property doc nahi","status":"Rejected","updatedAt":1791618135929},{"amount":300000,"banker":"sachin","connector":"Adesh","createdAt":1791442536813,"date":"2026-10-08","id":1791442537520,"lender":"increde","lid":"","lidBeforeMigration":"Dusikadun Ghetal","name":"Poonam Girigosavi","payoutPct":0,"ref":"Adesh","rejectReason":"Dusikadun Ghetal","status":"Rejected","updatedAt":1791618109537},{"amount":200000,"banker":"","connector":"","createdAt":1790231078143,"date":"2026-09-24","id":1790231078871,"lender":"","lid":"","lidBeforeMigration":"Over Obligation","name":"Suvarna Sonke","payoutPct":0,"product":"Personal Loan","ref":"Mahesh Potdar","rejectReason":"Over Obligation","sourceLeadId":1789625802932,"status":"Rejected","updatedAt":1791184821798},{"amount":1500000,"banker":"Pankaj","connector":"Trushal","createdAt":1790849345681,"date":"2026-10-01","id":1790849345796,"lender":"Bajaj","lid":"","name":"Akshay Raykar","payoutPct":0,"ref":"Trushal","status":"Login","updatedAt":1790849345681},{"amount":232000,"banker":"Sachin","connector":"Kuntiram","createdAt":1790581714199,"date":"2026-09-28","disbId":1790581724598,"id":1790581715006,"lender":"Werize","lid":"","name":"Dimple Kumar","payoutPct":2.16,"ref":"Kuntiram","status":"Disbursed","updatedAt":1790581714199},{"amount":100000,"banker":"","connector":"","createdAt":1789495041686,"date":"2026-09-15","disbId":1790231532888,"id":1789495042566,"lender":"Akash patil","lid":"","name":"Govind Kumar","payoutPct":5,"product":"Personal Loan","ref":"Akash patil","sourceLeadId":1789408432580,"status":"Disbursed","updatedAt":1790231532085},{"amount":400000,"banker":"","connector":"Kuntiram","createdAt":1789970642005,"date":"2026-09-21","id":1789970642439,"lender":"Bajaj","lid":"","name":"Aniket Solunke","payoutPct":2,"ref":"Kuntiram","status":"Rejected","updatedAt":1790231159212},{"amount":300000,"banker":"","connector":"Kuntiram","createdAt":1789714026527,"date":"2026-09-18","id":1789714026748,"lender":"","lid":"","name":"Suraj Sanjay Vala","payoutPct":2,"product":"Personal Loan","ref":"Aniket Solunke","sourceLeadId":1789714002711,"status":"Rejected","updatedAt":1789714026527},{"amount":500000,"banker":"Sachin","connector":"Vaishu","createdAt":1789496311696,"date":"2026-08-15","id":1789496312182,"lender":"Increde","lid":"","name":"Rameshwar Sable","payoutPct":0,"ref":"Vaishu","status":"Rejected","updatedAt":1789496311696}],"disb":[{"amount":3000000,"connector":"Trushal","createdAt":1792136623766,"date":"2026-10-16","id":1792136624592,"name":"Vitthal Nivgune","payoutId":1792136624626,"payoutPct":0,"product":"Car Loan","ref":"Trushal","sourceLoginId":1789496152211,"updatedAt":1792136623766},{"amount":30000,"connector":"Kuntiram","date":"2026-08-25","id":1789408603269,"name":"Sayli Lagad","payoutId":1789495041791,"payoutPct":2.3,"pct":"2.00","product":"Personal Loan","ref":"Kuntiram","updatedAt":1792136578244},{"amount":5700000,"connector":"Vaishu","date":"2026-08-10","id":1789467354351,"name":"Santosh Pawal","payoutId":1789495042531,"payoutPct":1,"pct":"1.10","product":"Loan Against Property","ref":"Vaishu","updatedAt":1792062435391},{"amount":500000,"connector":"Kuntiram","createdAt":1792055772821,"date":"2026-10-15","id":1792055772822,"name":"Krushna Pawar","payoutId":1792055773339,"payoutPct":100,"product":"Personal Loan","ref":"Kuntiram","updatedAt":1792055772821},{"amount":232000,"connector":"Kuntiram","createdAt":1790581723773,"date":"2026-09-28","id":1790581724598,"name":"Dimple Kumar","payoutId":1790581724270,"payoutPct":2.16,"product":"Personal Loan","ref":"Kuntiram","sourceLoginId":1790581715006,"updatedAt":1791618804014},{"amount":100000,"connector":"","createdAt":1790231532085,"date":"2026-09-24","id":1790231532888,"name":"Govind Kumar","payoutId":1790231533010,"payoutPct":5,"product":"Personal Loan","ref":"Akash patil","sourceLoginId":1789495042566,"updatedAt":1790231532085},{"amount":500000,"connector":"Pawar","date":"2026-08-21","id":1789467271587,"name":"Anis Sayyad","payoutId":1789495042395,"payoutPct":2,"pct":"2","product":"Personal Loan","ref":"Pawar","updatedAt":1789496506096},{"amount":1000000,"connector":"","date":"2026-09-01","id":1789467467188,"name":"Kunal Ghodke ","payoutId":1789495042379,"payoutPct":0,"pct":"2.50","product":"Car Loan","ref":"Ayush","updatedAt":1789496506096}],"payouts":[{"connector":"Trushal","createdAt":1792136623766,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Vitthal Nivgune","date":"2026-10-16","disbAmount":3000000,"expected":0,"id":1792136624626,"lender":"Trushal","pct":0,"received":0,"ref":"Trushal","sourceDisbId":1792136624592,"status":"Pending","updatedAt":1792136623766},{"connector":"Moneylight","createdAt":1792055772821,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Krushna Pawar","date":"2026-10-15","disbAmount":500000,"expected":5000,"id":1792055773339,"lender":"Kuntiram","pct":1,"received":0,"ref":"Kuntiram","sourceDisbId":1792055772822,"status":"Pending","updatedAt":1792056803761},{"connector":"Moneylight","createdAt":1790581723774,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Dimple Kumar","date":"2026-09-30","disbAmount":232000,"expected":4988,"id":1790581724270,"lender":"Kuntiram","pct":2.15,"received":4988,"ref":"2000 pending","sourceDisbId":1790581724598,"status":"Clear","updatedAt":1790760694676},{"connector":"Vaishu","createdAt":1789495041686,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Santosh Pawal","date":"2026-08-10","disbAmount":5700000,"expected":57000,"id":1789495042531,"lender":"Aditya Birla","pct":1,"received":57000,"ref":"Vaishu","sourceDisbId":1789467354351,"status":"Clear","updatedAt":1790232956558},{"connector":"Pawar","createdAt":1789495041686,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Anis Sayyad","date":"2026-08-21","disbAmount":500000,"expected":10000,"id":1789495042395,"lender":"Increde","pct":2,"received":10000,"ref":"Pawar","sourceDisbId":1789467271587,"status":"Clear","updatedAt":1790232834110},{"connector":"Ayush Kadam","createdAt":1789495041686,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Kunal Ghodke","date":"2026-09-01","disbAmount":1000000,"expected":0,"id":1789495042379,"lender":"IDFC","pct":0,"received":0,"ref":"","sourceDisbId":1789467467188,"status":"Pending","updatedAt":1790232795548},{"connector":"Moneylight","createdAt":1790231532085,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Govind Kumar","date":"2026-09-24","disbAmount":100000,"expected":5000,"id":1790231533010,"lender":"Akash patil","pct":5,"received":0,"ref":"Akash patil","sourceDisbId":1790231532888,"status":"Pending","updatedAt":1790231532085},{"connector":"Moneylight","createdAt":1789495041686,"custCommissionAmount":0,"custCommissionPct":0,"customer":"Sayli Lagad","date":"2026-09-16","disbAmount":30000,"expected":690,"id":1789495041791,"lender":"Kuntiram","pct":2.3,"received":690,"ref":"Kuntiram","sourceDisbId":1789408603269,"status":"Clear","updatedAt":1789794972444}],"deleted":{"leads":{"1789401777383":1792057444207},"logins":{"1789024329562":1791882329332,"1789465899535":1791882382194,"1789732082176":1791882334074,"1789732090995":1791882307070,"1791184841104":1791882297648,"1791202483197":1791882322186,"1791618161498":1791882293133},"disb":{},"payouts":{}}}</script><script>
 /* ===== Statement analysis engine (pure functions — no DOM, no network) =====
    Input : array of text items {str,x,w,y,page} extracted from a PDF (or OCR)
    Output: {transactions, meta, warnings, summary...}
@@ -1173,10 +1181,11 @@ let migrationCount=0;
 function normalizeDb(value){
   const src=(value && typeof value==='object')?value:{};
   const base=x=>({...x,connector:x.connector||'',payoutPct:Number(x.payoutPct||0)});
+  const fixSt=x=>(x.status==null?x:{...x,status:canonStatus(x.status)});
   const del=(src.deleted&&typeof src.deleted==='object')?src.deleted:{};
   const clean={
-    leads:Array.isArray(src.leads)?src.leads.filter(x=>x&&typeof x==='object'&&x.id!=null).map(base):[],
-    logins:Array.isArray(src.logins)?src.logins.filter(x=>x&&typeof x==='object'&&x.id!=null).map(x=>{const b=base(x);const m=migrateLogin(b);if(m!==b)migrationCount++;return m;}):[],
+    leads:Array.isArray(src.leads)?src.leads.filter(x=>x&&typeof x==='object'&&x.id!=null).map(base).map(fixSt):[],
+    logins:Array.isArray(src.logins)?src.logins.filter(x=>x&&typeof x==='object'&&x.id!=null).map(x=>{const b=base(x);const m=migrateLogin(b);if(m!==b)migrationCount++;return fixSt(m);}):[],
     disb:Array.isArray(src.disb)?src.disb.filter(x=>x&&typeof x==='object'&&x.id!=null).map(base):[],
     payouts:Array.isArray(src.payouts)?src.payouts.filter(x=>x&&typeof x==='object'&&x.id!=null).map(x=>({...x,
       connector:normalizeConnectorName(x.connector),
@@ -1186,6 +1195,16 @@ function normalizeDb(value){
   };
   COLLECTIONS.forEach(c=>{clean.deleted[c]=(del[c]&&typeof del[c]==='object')?{...del[c]}:{};});
   return clean;
+}
+/* ===== SINGLE STATUS NORMALIZER — every spelling of Disbursed (disburs, disbersment, disbursement, disbursal...) becomes 'Disbursed' ===== */
+function canonStatus(raw){
+  if(raw===undefined||raw===null) return raw;
+  const s=String(raw).toLowerCase().replace(/[^a-z]/g,'');
+  if(!s) return String(raw).trim();
+  if(/^dis+b/.test(s)) return 'Disbursed';
+  const MAP={login:'Login',underprocess:'Under Process',inprocess:'Under Process',approved:'Approved',rejected:'Rejected',
+    new:'New',followup:'Follow-up',pending:'Pending',clear:'Clear',converted:'Converted'};
+  return MAP[s]||String(raw).trim();
 }
 function normalizeConnectorName(name){
   const n=(name||'').trim();
@@ -1908,6 +1927,16 @@ const PIPELINE_STAGES=[
   {key:'Rejected',label:'❌ Rejected',color:'var(--bad)'},
   {key:'Disbursed',label:'💰 Disbursed',color:'#2563eb'}
 ];
+/* Disbursement records with no login in 'Disbursed' stage — now also shown in Pipeline > Disbursed so both screens agree */
+function disbWithoutDisbursedLogin(){
+  return db.disb.filter(d=>!db.logins.some(l=>canonStatus(l.status)==='Disbursed'&&(String(l.id)===String(d.sourceLoginId)||String(l.disbId)===String(d.id))))
+    .map(d=>({...d,_fromDisb:true}));
+}
+function pipeDisbRow(x){
+  const l=db.logins.find(l=>String(l.id)===String(x.sourceLoginId)||String(l.disbId)===String(x.id));
+  const note=l&&canonStatus(l.status)!=='Disbursed'?` <small style="color:var(--bad)">⚠ login stage: ${escapeHtml(l.status)}</small>`:'';
+  return `<tr><td><b>${escapeHtml(x.name||'-')}</b></td><td>${escapeHtml(x.product||'-')}</td><td>${escapeHtml(x.ref||x.lender||'-')}</td><td class="num-r">${money(x.amount)}</td><td>${formatDDMMYY(x.date)}</td><td>-</td><td>Disbursed${note}</td><td style="white-space:nowrap"><button class="btn light btn-sm" onclick="openForm('disb',${Number(x.id)})">Edit</button></td></tr>`;
+}
 let pipelineTab='lead';
 function switchPipelineTab(key){ pipelineTab=key; pageState.pipeline=1; renderPipelineBoard(); }
 function quickMoveLeadToLogin(id){
@@ -1917,8 +1946,9 @@ function quickMoveLeadToLogin(id){
 function renderPipelineBoard(){
   const boardEl=$('pipelineBoard'), tabsEl=$('pipelineTabs'), statsEl=$('pipelineStats'); if(!boardEl) return;
   const q=($('pipeSearch')?.value||'').toLowerCase().trim();
-  const groups={lead:db.leads.filter(x=>!['Approved','Rejected','Converted','Login'].includes(x.status))};
-  PIPELINE_STAGES.forEach(s=>{ if(s.key!=='lead') groups[s.key]=db.logins.filter(x=>x.status===s.key); });
+  const groups={lead:db.leads.filter(x=>!['Approved','Rejected','Converted','Login'].includes(canonStatus(x.status)))};
+  PIPELINE_STAGES.forEach(s=>{ if(s.key!=='lead') groups[s.key]=db.logins.filter(x=>canonStatus(x.status)===s.key); });
+  groups['Disbursed']=groups['Disbursed'].concat(disbWithoutDisbursedLogin());
   tabsEl.innerHTML=PIPELINE_STAGES.map(stage=>{
     const active=stage.key===pipelineTab;
     return `<button class="btn ${active?'':'light'}" style="border-left:4px solid ${stage.color}" aria-pressed="${active}" onclick="switchPipelineTab('${stage.key}')">${stage.label} <span class="badge" style="margin-left:4px">${groups[stage.key].length}</span></button>`;
@@ -1936,7 +1966,7 @@ function renderPipelineBoard(){
   }else{
     const rej=stage.key==='Rejected';
     headHtml=`<th>Customer</th><th>Loan Type</th><th>Lender / Bank</th><th>Amount</th><th>Date</th><th>${rej?'Rejection Reason':'Login ID'}</th><th>Stage</th><th>Actions</th>`;
-    bodyHtml=info.rows.map(x=>`<tr>
+    bodyHtml=info.rows.map(x=>x._fromDisb?pipeDisbRow(x):`<tr>
       <td><b>${escapeHtml(x.name||'-')}</b></td>
       <td>${escapeHtml(x.product||leadProductFor(x)||'-')}</td>
       <td>${escapeHtml(x.lender||x.banker||'-')}</td>
@@ -1952,14 +1982,63 @@ function renderPipelineBoard(){
 }
 
 /* ---------- Disbursements / payouts ---------- */
+/* Disbursements page — same features as Leads: filters, inline-editable cells, Edit / Delete, pager */
+function fillDisbFilters(){
+  const sync=(id,vals,first)=>{
+    const sel=$(id); if(!sel) return;
+    const sig=vals.map(v=>v[0]).join('|'); if(sel.dataset.sig===sig) return; sel.dataset.sig=sig;
+    const cur=sel.value;
+    sel.innerHTML=`<option value="">${first}</option>`+vals.map(v=>`<option value="${escapeHtml(v[0])}">${escapeHtml(v[1])}</option>`).join('');
+    sel.value=cur;
+  };
+  const prods=[...new Set([...LOAN_TYPES,...db.disb.map(x=>x.product).filter(Boolean)])];
+  sync('disbProductFilter',prods.map(x=>[x,x]),'All Loan Types');
+  const conns=[...new Set(db.disb.map(x=>normalizeConnectorName(x.connector)))].sort();
+  sync('disbConnectorFilter',conns.map(x=>[x,x]),'All Connectors');
+  const months=[...new Set(db.disb.map(x=>String(x.date||'').slice(0,7)).filter(k=>/^\d{4}-\d{2}$/.test(k)))].sort().reverse();
+  sync('disbMonthFilter',months.map(k=>[k,(MON_SHORT[Number(k.slice(5))-1]||k.slice(5))+' '+k.slice(0,4)]),'All Months');
+}
+function payoutOfDisb(x){ return db.payouts.find(p=>String(p.id)===String(x.payoutId)||String(p.sourceDisbId)===String(x.id)); }
+function quickSetDisb(id,field,val){
+  const x=db.disb.find(d=>d.id===id); if(!x) return toast('Disbursement not found — please refresh and try again.','warn');
+  let v;
+  if(field==='name'){ v=String(val||'').trim(); if(!v){ toast('Customer name is required.','err'); return renderDisb(); } }
+  else if(field==='amount'){ v=parseCurrencyNum(val); if(v<0){ toast('Amount cannot be negative.','err'); return renderDisb(); } }
+  else if(field==='date'){ v=ddmmyyyyToIso(String(val||'').trim()); if(!v){ toast('Date must be a real date in DD/MM/YYYY format.','err'); return renderDisb(); } }
+  else if(field==='payoutPct'){ v=Math.min(100,Math.max(0,parseFloat(val)||0)); }
+  else v=String(val||'').trim();
+  if(x[field]===v) return;
+  x[field]=v; x.updatedAt=Date.now();
+  if(save()) toast('Disbursement updated','ok');
+}
 function renderDisb(){
-  const disbTotal=db.disb.reduce((a,x)=>a+Number(x.amount||0),0);
-  $('dTotal').textContent=money(disbTotal); $('dFiles').textContent=db.disb.length;
-  const q=($('disbSearch')?.value||'').toLowerCase().trim();
-  const list=db.disb.filter(x=>!q||Object.values(x).join(' ').toLowerCase().includes(q)).sort((a,b)=>String(disbDate(b)).localeCompare(String(disbDate(a))));
+  fillDisbFilters();
+  const q=($('disbSearch')?.value||'').toLowerCase().trim(), pf=$('disbProductFilter')?.value||'', cf=$('disbConnectorFilter')?.value||'',
+        mf=$('disbMonthFilter')?.value||'', sf=$('disbPayoutFilter')?.value||'';
+  const rows=db.disb.map(x=>({x,po:payoutOfDisb(x)}));
+  const list=rows.filter(({x,po})=>{
+    const text=[x.name,x.product,x.ref,x.connector,normalizeConnectorName(x.connector),x.date,isoToDdmmyyyy(x.date),x.amount,po&&po.status].join(' ').toLowerCase();
+    return (!q||text.includes(q)) && (!pf||x.product===pf) && (!cf||normalizeConnectorName(x.connector)===cf)
+      && (!mf||String(x.date||'').slice(0,7)===mf) && (!sf||(sf==='none'?!po:(po&&po.status===sf)));
+  }).sort((a,b)=>String(disbDate(b.x)).localeCompare(String(disbDate(a.x))));
+  const filtered=!!(q||pf||cf||mf||sf);
+  $('dTotal').textContent=money(list.reduce((a,r)=>a+Number(r.x.amount||0),0));
+  $('dFiles').textContent=filtered?`${list.length} of ${db.disb.length}`:db.disb.length;
   const info=slicePage('disb',list);
-  $('disbTable').innerHTML=info.rows.map(x=>`<tr><td><b>${escapeHtml(x.name||'-')}</b></td><td>${escapeHtml(x.product||'-')}</td><td class="num-r">${money(x.amount)}</td><td>${formatDDMMYY(x.date)}</td><td>${escapeHtml(x.ref||'-')}</td>
-    <td style="white-space:nowrap"><button class="btn light btn-sm" onclick="openForm('disb',${Number(x.id)})">Edit</button><button class="btn red btn-sm" onclick="removeDisb(${Number(x.id)})">Delete</button></td></tr>`).join('')||`<tr><td colspan="6" class="empty">No disbursements found</td></tr>`;
+  const inp='padding:4px 6px;font-size:12px;box-sizing:border-box;width:100%';
+  $('disbTable').innerHTML=info.rows.map(({x,po})=>{
+    const id=Number(x.id), st=po?po.status||'Pending':'';
+    return `<tr>
+    <td><input aria-label="Customer name" value="${escapeHtml(x.name||'')}" maxlength="120" onchange="quickSetDisb(${id},'name',this.value)" style="${inp};min-width:140px;font-weight:600"></td>
+    <td><select aria-label="Loan type for ${escapeHtml(x.name||'')}" onchange="quickSetDisb(${id},'product',this.value)" style="${inp};min-width:130px">${productOptions(x.product||'',!x.product)}</select></td>
+    <td><input aria-label="Disbursed amount" inputmode="decimal" value="${formatIndianNum(x.amount)}" oninput="formatCurrencyInput(this)" onchange="quickSetDisb(${id},'amount',this.value)" style="${inp};min-width:100px;text-align:right"></td>
+    <td><input aria-label="Disbursement date" class="date-ddmm" inputmode="numeric" placeholder="DD/MM/YYYY" maxlength="10" value="${isoToDdmmyyyy(x.date)}" onchange="quickSetDisb(${id},'date',this.value)" style="${inp};min-width:96px"></td>
+    <td><input aria-label="Reference or lender" value="${escapeHtml(x.ref||'')}" onchange="quickSetDisb(${id},'ref',this.value)" style="${inp};min-width:120px"></td>
+    <td><input aria-label="Connector" value="${escapeHtml(x.connector||'')}" onchange="quickSetDisb(${id},'connector',this.value)" style="${inp};min-width:100px"></td>
+    <td><input aria-label="Payout percent" type="number" min="0" max="100" step="0.01" value="${x.payoutPct!=null?x.payoutPct:''}" onchange="quickSetDisb(${id},'payoutPct',this.value)" style="${inp};min-width:64px"></td>
+    <td>${po?`<span class="badge ${st==='Clear'?'good':'blue'}">${escapeHtml(st)}</span>`:'<small style="color:var(--muted)">No payout</small>'}</td>
+    <td style="white-space:nowrap"><button class="btn light btn-sm" onclick="openForm('disb',${id})">Edit</button><button class="btn red btn-sm" onclick="removeDisb(${id})">Delete</button></td></tr>`;
+  }).join('')||`<tr><td colspan="9" class="empty">${db.disb.length?'No disbursements match these filters.':'No disbursements yet — click “+ Add Disbursement” to add the first one.'}</td></tr>`;
   renderPager('disbPager','disb',info);
 }
 let payoutTab='connector';
@@ -2649,5 +2728,6 @@ render();
     const e=document.getElementById('loginError'); if(e) e.textContent='⚠️ Could not connect to the login service. Check your internet connection and reload the page.';
   }
 </script>
-</body>
-</html>
+
+
+</body></html>
